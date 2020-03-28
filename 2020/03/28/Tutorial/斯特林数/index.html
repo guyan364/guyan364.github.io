@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="wiki 第一类斯特林数 \(\begin{bmatrix}n\\k\end{bmatrix}\) 表示 \(n\) 元素分成 \(k\) 个圆排列的方案数 递推式 \(\begin{bmatrix}n\\k\end{bmatrix} &#x3D; \begin{bmatrix} n - 1 \\ k - 1\end{bmatrix} + ( n - 1 ) \begin{bmatrix} n - 1 \\">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斯特林数">
+<meta property="og:url" content="http://yoursite.com/2020/03/28/Tutorial/%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="wiki 第一类斯特林数 \(\begin{bmatrix}n\\k\end{bmatrix}\) 表示 \(n\) 元素分成 \(k\) 个圆排列的方案数 递推式 \(\begin{bmatrix}n\\k\end{bmatrix} &#x3D; \begin{bmatrix} n - 1 \\ k - 1\end{bmatrix} + ( n - 1 ) \begin{bmatrix} n - 1 \\">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-28T15:46:14.736Z">
+<meta property="article:modified_time" content="2020-03-28T15:46:14.736Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/28/Tutorial/%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>斯特林数 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/Tutorial/%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          斯特林数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-03-28 23:46:14" itemprop="dateCreated datePublished" datetime="2020-03-28T23:46:14+08:00">2020-03-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://en.wikipedia.org/wiki/Stirling_number" target="_blank" rel="noopener">wiki</a></p>
+<h2 id="第一类斯特林数">第一类斯特林数</h2>
+<p><span class="math inline">\(\begin{bmatrix}n\\k\end{bmatrix}\)</span> 表示 <span class="math inline">\(n\)</span> 元素分成 <span class="math inline">\(k\)</span> 个圆排列的方案数</p>
+<p>递推式 <span class="math inline">\(\begin{bmatrix}n\\k\end{bmatrix} = \begin{bmatrix} n - 1 \\ k - 1\end{bmatrix} + ( n - 1 ) \begin{bmatrix} n - 1 \\ k \end{bmatrix}\)</span></p>
+<p>新加入第 <span class="math inline">\(n\)</span> 个元素 , 可以自成一个圆排列 , 也可以加入以前 <span class="math inline">\(n - 1\)</span> 的任意一个数之前</p>
+<a id="more"></a>
+<h3 id="性质">性质</h3>
+<p>第一类斯特林数还可以定义为 <span class="math inline">\(x^{\underline n}\)</span> 的各项系数</p>
+<p><span class="math inline">\(x^{\underline 3} = x ( x - 1 ) ( x - 2 ) = 0 + 2 x - 3x^2 + x^3\)</span></p>
+<p><span class="math inline">\(2,3,1\)</span> 就是 <span class="math inline">\(\begin{bmatrix}3\\1\end{bmatrix}\begin{bmatrix}3\\2\end{bmatrix}\begin{bmatrix}3\\3\end{bmatrix}\)</span> , 乘上一个 <span class="math inline">\((-1)^{n-i}\)</span> 就是有符号第一类斯特林数</p>
+<p>归纳证明 <span class="math inline">\(\sum_{i=0}^n \begin{bmatrix} n \\ i\end{bmatrix} (-1)^{n-i} x^i = x^{\underline n}\)</span></p>
+<p><span class="math display">\[
+\begin{aligned} 
+x^{\underline{n+1}} &amp;= ( x - n ) \sum_{i=0}^n \begin{bmatrix} n \\ i\end{bmatrix}(-1)^{n-i}x^i \\ 
+&amp; = x\sum_{i=0}^n \begin{bmatrix} n \\ i \end{bmatrix} (-1)^{n-i}x^i - n\sum_{i=0}^n \begin{bmatrix} n \\ i \end{bmatrix} (-1)^{n-i}x^i \\
+&amp;= \sum_{i=1}^{n+1} \begin{bmatrix} n \\ i - 1 \end{bmatrix}(-1)^{n+1-i}x^i - \sum_{i=0}^n n \begin{bmatrix} n \\ i \end{bmatrix} (-1)^{n-i}x^i \\
+&amp;= \sum_{i=1}^{n+1} \begin{bmatrix} n \\ i - 1 \end{bmatrix}(-1)^{n+1-i}x^i + \sum_{i=0}^n n \begin{bmatrix} n \\ i \end{bmatrix} (-1)^{n+1-i}x^i \\
+&amp;= \sum_{i=0}^{n+1} \left(\begin{bmatrix} n \\ i - 1 \end{bmatrix} + n\begin{bmatrix} n \\ i\end{bmatrix} \right)(-1)^{n-i} x^i \\
+&amp;= \sum_{i=0}^{n+1} \begin{bmatrix} n + 1 \\ i \end{bmatrix} (-1)^{n-i} x^i
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\sum_{i=0}^n \begin{bmatrix} n \\ i \end{bmatrix} = n!\)</span> 就是枚举循环个数 , 每个方案对应一种置换</p>
+<p><span class="math inline">\(\sum_{i=0}^n \begin{bmatrix} n \\ i \end{bmatrix} x^i = x^{\overline n}\)</span></p>
+<p>考虑递推式 <span class="math inline">\(\begin{bmatrix}n\\k\end{bmatrix} = \begin{bmatrix} n - 1 \\ k - 1\end{bmatrix} + ( n - 1 ) \begin{bmatrix} n - 1 \\ k \end{bmatrix}\)</span> , 设有 <span class="math inline">\(n\)</span> 个元素的行第一类斯特林数生成函数为 <span class="math inline">\(F_n(x)\)</span></p>
+<p>则有 <span class="math inline">\(F_{n+1}(x) = xF_n(x) + nF_n(x)\)</span> 就是 <span class="math inline">\(\prod_{i=0}^{n} (x+i)\)</span> , 等于 <span class="math inline">\(x^{\overline {n+1}}\)</span></p>
+<p>于是求第 <span class="math inline">\(n\)</span> 行的第一类斯特林数就得到了 <span class="math inline">\(O(n\log^2n)\)</span> 的分治做法</p>
+<p>不过有更优的 <span class="math inline">\(O(n\log n)\)</span> 做法</p>
+<h3 id="行">行</h3>
+<p>已知 <span class="math inline">\(x^{\overline{n}}\)</span> 是第 <span class="math inline">\(n\)</span> 行第一类斯特林数的生成函数</p>
+<p>考虑倍增 <span class="math inline">\(x^{\overline{2n}} = x^{\overline{n}} (x+n)^{\overline{n}}\)</span></p>
+<p>问题变成 , 已有多项式 <span class="math inline">\(f(x)\)</span> , 求多项式 <span class="math inline">\(f(x+c)\)</span></p>
+<p>设 <span class="math inline">\(f(x)\)</span> 的第 <span class="math inline">\(i\)</span> 项系数为 <span class="math inline">\(a_i\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+f(x+c) &amp;= \sum_{i} a_i\left(x +c\right)^i \\ 
+&amp;= \sum_{i}x^i\sum_{j=i}a_j\binom{j}{i}c^{j-i} \\
+&amp;= \sum_{i}\frac{x^i}{i!}\sum_{j=i}j!a_j\frac{c^{j-i}}{(j-i)!} \\ 
+\end{aligned}
+\]</span></p>
+<p>设 <span class="math inline">\(g(x) = \sum_{i} i! a_ix^{i}\)</span> , <span class="math inline">\(h(x) = \sum_i \frac{c^i}{i!}x^{n-i}\)</span> , 答案就是 <span class="math inline">\(g(x)\)</span> , <span class="math inline">\(h(x)\)</span> 相乘再乘上 <span class="math inline">\(x^{-n}\)</span></p>
+<p>于是卷积即可 , 时间复杂度 $T(n) = T() + O( n n ) = O( n n) $</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">8e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">167772161</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ig = <span class="number">55924054</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a + b &gt;= mod ? a + b - mod : a + b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a - b &lt; <span class="number">0</span> ? a - b + mod : a - b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> r[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> n , <span class="keyword">int</span> flag )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> x , y , w , wn;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; n ; ++i ) <span class="keyword">if</span>( i &lt; r[i] ) swap( f[i] , f[r[i]] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> mid = <span class="number">1</span> ; mid &lt; n ; mid &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    wn = fpow( flag ? ig : <span class="number">3</span> , ( mod - <span class="number">1</span> ) / ( mid &lt;&lt; <span class="number">1</span> ) );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i += ( mid &lt;&lt; <span class="number">1</span> ) ) &#123;</span><br><span class="line">      w = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; mid ; ++j , w = <span class="number">1L</span>L * w * wn % mod ) &#123;</span><br><span class="line">        x = f[i + j] , y = <span class="number">1L</span>L * f[i + j + mid] * w % mod;</span><br><span class="line">        f[i + j] = pls( x , y );</span><br><span class="line">        f[i + j + mid] = mns( x , y );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>( flag ) &#123;</span><br><span class="line">    w = fpow( n , mod - <span class="number">2</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) f[i] = <span class="number">1L</span>L * f[i] * w % mod;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A[N] , B[N] , S[N] , top , f[N] , g[N] , fac[N] , ifac[N] , inv[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">( <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n = _n , lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>( n ) &#123;</span><br><span class="line">    S[++top] = n;</span><br><span class="line">    n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125; --top;</span><br><span class="line">  n = <span class="number">1</span> , f[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> k = top ; k ; --k ) &#123;</span><br><span class="line">    <span class="keyword">while</span>( lim &lt;= ( n &lt;&lt; <span class="number">1</span> ) ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> , t = <span class="number">1</span> ; i &lt;= n ; ++i , t = <span class="number">1L</span>L * t * n % mod ) A[i] = <span class="number">1L</span>L * ifac[i] * t % mod;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) B[i] = <span class="number">1L</span>L * fac[i] * f[i] % mod; </span><br><span class="line">    reverse( A , A + <span class="number">1</span> + n );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n + <span class="number">1</span> ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    NTT( A , lim , <span class="number">0</span> ); NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) A[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">    NTT( A , lim , <span class="number">1</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) A[i] = <span class="number">1L</span>L * A[n + i] * ifac[i] % mod;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) B[i] = f[i];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n + <span class="number">1</span> ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) f[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">    NTT( f , lim , <span class="number">1</span> ); </span><br><span class="line">    n &lt;&lt;= <span class="number">1</span>; <span class="keyword">for</span>( <span class="keyword">int</span> i = n + <span class="number">1</span> ; i &lt; lim ; ++i ) f[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>( n == S[k] ) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) g[i] = f[i];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) f[i] = pls( <span class="number">1L</span>L * f[i] * n % mod , g[i - <span class="number">1</span>] );</span><br><span class="line">    f[<span class="number">0</span>] = <span class="number">1L</span>L * f[<span class="number">0</span>] * n % mod; ++n; f[n] = g[n - <span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">  fac[<span class="number">0</span>] = fac[<span class="number">1</span>] = ifac[<span class="number">0</span>] = ifac[<span class="number">1</span>] = inv[<span class="number">0</span>] = inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; ++i ) &#123;</span><br><span class="line">    fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[i] = <span class="number">1L</span>L * ( mod - mod / i ) * inv[mod % i] % mod;</span><br><span class="line">    ifac[i] = <span class="number">1L</span>L * ifac[i - <span class="number">1</span>] * inv[i] % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  solve( n );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) <span class="built_in">printf</span>(<span class="string">"%d "</span>,f[i]); </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="列">列</h3>
+<p><span class="math inline">\(k=1\)</span> 时一列为 <span class="math inline">\(0!,1!,\cdots (i-1)!,\cdots\)</span> , 因为带标号 , 用指数生成函数</p>
+<p>考虑一个圆排列时的指数生成函数 <span class="math inline">\(\sum_{i=1} (i-1)!\frac{x^i}{i!}\)</span></p>
+<p><span class="math inline">\(k\)</span> 个圆排列就是 <span class="math inline">\(\left(\sum_{i=1} (i-1)!\frac{x^i}{i!}\right)^k\)</span></p>
+<p>于是多项式快速幂即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">8e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">167772161</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ig = <span class="number">55924054</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a + b &gt;= mod ? a + b - mod : a + b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a - b &lt; <span class="number">0</span> ? a - b + mod : a - b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> r[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> n , <span class="keyword">int</span> flag )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> x , y , w , wn;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; n ; ++i ) <span class="keyword">if</span>( i &lt; r[i] ) swap( f[i] , f[r[i]] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> mid = <span class="number">1</span> ; mid &lt; n ; mid &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    wn = fpow( flag ? ig : <span class="number">3</span> , ( mod - <span class="number">1</span> ) / ( mid &lt;&lt; <span class="number">1</span> ) );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i += ( mid &lt;&lt; <span class="number">1</span> ) ) &#123;</span><br><span class="line">      w = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; mid ; ++j , w = <span class="number">1L</span>L * w * wn % mod ) &#123;</span><br><span class="line">        x = f[i + j] , y = <span class="number">1L</span>L * f[i + j + mid] * w % mod;</span><br><span class="line">        f[i + j] = pls( x , y );</span><br><span class="line">        f[i + j + mid] = mns( x , y );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>( flag ) &#123;</span><br><span class="line">    w = fpow( n , mod - <span class="number">2</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) f[i] = <span class="number">1L</span>L * f[i] * w % mod;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A[N] , B[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Inv</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  ++_n; <span class="keyword">int</span> n = <span class="number">1</span> , lim = <span class="number">1</span> , l = <span class="number">-1</span>; g[<span class="number">0</span>] = fpow( f[<span class="number">0</span>] , mod - <span class="number">2</span> );</span><br><span class="line">  <span class="keyword">for</span>( ; n &lt; _n * <span class="number">2</span> ; n &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    <span class="keyword">while</span>( lim &lt; n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) A[i] = f[i] , B[i] = g[i];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = mns( pls( B[i] , B[i] ) , <span class="number">1L</span>L * A[i] * B[i] % mod * B[i] % mod );</span><br><span class="line">    NTT( g , lim , <span class="number">1</span> ); <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> df[N] , invf[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Ln</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  df[_n] = <span class="number">0</span>; <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= _n ; ++i ) df[i - <span class="number">1</span>] = <span class="number">1L</span>L * i * f[i] % mod;</span><br><span class="line">  Inv( f , invf , _n ); <span class="keyword">int</span> lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>( lim &lt;= _n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= _n ; ++i ) A[i] = df[i] , B[i] = invf[i];</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n + <span class="number">1</span> ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">  NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">  NTT( g , lim , <span class="number">1</span> ); <span class="keyword">for</span>( <span class="keyword">int</span> i = _n + <span class="number">1</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i ; --i ) g[i] = <span class="number">1L</span>L * g[i - <span class="number">1</span>] * fpow( i , mod - <span class="number">2</span> ) % mod;</span><br><span class="line">  g[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> lng[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Exp</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  g[<span class="number">0</span>] = <span class="number">1</span>; ++_n; <span class="keyword">int</span> n = <span class="number">1</span> , lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">for</span>( ; n &lt; _n * <span class="number">2</span> ; n &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    Ln( g , lng , n );</span><br><span class="line">    <span class="keyword">while</span>( lim &lt; n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) A[i] = g[i] , B[i] = mns( f[i] , lng[i] );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    B[<span class="number">0</span>] = pls( B[<span class="number">0</span>] , <span class="number">1</span> ); NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">    NTT( g , lim , <span class="number">1</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pow</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n , <span class="keyword">int</span> _k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> vk , v , tmp , _f[N] , _g[N] , n;</span><br><span class="line">  <span class="keyword">for</span>( vk = <span class="number">0</span> ; vk &lt;= _n ; ++vk ) <span class="keyword">if</span>( f[vk] ) <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">if</span>( <span class="number">1L</span>L * vk * _k &gt; _n ) &#123; <span class="built_in">memset</span>( g , <span class="number">0</span> , <span class="keyword">sizeof</span>( <span class="keyword">int</span> ) * ( _n + <span class="number">1</span> ) ); <span class="keyword">return</span>; &#125;</span><br><span class="line">  tmp = fpow( v = f[vk] , mod - <span class="number">2</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = vk ; i &lt;= _n ; ++i ) _f[i - vk] = <span class="number">1L</span>L * f[i] * tmp % mod;</span><br><span class="line">  n = _n - vk;</span><br><span class="line">  Ln( _f , _g , n );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) _g[i] = <span class="number">1L</span>L * _g[i] * _k % mod;</span><br><span class="line">  Exp( _g , g , n );</span><br><span class="line">  v = fpow( v , _k ); vk *= _k;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &gt;= vk ; --i ) g[i] = <span class="number">1L</span>L * g[i - vk] * v % mod;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; vk ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[N] , g[N] , n , k , fac[N] , ifac[N] , inv[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k; ++n;</span><br><span class="line">  inv[<span class="number">0</span>] = inv[<span class="number">1</span>] = ifac[<span class="number">0</span>] = ifac[<span class="number">1</span>] = fac[<span class="number">0</span>] = fac[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> , t = max( n , k ) ; i &lt;= t ; ++i ) &#123;</span><br><span class="line">    fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[i] = <span class="number">1L</span>L * ( mod - mod / i ) * inv[mod % i] % mod;</span><br><span class="line">    ifac[i] = <span class="number">1L</span>L * ifac[i - <span class="number">1</span>] * inv[i] % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) f[i] = inv[i];</span><br><span class="line">  Pow( f , g , n , k );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) <span class="built_in">printf</span>(<span class="string">"%lld "</span>,<span class="number">1L</span>L*fac[i]*g[i]%mod*ifac[k]%mod);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="第二类斯特林数">第二类斯特林数</h2>
+<p><span class="math inline">\(\begin{Bmatrix}n\\k\end{Bmatrix}\)</span> 表示 <span class="math inline">\(n\)</span> 个元素分成 <span class="math inline">\(k\)</span> 个集合的方案数 , 集合无标号</p>
+<p>递推式 <span class="math inline">\(\begin{Bmatrix}n\\k\end{Bmatrix} = \begin{Bmatrix} n - 1 \\ k - 1 \end{Bmatrix} + k\begin{Bmatrix} n - 1 \\ k \end{Bmatrix}\)</span></p>
+<p>新加入第 <span class="math inline">\(n\)</span> 个元素 , 可以自成一个集合 , 也可以加入以前的 <span class="math inline">\(k\)</span> 个集合</p>
+<h3 id="性质-1">性质</h3>
+<p><span class="math inline">\(\sum_{i=0}^n \begin{Bmatrix}n \\ i\end{Bmatrix}x^{\underline i} = x^n\)</span></p>
+<p>可以看作有 <span class="math inline">\(n\)</span> 个带标号小球 , <span class="math inline">\(x\)</span> 个带标号盒子 , 允许有空盒子的小球放置数 , 每次枚举用到了 <span class="math inline">\(i\)</span> 个盒子 , 从 <span class="math inline">\(x\)</span> 个盒子中挑出一个 <span class="math inline">\(i\)</span> 排列 , 乘上 <span class="math inline">\(n\)</span> 个小球划分成 <span class="math inline">\(i\)</span> 个集合的方案</p>
+<p>也可以写成 <span class="math inline">\(\sum_{i=0}^n \begin{Bmatrix} n \\ i \end{Bmatrix}i!\begin{pmatrix}x \\ i \end{pmatrix}\)</span></p>
+<p><span class="math inline">\(\begin{Bmatrix}n\\k\end{Bmatrix} = \frac{1}{k!} \sum_{i=0}^k(-1)^i \begin{pmatrix} k \\ i\end{pmatrix} ( k - i ) ^ n\)</span></p>
+<p>容斥原理 , 求 <span class="math inline">\(n\)</span> 个标号小球放入 <span class="math inline">\(k\)</span> 个盒子且盒子非空的方案数</p>
+<p><span class="math inline">\(f(U) = g(\varnothing) - (g(P_1)+g(P_2)+\cdots+g(P_n))+(g(P_1P_2)+g(P_1P_3)+\cdots)+\cdots+g(U)\cdot(-1)^n\)</span></p>
+<p>自然数幂和 <span class="math display">\[
+\begin{aligned}
+S_n^k &amp;= \sum_{i=0}^n i ^ k \\ 
+&amp;= \sum_{i=0}^n \sum_{j=0}^k \begin{Bmatrix}k \\ j\end{Bmatrix}i^{\underline j} \\
+&amp;= \sum_{j=0}^k \begin{Bmatrix} k \\ j \end{Bmatrix} \sum_{i=0}^n i^{\underline j} \\ 
+&amp;= \sum_{j=0}^k \begin{Bmatrix} k \\ j \end{Bmatrix} j! \sum_{i=0}^n \binom{i}{j} \\ 
+&amp;= \sum_{j=0}^k \begin{Bmatrix} k \\ j \end{Bmatrix} j!\binom{n+1}{j+1} \\ 
+&amp;= \sum_{j=0}^k \begin{Bmatrix} k \\ j \end{Bmatrix} \frac{(n+1)^{\underline{j+1}}}{j+1}
+\end{aligned}
+\]</span></p>
+<h3 id="行-1">行</h3>
+<p><span class="math inline">\(\begin{Bmatrix}n\\k\end{Bmatrix} = \frac{1}{k!} \sum_{i=0}^k(-1)^i \begin{pmatrix} k \\ i\end{pmatrix} ( k - i ) ^ n\)</span> 直接卷积就可以</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">8e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">167772161</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ig = <span class="number">55924054</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a + b &gt;= mod ? a + b - mod : a + b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a - b &lt; <span class="number">0</span> ? a - b + mod : a - b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> r[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> n , <span class="keyword">int</span> flag )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> x , y , w , wn;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; n ; ++i ) <span class="keyword">if</span>( i &lt; r[i] ) swap( f[i] , f[r[i]] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> mid = <span class="number">1</span> ; mid &lt; n ; mid &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    wn = fpow( flag ? ig : <span class="number">3</span> , ( mod - <span class="number">1</span> ) / ( mid &lt;&lt; <span class="number">1</span> ) );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i += ( mid &lt;&lt; <span class="number">1</span> ) ) &#123;</span><br><span class="line">      w = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; mid ; ++j , w = <span class="number">1L</span>L * w * wn % mod ) &#123;</span><br><span class="line">        x = f[i + j] , y = <span class="number">1L</span>L * f[i + j + mid] * w % mod;</span><br><span class="line">        f[i + j] = pls( x , y );</span><br><span class="line">        f[i + j + mid] = mns( x , y );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>( flag ) &#123;</span><br><span class="line">    w = fpow( n , mod - <span class="number">2</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) f[i] = <span class="number">1L</span>L * f[i] * w % mod;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A[N] , B[N] , n , fac[N] , ifac[N] , inv[N] , lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">( <span class="keyword">int</span> n , <span class="keyword">int</span> m )</span> </span>&#123; <span class="keyword">return</span> <span class="number">1L</span>L * fac[n] * ifac[m] % mod * ifac[n - m] % mod; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">  fac[<span class="number">0</span>] = ifac[<span class="number">0</span>] = fac[<span class="number">1</span>] = ifac[<span class="number">1</span>] = inv[<span class="number">0</span>] = inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n ; ++i ) &#123;</span><br><span class="line">    fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[i] = <span class="number">1L</span>L * ( mod - mod / i ) * inv[mod % i] % mod;</span><br><span class="line">    ifac[i] = <span class="number">1L</span>L * ifac[i - <span class="number">1</span>] * inv[i] % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) A[i] = <span class="number">1L</span>L * fpow( i , n ) * ifac[i] % mod;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i )</span><br><span class="line">    <span class="keyword">if</span>( i &amp; <span class="number">1</span> ) B[i] = mns( <span class="number">0</span> , ifac[i] );</span><br><span class="line">    <span class="keyword">else</span> B[i] = ifac[i];</span><br><span class="line">  <span class="keyword">while</span>( lim &lt;= ( n &lt;&lt; <span class="number">1</span> ) ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">  NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) A[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">  NTT( A , lim , <span class="number">1</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>,A[i]);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="列-1">列</h3>
+<p>设第 <span class="math inline">\(k\)</span> 列的生成函数是 <span class="math inline">\(F_k(x)\)</span></p>
+根据递推式 <span class="math inline">\(\begin{Bmatrix}n\\k\end{Bmatrix} = \begin{Bmatrix} n - 1 \\ k - 1 \end{Bmatrix} + k\begin{Bmatrix} n - 1 \\ k \end{Bmatrix}\)</span> $$
+<span class="math display">\[\begin{aligned}
+ F_k(x) &amp;= xF_{k-1}(x) + xkF_k(x) \\ 
+
+(1-kx)F_k(x) &amp;= xF_{k-1}(x) \\
+
+F_k(x) &amp;= \frac{xF_{k-1}(x)}{1-kx}
+\end{aligned}\]</span>
+<p>$$</p>
+<p>由于 <span class="math inline">\(F_0(x) =1\)</span></p>
+<p><span class="math display">\[
+F_k(x) = \frac{x^k}{ \prod_{i=1}^k(1-ix)}
+\]</span></p>
+<p>可以分治 <span class="math inline">\(O(n \log^2 n)\)</span> , 不过可以 <span class="math inline">\(O(n \log n)\)</span> <span class="math display">\[
+\begin{aligned}
+\prod_{i=1}^k(1-ix) &amp;= x^k \prod_{i=1}^k(x^{-1}-i) \\
+&amp;= \left(\prod_{i=1}^k(x-i)\right)^{R}
+\end{aligned}
+\]</span> <span class="math inline">\(F^R(x)\)</span> 表示翻转多项式</p>
+<p>问题转化为求 <span class="math inline">\(\prod_{i=1}^k(x-i) = \frac{x^{\underline{k+1}}}{x}\)</span></p>
+<p>求 <span class="math inline">\(x^{\underline{k+1}}\)</span> 可以类比求第一类斯特林数一行时的倍增</p>
+<p><span class="math inline">\(x^{\underline{2n}} = x^{\underline{n}}(x-n)^{\underline{n}}\)</span></p>
+<p>让 <span class="math inline">\(-n\)</span> 变为 <span class="math inline">\(+(mod-n)\)</span> <span class="math display">\[
+\begin{aligned}
+f(x+c) &amp;= \sum_{i} a_i(x+c)^i \\
+&amp;=\sum_{i}a_i\sum_{j}\binom{i}{j} x^jc^{i-j} \\ 
+&amp;= \sum_{i}x^i \sum_{j=i}a_j\binom{j}{i}c^{j-i} \\
+&amp;=\sum_{i}\frac{x^i}{i!}\sum_{j=i}j!a_j\frac{c^{j-i}}{(j-i)!}
+\end{aligned}
+\]</span> 和之前一样卷积即可 <span class="math inline">\(O(n \log n)\)</span></p>
+<p>还有一种多项式快速幂的方法</p>
+<p>先将 <span class="math inline">\(k\)</span> 个无标号盒子变为有标号 , 就得到以下式子 <span class="math display">\[
+\begin{Bmatrix}n \\ k\end{Bmatrix} = \prod_{v_1\geq1}\prod_{v_2\geq1}\cdots\prod_{v_k\geq1}\frac{n!}{\prod_{i=1}^k v_i!}
+\]</span> 分母是指数生成函数相乘的形式 <span class="math display">\[
+\sum_{i}\begin{Bmatrix}i\\k\end{Bmatrix}\frac{x^i}{i!}=\frac{\left(e^x-1\right)^k}{k!}
+\]</span></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">8e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">167772161</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> ig = <span class="number">55924054</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a + b &gt;= mod ? a + b - mod : a + b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a - b &lt; <span class="number">0</span> ? a - b + mod : a - b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> r[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> n , <span class="keyword">int</span> flag )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> x , y , w , wn;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; n ; ++i ) <span class="keyword">if</span>( i &lt; r[i] ) swap( f[i] , f[r[i]] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> mid = <span class="number">1</span> ; mid &lt; n ; mid &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    wn = fpow( flag ? ig : <span class="number">3</span> , ( mod - <span class="number">1</span> ) / ( mid &lt;&lt; <span class="number">1</span> ) );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i += ( mid &lt;&lt; <span class="number">1</span> ) ) &#123;</span><br><span class="line">      w = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; mid ; ++j , w = <span class="number">1L</span>L * w * wn % mod ) &#123;</span><br><span class="line">        x = f[i + j] , y = <span class="number">1L</span>L * f[i + j + mid] * w % mod;</span><br><span class="line">        f[i + j] = pls( x , y );</span><br><span class="line">        f[i + j + mid] = mns( x , y );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>( flag ) &#123;</span><br><span class="line">    w = fpow( n , mod - <span class="number">2</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) f[i] = <span class="number">1L</span>L * f[i] * w % mod;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A[N] , B[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Inv</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  ++_n; <span class="keyword">int</span> n = <span class="number">1</span> , lim = <span class="number">1</span> , l = <span class="number">-1</span>; g[<span class="number">0</span>] = fpow( f[<span class="number">0</span>] , mod - <span class="number">2</span> );</span><br><span class="line">  <span class="keyword">for</span>( ; n &lt; _n * <span class="number">2</span> ; n &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    <span class="keyword">while</span>( lim &lt; n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) A[i] = f[i] , B[i] = g[i];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = mns( pls( B[i] , B[i] ) , <span class="number">1L</span>L * A[i] * B[i] % mod * B[i] % mod );</span><br><span class="line">    NTT( g , lim , <span class="number">1</span> ); <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> df[N] , invf[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Ln</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  df[_n] = <span class="number">0</span>; <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= _n ; ++i ) df[i - <span class="number">1</span>] = <span class="number">1L</span>L * i * f[i] % mod;</span><br><span class="line">  Inv( f , invf , _n ); <span class="keyword">int</span> lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>( lim &lt;= _n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= _n ; ++i ) A[i] = df[i] , B[i] = invf[i];</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n + <span class="number">1</span> ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">  NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">  NTT( g , lim , <span class="number">1</span> ); <span class="keyword">for</span>( <span class="keyword">int</span> i = _n + <span class="number">1</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i ; --i ) g[i] = <span class="number">1L</span>L * g[i - <span class="number">1</span>] * fpow( i , mod - <span class="number">2</span> ) % mod;</span><br><span class="line">  g[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> lng[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Exp</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  g[<span class="number">0</span>] = <span class="number">1</span>; ++_n; <span class="keyword">int</span> n = <span class="number">1</span> , lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">for</span>( ; n &lt; _n * <span class="number">2</span> ; n &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    Ln( g , lng , n );</span><br><span class="line">    <span class="keyword">while</span>( lim &lt; n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) A[i] = g[i] , B[i] = mns( f[i] , lng[i] );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    B[<span class="number">0</span>] = pls( B[<span class="number">0</span>] , <span class="number">1</span> ); NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">    NTT( g , lim , <span class="number">1</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pow</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n , <span class="keyword">int</span> _k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> vk , v , tmp , _f[N] , _g[N] , n;</span><br><span class="line">  <span class="keyword">for</span>( vk = <span class="number">0</span> ; vk &lt;= _n ; ++vk ) <span class="keyword">if</span>( f[vk] ) <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">if</span>( <span class="number">1L</span>L * vk * _k &gt; _n ) &#123; <span class="built_in">memset</span>( g , <span class="number">0</span> , <span class="keyword">sizeof</span>( <span class="keyword">int</span> ) * ( _n + <span class="number">1</span> ) ); <span class="keyword">return</span>; &#125;</span><br><span class="line">  tmp = fpow( v = f[vk] , mod - <span class="number">2</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = vk ; i &lt;= _n ; ++i ) _f[i - vk] = <span class="number">1L</span>L * f[i] * tmp % mod;</span><br><span class="line">  n = _n - vk;</span><br><span class="line">  Ln( _f , _g , n );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt;= n ; ++i ) _g[i] = <span class="number">1L</span>L * _g[i] * _k % mod;</span><br><span class="line">  Exp( _g , g , n );</span><br><span class="line">  v = fpow( v , _k ); vk *= _k;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &gt;= vk ; --i ) g[i] = <span class="number">1L</span>L * g[i - vk] * v % mod;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; vk ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[N] , g[N] , n , k , fac[N] , ifac[N] , inv[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k; ++n;</span><br><span class="line">  inv[<span class="number">0</span>] = inv[<span class="number">1</span>] = ifac[<span class="number">0</span>] = ifac[<span class="number">1</span>] = fac[<span class="number">0</span>] = fac[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> , t = max( n , k ) ; i &lt;= t ; ++i ) &#123;</span><br><span class="line">    fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[i] = <span class="number">1L</span>L * ( mod - mod / i ) * inv[mod % i] % mod;</span><br><span class="line">    ifac[i] = <span class="number">1L</span>L * ifac[i - <span class="number">1</span>] * inv[i] % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) f[i] = ifac[i];</span><br><span class="line">  Pow( f , g , n , k );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) <span class="built_in">printf</span>(<span class="string">"%lld "</span>,<span class="number">1L</span>L*fac[i]*g[i]%mod*ifac[k]%mod);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="斯特林反演">斯特林反演</h2>
+<p>主要就是以下两个式子 <span class="math display">\[
+\sum_{i=m}^n(-1)^{n-i}\begin{bmatrix}n \\ i \end{bmatrix} \begin{Bmatrix} i \\m \end{Bmatrix} = [n=m] \\
+\sum_{i=m}^n(-1)^{n-i}\begin{Bmatrix}n \\ i \end{Bmatrix} \begin{bmatrix} i \\m \end{bmatrix} = [n=m]
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+m^{\underline n} &amp;= \sum_{i=0}^n (-1)^{n-i}\begin{bmatrix}n \\ i \end{bmatrix}m^i \\
+&amp;= \sum_{i=0}^n (-1)^{n-i} \begin{bmatrix}n\\i\end{bmatrix}\sum_{j=0}^i\begin{Bmatrix}i \\ j\end{Bmatrix} m^{\underline{j}} \\ 
+&amp;= \sum_{j=0}^n m^{\underline{j}}\sum_{i=j}^n(-1)^{n-i}\begin{bmatrix} n\\i\end{bmatrix}\begin{Bmatrix}i\\j\end{Bmatrix}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+m^n &amp;= \sum_{i=0}^n\begin{Bmatrix}n\\i\end{Bmatrix} m^{\underline{i}} \\ 
+&amp;=\sum_{i=0}^n\begin{Bmatrix}n\\i\end{Bmatrix}\sum_{j=0}^i(-1)^{j-i}\begin{bmatrix}j\\i\end{bmatrix}m^i \\
+&amp;=\sum_{j=0}^nm^i\sum_{i=j}^n(-1)^{i-j}\begin{Bmatrix}n\\i\end{Bmatrix}\begin{bmatrix}i\\j\end{bmatrix}
+\end{aligned}
+\]</span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/28/Tutorial/DP%20%E5%A5%97%20DP/" rel="prev" title="DP 套 DP">
+      <i class="fa fa-chevron-left"></i> DP 套 DP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/28/Tutorial/%E5%8D%95%E7%BA%AF%E5%BD%A2/" rel="next" title="使用单纯形法解决线性规划问题">
+      使用单纯形法解决线性规划问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一类斯特林数"><span class="nav-number">1.</span> <span class="nav-text">第一类斯特林数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">1.1.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行"><span class="nav-number">1.2.</span> <span class="nav-text">行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列"><span class="nav-number">1.3.</span> <span class="nav-text">列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二类斯特林数"><span class="nav-number">2.</span> <span class="nav-text">第二类斯特林数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质-1"><span class="nav-number">2.1.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行-1"><span class="nav-number">2.2.</span> <span class="nav-text">行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列-1"><span class="nav-number">2.3.</span> <span class="nav-text">列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#斯特林反演"><span class="nav-number">3.</span> <span class="nav-text">斯特林反演</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Description 我们的大朋友很喜欢计算机科学，而且尤其喜欢多叉树。对于一棵带有正整数点权的有根多叉树，如果它满足这样的性质，我们的大朋友就会将其称作神犇的：点权为 \(1\) 的结点是叶子结点；对于任一点权大于 \(1\) 的结点 \(u\) ，\(u\) 的孩子数目 \(deg_u\) 属于集合 \(D\) ，且 \(u\) 的点权等于这些孩子结点的点权之和。 给出一个整数 \(s\)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ3684] 大朋友与多叉树">
+<meta property="og:url" content="http://yoursite.com/2020/03/28/Solutions/[BZOJ]%20P3684/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="Description 我们的大朋友很喜欢计算机科学，而且尤其喜欢多叉树。对于一棵带有正整数点权的有根多叉树，如果它满足这样的性质，我们的大朋友就会将其称作神犇的：点权为 \(1\) 的结点是叶子结点；对于任一点权大于 \(1\) 的结点 \(u\) ，\(u\) 的孩子数目 \(deg_u\) 属于集合 \(D\) ，且 \(u\) 的点权等于这些孩子结点的点权之和。 给出一个整数 \(s\)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-28T15:09:38.747Z">
+<meta property="article:modified_time" content="2020-03-28T14:54:10.167Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/03/28/Solutions/[BZOJ]%20P3684/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>[BZOJ3684] 大朋友与多叉树 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/Solutions/[BZOJ]%20P3684/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ3684] 大朋友与多叉树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-03-28 23:09:38 / 修改时间：22:54:10" itemprop="dateCreated datePublished" datetime="2020-03-28T23:09:38+08:00">2020-03-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="description">Description</h2>
+<p>我们的大朋友很喜欢计算机科学，而且尤其喜欢多叉树。对于一棵带有正整数点权的有根多叉树，如果它满足这样的性质，我们的大朋友就会将其称作神犇的：点权为 <span class="math inline">\(1\)</span> 的结点是叶子结点；对于任一点权大于 <span class="math inline">\(1\)</span> 的结点 <span class="math inline">\(u\)</span> ，<span class="math inline">\(u\)</span> 的孩子数目 <span class="math inline">\(deg_u\)</span> 属于集合 <span class="math inline">\(D\)</span> ，且 <span class="math inline">\(u\)</span> 的点权等于这些孩子结点的点权之和。 给出一个整数 <span class="math inline">\(s\)</span> ，你能求出根节点权值为 <span class="math inline">\(s\)</span> 的神犇多叉树的个数吗？请参照样例以更好的理解什么样的两棵多叉树会被视为不同的。我们只需要知道答案关于 <span class="math inline">\(950009857\)</span>（<span class="math inline">\(453*2^{21}+1\)</span>，一个质数）取模后的值。</p>
+<a id="more"></a>
+<h2 id="input">Input</h2>
+<p>第一行有 <span class="math inline">\(2\)</span> 个整数 <span class="math inline">\(s\)</span> , <span class="math inline">\(m\)</span> 。 第二行有 <span class="math inline">\(m\)</span> 个互异的整数，<span class="math inline">\(d_1,d_2,\cdots,d_m\)</span> ，为集合 <span class="math inline">\(D\)</span> 中的元素。</p>
+<h2 id="output">Output</h2>
+<p>输出一行仅一个整数，表示答案模 <span class="math inline">\(950009857\)</span> 的值。</p>
+<h2 id="solution">Solution</h2>
+<p>拉格朗日反演</p>
+<p>设答案的生成函数为 <span class="math inline">\(F(x)\)</span> , 集合 <span class="math inline">\(D\)</span> 中是否有元素 <span class="math inline">\(d\)</span> 的数列的生成函数为 <span class="math inline">\(V(x)\)</span></p>
+<p>考虑枚举 <span class="math inline">\(1\)</span> 号节点孩子个数 , 以及每个孩子的权值</p>
+<p><span class="math display">\[
+[x_i]F(x) = x + \sum_{d \in D} \sum_{x_1+x_2+\cdots+x_d=i} \prod_{k=1}^d [x_k]F(x) \\
+F(x) = \sum_{d \in D} F^d(x) + x \\
+F(x) - \sum_{d \in D} F^d(x) = x
+\]</span></p>
+<p>设 <span class="math inline">\(G(x) = x - V(x)\)</span> 就有 <span class="math display">\[
+G(F(x)) = F(x) - \sum_{d\in D}F^d(x) = x
+\]</span> 根据拉格朗日反演</p>
+<p><span class="math display">\[
+[x^n]F(x) = \frac{1}{n}[x^{-1}] \frac{1}{G^n(x)} \\ 
+[x^n]F(x) = \frac{1}{n}[x^{n-1}] \frac{x^n}{G^n(x)} \\ 
+[x^n]F(x) = \frac{1}{n}[x^{n-1}] \frac{1}{\left(\frac{G(x)}{x}\right)^n}
+\]</span></p>
+<p>注意之所以可以由二式推出三式 , 是因为 <span class="math inline">\(G(x)\)</span> 的常数项为 <span class="math inline">\(0\)</span></p>
+<p>于是直接多项式快速幂 , 求逆就可以了</p>
+<h2 id="code">Code</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IO &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1</span> &lt;&lt; <span class="number">18</span> | <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN] , *s , *t;</span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Getchar</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> s == t &amp;&amp; ( t = ( s = buf ) + fread( buf , <span class="number">1</span> , IN_LEN , <span class="built_in">stdin</span> ) ) , s == t ? <span class="number">-1</span> : *s++; &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">inline</span> <span class="title">void</span> <span class="title">read</span>( <span class="title">T</span> &amp; <span class="title">x</span> ) &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c , f; c = Getchar() , x = f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>( c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span> ) &#123; <span class="keyword">if</span>( c == <span class="string">'-'</span> ) f = <span class="number">1</span>; c = Getchar(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( c &lt;= <span class="string">'9'</span> &amp;&amp; c &gt;= <span class="string">'0'</span> ) x = x * <span class="number">10</span> + c - <span class="number">48</span> , c = Getchar();</span><br><span class="line">    x = f ? -x : x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">using</span> IO::read;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">4e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">950009857</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> g = <span class="number">7</span> , ig = <span class="number">135715694</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a + b &gt;= mod ? a + b - mod : a + b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a - b &lt; <span class="number">0</span> ? a - b + mod : a - b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">if</span>( ( a += b ) &gt;= mod ) a -= mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">if</span>( ( a -= b ) &lt; <span class="number">0</span> ) a += mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A[N] , B[N] , r[N] , preG[<span class="number">22</span>] , preIG[<span class="number">22</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> n , <span class="keyword">int</span> flag )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> x , y , wn , w;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; n ; ++i ) <span class="keyword">if</span>( i &lt; r[i] ) swap( f[i] , f[r[i]] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> mid = <span class="number">1</span> , tk = <span class="number">0</span> ; mid &lt; n ; mid &lt;&lt;= <span class="number">1</span> , ++tk ) &#123;</span><br><span class="line">    wn = flag ? preIG[tk] : preG[tk];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i += ( mid &lt;&lt; <span class="number">1</span> ) ) &#123;</span><br><span class="line">      w = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; mid ; ++j , w = <span class="number">1L</span>L * w * wn % mod ) &#123;</span><br><span class="line">        x = f[i + j] , y = <span class="number">1L</span>L * f[i + j + mid] * w % mod;</span><br><span class="line">        f[i + j] = pls( x , y );</span><br><span class="line">        f[i + j + mid] = mns( x , y );</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>( flag ) &#123;</span><br><span class="line">    w = fpow( n , mod - <span class="number">2</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) f[i] = <span class="number">1L</span>L * f[i] * w % mod;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inv</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  g[<span class="number">0</span>] = fpow( f[<span class="number">0</span>] , mod - <span class="number">2</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> n = <span class="number">2</span> ; n &lt; _n * <span class="number">2</span> ; n &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    <span class="keyword">while</span>( lim &lt; n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) A[i] = f[i] , B[i] = g[i];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = mns( pls( B[i] , B[i] ) , <span class="number">1L</span>L * A[i] * B[i] % mod * B[i] % mod );</span><br><span class="line">    NTT( g , lim , <span class="number">1</span> ); <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> df[N] , invf[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ln</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; _n ; ++i ) df[i] = <span class="number">1L</span>L * f[i + <span class="number">1</span>] * ( i + <span class="number">1</span> ) % mod;</span><br><span class="line">  df[_n - <span class="number">1</span>] = <span class="number">0</span>; inv( f , invf , _n );</span><br><span class="line">  <span class="keyword">int</span> lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">while</span>( lim &lt; _n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; lim ; ++i ) r[i] = ( r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; _n ; ++i ) A[i] = df[i] , B[i] = invf[i];</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">  NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">  NTT( g , lim , <span class="number">1</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = _n - <span class="number">1</span> ; i ; --i ) g[i] = <span class="number">1L</span>L * g[i - <span class="number">1</span>] * fpow( i , mod - <span class="number">2</span> ) % mod;</span><br><span class="line">  g[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> lng[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exp</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> * g , <span class="keyword">int</span> _n )</span> </span>&#123;</span><br><span class="line">  g[<span class="number">0</span>] = <span class="number">1</span>; <span class="keyword">int</span> lim = <span class="number">1</span> , l = <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> n = <span class="number">2</span> ; n &lt; _n * <span class="number">2</span> ; n &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">    ln( g , lng , n );</span><br><span class="line">    <span class="keyword">while</span>( lim &lt; n * <span class="number">2</span> ) lim &lt;&lt;= <span class="number">1</span> , ++l;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) A[i] = mns( f[i] , lng[i] ) , B[i] = g[i];</span><br><span class="line">    inc( A[<span class="number">0</span>] , <span class="number">1</span> ); </span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) A[i] = B[i] = <span class="number">0</span>;</span><br><span class="line">    NTT( A , lim , <span class="number">0</span> ) , NTT( B , lim , <span class="number">0</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) g[i] = <span class="number">1L</span>L * A[i] * B[i] % mod;</span><br><span class="line">    NTT( g , lim , <span class="number">1</span> );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">for</span>( <span class="keyword">int</span> i = _n ; i &lt; lim ; ++i ) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[N] , b[N] , n , m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  read( n ) , read( m );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">20</span> ; ++i ) &#123;</span><br><span class="line">    preG[i] = fpow( g , ( mod - <span class="number">1</span> ) / ( <span class="number">1</span> &lt;&lt; ( i + <span class="number">1</span> ) ) );</span><br><span class="line">    preIG[i] = fpow( ig , ( mod - <span class="number">1</span> ) / ( <span class="number">1</span> &lt;&lt; ( i + <span class="number">1</span> ) ) );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> , x ; i &lt;= m ; ++i ) &#123;</span><br><span class="line">    read( x );</span><br><span class="line">    b[--x] = mod - <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  inc( b[<span class="number">0</span>] , <span class="number">1</span> );</span><br><span class="line">  ln( b , a , n );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i ) a[i] = <span class="number">1L</span>L * a[i] * n % mod; </span><br><span class="line">  <span class="built_in">exp</span>( a , b , n );</span><br><span class="line">  inv( b , a , n );</span><br><span class="line">  cout &lt;&lt; 1LL * fpow( n , mod - 2 ) * a[n - 1] % mod;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="prove">Prove</h2>
+<p>拉格朗日反演的证明</p>
+<p><span class="math display">\[
+G(F(x)) = x \\ 
+\sum_{i=1}a_iF^i(x) = x 
+\]</span></p>
+<p>两边同时对 <span class="math inline">\(x\)</span> 求导 , 得</p>
+<p><span class="math display">\[
+\sum_{i=1}ia_iF^{i-1}(x) F&#39;(x)=1
+\]</span></p>
+<p>两边同时除以 <span class="math inline">\(F^n(x)\)</span> , 取 <span class="math inline">\([x^{-1}]\)</span> <span class="math display">\[
+[x^{-1}]\sum_{i=1}ia_iF_{i-1-n}F&#39;(x) = [x^{-1}]\frac{1}{F^n(x)}
+\]</span> 当 <span class="math inline">\(i \neq n\)</span> 时 <span class="math display">\[
+F^{i−n−1}(x)F′(x)=\frac{(F^{i−n}(x))′}{i−n}
+\]</span> 求导后 <span class="math inline">\(x^{-1}\)</span> 的系数一定为 <span class="math inline">\(0\)</span></p>
+<p>当 <span class="math inline">\(i = n\)</span> 时 <span class="math display">\[
+\begin{aligned}
+[x^{-1}]na_n\frac{F&#39;(x)}{F(x)} &amp;=[x^{-1}]\frac{1}{F^n(x)} \\ 
+\frac{F&#39;(x)}{F(x)} &amp;= \frac{\sum_{i=1}ib_ix^{i-1}}{\sum_{i=1}b_ix^i} \\
+                                     &amp;= \frac{\sum_{i=1}ib_ix^{i-1}}{b_1x} \cdot \frac{1}{1 + \sum_{i=1}\frac{b_{i+1}}{b_1}x^{i}}
+\end{aligned}
+\]</span> 前一个多项式的 <span class="math inline">\(-1\)</span> 次项是 <span class="math inline">\(\frac{b_1}{b_1} = 1\)</span> , 后一个多项式常数项为 <span class="math inline">\(1\)</span> <span class="math display">\[
+[x^{-1}]\frac{F&#39;(x)}{F(x)} = 1
+\]</span></p>
+<p>于是得到 <span class="math display">\[
+na_n = [x^{-1}]\frac{1}{F^n(x)} \\ 
+[x^n]G(x) = \frac{1}{n}[x^{-1}]\frac{1}{F^n(x)}
+\]</span> 使用条件是 <span class="math inline">\(G(F(x)) = x\)</span> , 且 <span class="math inline">\(F(x)\)</span> , <span class="math inline">\(G(x)\)</span> 常数项为 <span class="math inline">\(0\)</span> , 一次项不为 <span class="math inline">\(0\)</span></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/28/Solutions/%5BBZOJ%5D%20P5100/" rel="prev" title="[POI2018] Plan metra">
+      <i class="fa fa-chevron-left"></i> [POI2018] Plan metra
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/28/Solutions/%5BBZOJ%5D%20P4477/" rel="next" title="[JSOI2015] 字符串树">
+      [JSOI2015] 字符串树 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-number">4.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code"><span class="nav-number">5.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prove"><span class="nav-number">6.</span> <span class="nav-text">Prove</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
