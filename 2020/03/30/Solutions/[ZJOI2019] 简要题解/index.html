@@ -23,19 +23,19 @@
   <meta name="description" content="麻将 首先做一个转化 设 \(p_i\) 表示抽 \(i\) 张牌恰好胡的概率">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[ZJOI2019] 简要题解">
-<meta property="og:url" content="http://yoursite.com/2020/03/28/Solutions/[ZJOI2019]%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/03/30/Solutions/[ZJOI2019]%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Guyan&#39;s blog">
 <meta property="og:description" content="麻将 首先做一个转化 设 \(p_i\) 表示抽 \(i\) 张牌恰好胡的概率">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.loli.net/2020/03/28/6tzmeFR9PgbV3Cq.jpg">
 <meta property="og:image" content="https://i.loli.net/2020/03/28/IftiqLQpaMDv3Fu.jpg">
-<meta property="article:published_time" content="2020-03-28T15:09:38.763Z">
-<meta property="article:modified_time" content="2020-03-28T14:57:49.061Z">
+<meta property="article:published_time" content="2020-03-29T17:30:46.138Z">
+<meta property="article:modified_time" content="2020-03-29T17:30:46.138Z">
 <meta property="article:author" content="Guyan">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2020/03/28/6tzmeFR9PgbV3Cq.jpg">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/28/Solutions/[ZJOI2019]%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+<link rel="canonical" href="http://yoursite.com/2020/03/30/Solutions/[ZJOI2019]%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/Solutions/[ZJOI2019]%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/30/Solutions/[ZJOI2019]%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -186,9 +186,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-28 23:09:38 / 修改时间：22:57:49" itemprop="dateCreated datePublished" datetime="2020-03-28T23:09:38+08:00">2020-03-28</time>
+              <time title="创建时间：2020-03-30 01:30:46" itemprop="dateCreated datePublished" datetime="2020-03-30T01:30:46+08:00">2020-03-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,8 +320,10 @@ a_i\sum_{j} i^j = a_i \frac{1}{1-i}
 \]</span> 发现 <span class="math inline">\(P=\sum p \leq 2000\)</span> , 可以直接记录 <span class="math inline">\(e^{\frac{i}{P}}\)</span> 的系数</p>
 <p>不过有个问题 , <span class="math inline">\(\frac{1}{1-x}\)</span> 在 <span class="math inline">\(1\)</span> 处没有定义 , 可以上下同时乘上 <span class="math inline">\(\prod_{i=-p}^i \left(1 - \frac{i}{p}x\right)\)</span></p>
 <p>接下来就是推式子时间 <span class="math display">\[
-f( 1 ) = \sum_{i=-P}^Pa_i \prod_{j\neq i}(1-\frac{j}{p}) = a_P \prod_{j\neq P}(1-\frac{j}{P}) \\
-f&#39;(1) = \sum_{i=-P}^Pa_i \sum_{j \neq i}-\frac{j}{P}\prod_{k\neq i , k\neq j}(1-\frac{k}{P}) =\sum_{i=P \or j =P} -\frac{a_ij}{P}\prod_{k\neq i , k \neq j}( 1 - \frac{k}{P})
+\begin{aligned}
+f( 1 ) = \sum_{i=-P}^Pa_i \prod_{j\neq i}(1-\frac{j}{p}) &amp;= a_P \prod_{j\neq P}(1-\frac{j}{P}) \\
+f&#39;(1) = \sum_{i=-P}^Pa_i \sum_{j \neq i}-\frac{j}{P}\prod_{k\neq i , k\neq j}(1-&amp;\frac{k}{P}) =\sum_{i=P \vee j =P} -\frac{a_ij}{P}\prod_{k\neq i , k \neq j}( 1 - \frac{k}{P})
+\end{aligned}
 \]</span></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5e4</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inv2 = ( mod + <span class="number">1</span> ) / <span class="number">2</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125; <span class="keyword">int</span> _w;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n , p , s[N] , fPool[N &lt;&lt; <span class="number">1</span>] , gPool[N &lt;&lt; <span class="number">1</span>] , *f = fPool + N , *g = gPool + N , hPool[N &lt;&lt; <span class="number">1</span>] , *h = hPool + N;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>,s+i);</span><br><span class="line">  f[<span class="number">0</span>] = g[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> , x ; i &lt;= n ; ++i ) &#123;</span><br><span class="line">    _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = -p ; j &lt;= p ; ++j ) inc( h[j + x] , <span class="number">1L</span>L * inv2 * f[j] % mod );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = -p ; j &lt;= p ; ++j ) inc( h[j - x] , <span class="number">1L</span>L * ( s[i] ? mod - inv2 : inv2 ) * f[j] % mod );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = -p - x ; j &lt;= p + x ; ++j ) &#123; f[j] = h[j]; h[j] = <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = -p ; j &lt;= p ; ++j ) inc( h[j + x] , <span class="number">1L</span>L * inv2 * g[j] % mod );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = -p ; j &lt;= p ; ++j ) inc( h[j - x] , <span class="number">1L</span>L * inv2 * g[j] % mod );</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = -p - x ; j &lt;= p + x ; ++j ) &#123; g[j] = h[j]; h[j] = <span class="number">0</span>; &#125;</span><br><span class="line">    p += x;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = -p , invp = fpow( p , mod - <span class="number">2</span> ) ; i &lt; p ; ++i ) </span><br><span class="line">    inc( ans , <span class="number">1L</span>L * mns( g[i] , f[i] ) * fpow( mns( <span class="number">1</span> , <span class="number">1L</span>L * ( i + mod ) * invp % mod ) , mod - <span class="number">2</span> ) % mod );</span><br><span class="line">  cout &lt;&lt; 1LL * ans * fpow( 2 , n ) % mod;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="语言"><a href="https://loj.ac/problem/3046" target="_blank" rel="noopener">语言</a></h3>
@@ -360,13 +361,10 @@ f&#39;(1) = \sum_{i=-P}^Pa_i \sum_{j \neq i}-\frac{j}{P}\prod_{k\neq i , k\neq j
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/28/Solutions/%E4%BB%98%E5%85%AC%E4%B8%BB%E7%9A%84%E8%83%8C%E5%8C%85/" rel="prev" title="付公主的背包">
-      <i class="fa fa-chevron-left"></i> 付公主的背包
+    <a href="/2020/03/29/Tutorial/%E5%8D%95%E7%BA%AF%E5%BD%A2/" rel="prev" title="使用单纯形法解决线性规划问题">
+      <i class="fa fa-chevron-left"></i> 使用单纯形法解决线性规划问题
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/28/Tutorial/prufer%20%E5%BA%8F%E5%88%97/" rel="next" title="Prufer 序列">
-      Prufer 序列 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
