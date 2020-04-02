@@ -27,13 +27,12 @@
 <meta property="og:site_name" content="Guyan&#39;s blog">
 <meta property="og:description" content="麻将 首先做一个转化 设 \(p_i\) 表示抽 \(i\) 张牌恰好胡的概率">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2020/03/28/6tzmeFR9PgbV3Cq.jpg">
-<meta property="og:image" content="https://i.loli.net/2020/03/28/IftiqLQpaMDv3Fu.jpg">
+<meta property="og:image" content="http://yoursite.com/images/tree.jpg">
 <meta property="article:published_time" content="2020-03-28T02:01:00.000Z">
-<meta property="article:modified_time" content="2020-03-30T15:09:58.389Z">
+<meta property="article:modified_time" content="2020-04-01T12:42:28.522Z">
 <meta property="article:author" content="Guyan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/03/28/6tzmeFR9PgbV3Cq.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/tree.jpg">
 
 <link rel="canonical" href="http://yoursite.com/2020/03/28/Solutions/[ZJOI2019]%20%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
 
@@ -194,7 +193,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-30 23:09:58" itemprop="dateModified" datetime="2020-03-30T23:09:58+08:00">2020-03-30</time>
+                <time title="修改时间：2020-04-01 20:42:28" itemprop="dateModified" datetime="2020-04-01T20:42:28+08:00">2020-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,11 +247,8 @@ E(x) = \sum_{i}(&amp;q_{i-1} - q_i)i =\sum_{i} q_i
 <p>由于期望的可加性 , 可以分别求出每个节点期望值求和</p>
 <p>于是只用维护一颗线段树 , 不过需要一点分析</p>
 <p>以 <span class="math inline">\([1,5]\)</span> 的线段树为例</p>
-<figure>
-<img src="https://i.loli.net/2020/03/28/6tzmeFR9PgbV3Cq.jpg" alt="" /><figcaption>Tree.jpg</figcaption>
-</figure>
 <p>假设现在进行 <span class="math inline">\([3,4]\)</span> 的操作 , 有四类不同的点</p>
-<p><img src="https://i.loli.net/2020/03/28/IftiqLQpaMDv3Fu.jpg" /></p>
+<p><img src="/images/tree.jpg" /></p>
 <p>其中红点是经过的点 , 有 Pushdown 操作 , 黄点是最终到达的目标节点</p>
 <p>蓝点是有可能被 Pushdown 操作影响的点 , 其他为灰点</p>
 <p>现在设 <span class="math inline">\(f[i]\)</span> 表示节点的期望值</p>
@@ -450,7 +446,7 @@ f&#39;(1) = \sum_{i=-P}^Pa_i \sum_{j \neq i}-\frac{j}{P}\prod_{k\neq i , k\neq j
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
