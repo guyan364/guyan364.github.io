@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="各种有关图的计数问题 代码会有的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关图的计数问题">
+<meta property="og:url" content="http://yoursite.com/2020/04/08/Tutorial/%E5%9B%BE%E7%9A%84%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="各种有关图的计数问题 代码会有的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-07T16:19:18.000Z">
+<meta property="article:modified_time" content="2020-04-09T16:28:12.247Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/08/Tutorial/%E5%9B%BE%E7%9A%84%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>有关图的计数问题 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/08/Tutorial/%E5%9B%BE%E7%9A%84%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          有关图的计数问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-08 00:19:18" itemprop="dateCreated datePublished" datetime="2020-04-08T00:19:18+08:00">2020-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-10 00:28:12" itemprop="dateModified" datetime="2020-04-10T00:28:12+08:00">2020-04-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>各种有关图的计数问题</p>
+<p>代码会有的</p>
+<a id="more"></a>
+<h4 id="有标号无根树计数">有标号无根树计数</h4>
+<p>根据 Prufer 序列 , 答案是 <span class="math inline">\(n^{n-2}\)</span></p>
+<h4 id="有标号有根树计数">有标号有根树计数</h4>
+<p>在无根树的基础上 , 随便选一个作为根 , 答案是 <span class="math inline">\(n^{n-1}\)</span></p>
+<h4 id="无标号有根树计数">无标号有根树计数</h4>
+<p>设 <span class="math inline">\(f_i\)</span> 表示 <span class="math inline">\(i\)</span> 个点无标号有根树个数</p>
+<p>对于新增第 <span class="math inline">\(n+1\)</span> 个点 , 钦定为根 , 剩下就是选出 <span class="math inline">\(n-1\)</span> 个点的森林</p>
+<p>剩下就是个背包 , 枚举子树大小可以得到 <span class="math display">\[
+f_n = [x^n]x\prod_{k=1}^{\infty}\left(\frac{1}{1-x^k}\right)^{f_k}
+\]</span> 解释一下 <span class="math inline">\(\left(\frac{1}{1-x^k}\right)^{f_k}\)</span> , 大小为 <span class="math inline">\(k\)</span> 的子树有 <span class="math inline">\(f_k\)</span> 种 , 每一种选 <span class="math inline">\(ik(i \geq 0)\)</span> 个点方案数都是 <span class="math inline">\(1\)</span> , 将每一种方案卷起来就是子树大小为 <span class="math inline">\(k\)</span> 时的方案数</p>
+<p>这其实就是 <strong><span class="math inline">\(\text{Euler}\)</span> 变换</strong> <span class="math display">\[
+\begin{aligned}
+{\LARGE \varepsilon}(F(x)) = \prod_{i}(\frac{1}{1-x^i})^{f_i}
+\end{aligned}
+\]</span> 看起来很像 <span class="math inline">\(\exp\)</span> <span class="math display">\[
+\exp(F(x)) = \sum_{i}\frac{F^i(x)}{i!}
+\]</span> <span class="math inline">\(\exp\)</span> 的组合意义是 , 将 <span class="math inline">\(1 \sim n\)</span> 分成若干非空部分 , 大小为 <span class="math inline">\(k\)</span> 的部分有 <span class="math inline">\(f_k\)</span> 种方案数 , 求总方案数</p>
+<p><span class="math inline">\(\text{Euler}\)</span> 边换则是无标号 , 对于两个大小为 <span class="math inline">\(k\)</span> 的部分 , 若其内部方案相同 , 则两部分不可区分</p>
+<p>现在从 <strong><span class="math inline">\(\text{Burniside}\)</span> 引理</strong> 着手推导一遍</p>
+<p>设这 <span class="math inline">\(n\)</span> 个位置一共分成了 <span class="math inline">\(m\)</span> 组</p>
+<p>接下来的问题就是 , 对所有的 <span class="math inline">\(m\)</span> 元置换 , 求在该置换群下不动点个数的平均数</p>
+<p>设其中有一个 <span class="math inline">\(k\)</span> 阶循环 , 此时这 <span class="math inline">\(k\)</span> 个部分内部方案应该一样 , 于是得到 <span class="math inline">\(k\)</span> 个位置构成 <span class="math inline">\(k\)</span> 阶循环的 <strong>EGF</strong> <span class="math display">\[
+G(x) = \frac{1}{k!}( k - 1 )!F(x^k) = \frac{F(x^k)}{k}
+\]</span> 这个 <span class="math inline">\((k-1)!\)</span> 是长度 <span class="math inline">\(k\)</span> 的圆排列个数 , 然后将所有的 <span class="math inline">\(k\)</span> 的 <span class="math inline">\(G_k(x)\)</span> 加起来 , 得到 <span class="math inline">\(H(x)\)</span> , <span class="math inline">\(h_i\)</span> 代表 , 大小为 <span class="math inline">\(i\)</span> , 其内部分成的几部分构成一个循环节的方案数 , 也就是其内部的分组的循环节与其他地方无关 , 这就是 <span class="math inline">\(\exp\)</span> 所解决的问题 , 将序列分成若干非空组 , 大小为 <span class="math inline">\(i\)</span> 的组其内部方案数是 <span class="math inline">\(h_i\)</span> , 最后求置换平均数就是除 <span class="math inline">\(n!\)</span> , 于是直接 <span class="math inline">\(\exp\)</span> 就行了 <span class="math display">\[
+{\LARGE\varepsilon}(F(x)) = \exp(\sum_{i}\frac{F(x^i)}{i})
+\]</span> 这个式子也可以直接求导推出来 <span class="math display">\[
+\begin{aligned}
+{\LARGE \varepsilon}(F(x)) &amp;= \exp\left(\sum_{i}\ln\frac{1}{(1-x^i)^{f_i}}\right) \\
+&amp;=\exp\left(\sum_{i}-f_i\ln(1-x^i)\right) \\
+&amp;=\exp \left(\sum_{i}f_i\sum_{j}\frac{x^{ij}}{j}\right) \\
+&amp;=\exp\left(\sum_{j}\frac{1}{j}\sum_{i}f_ix^{ij}\right) \\
+&amp;=\exp\left(\sum_j\frac{F(x^j)}{j}\right)
+\end{aligned}
+\]</span> 其中二式到三式是 <span class="math inline">\(\ln(1-x)\)</span> 的泰勒展开</p>
+<p>回到题目 , 现在的问题是求 <span class="math display">\[
+F(x) = x\prod_{i}\left(\frac{1}{1-x^i}\right)^{f_i}
+\]</span> 考虑牛顿迭代 <span class="math display">\[
+\begin{aligned}
+G(F(x)) &amp;= F(x) -x{\LARGE \varepsilon}(F(x)) \\
+&#39;F(x) &amp;=F(x) - \frac{G(F(x))}{G&#39;(F(x))}
+\end{aligned}
+\]</span> 考虑当前已经求出 <span class="math inline">\(\bmod x^n\)</span> 的 <span class="math inline">\(F(x)\)</span> , 发现此时 <span class="math inline">\(F(x^k)\bmod x^{2n}(k &gt;1)\)</span> 的值是知道的</p>
+<p>设 <span class="math inline">\(P(x) = x\exp\left(\sum_{k&gt;1}\frac{F(x^j)}{j}\right) \bmod x^{2n}\)</span> , 有 <span class="math inline">\(F(x) \equiv P(x) \exp F(x) \pmod {x^{2n}}\)</span></p>
+<p>就可以迭代了 , <span class="math inline">\(O(n\log n)\)</span> 附赠常数大礼包</p>
+<p>然而 <span class="math inline">\(O(n \log^2 n)\)</span> 的分治 NTT 跑得更快 <span class="math display">\[
+\begin{aligned}
+F(x) &amp;= x\prod_{i}\left(\frac{1}{1-x^i}\right)^{f_i} \\
+\ln(F(x)) &amp;= \ln x - \sum_{i}f_i\ln(1-x^i) \\
+\frac{F&#39;(x)}{F(x)} &amp;= \frac{1}{x}-\sum_{i} if_i\frac{x^{i-1}}{1-x^i} \\
+xF&#39;(x) &amp;= F(x) - F(x) \sum_{i}if_i\frac{x^i}{1-x^i} \\
+xF&#39;(x) &amp;= F(x)-F(x)\sum_{i}x^iF&#39;(x^i)
+\end{aligned}
+\]</span> 设 <span class="math inline">\(G(x) = \sum_{i}x^i F&#39;(x^i)\)</span> , 有 <span class="math inline">\(g_n = \sum_{d|n} df_d\)</span> <span class="math display">\[
+\begin{aligned}
+nf_n &amp;= f_n + \sum_{i}f_ig_{n-i} \\
+f_n &amp;= \frac{1}{n-1}\sum_{i}f_ig_{n-i}
+\end{aligned}
+\]</span> 于是就可以分治 NTT 了</p>
+<h4 id="无标号无根树计数">无标号无根树计数</h4>
+<p>其实就是有根树减去根不是重心的方案数</p>
+<p>当 <span class="math inline">\(n\)</span> 为奇数时 , 就是有一个子树的大小大于 <span class="math inline">\(\lfloor \frac{n}{2}\rfloor\)</span> , 就是 <span class="math inline">\(\sum_{k=\lfloor \frac{n}{2}\rfloor+1}^n f_kf_{n-k}\)</span></p>
+<p>当 <span class="math inline">\(n\)</span> 为偶数时 , 还有可能有两个重心 , 其中一个是根 , 有一个子树大小为 <span class="math inline">\(\frac{n}{2}\)</span> , 需要特判</p>
+<p>考虑当去除这个子树后 , 剩下的部分如果和这个子树一样 , 这种情况只会在 <span class="math inline">\(f_n\)</span> 中算一遍 , 不用减去</p>
+<p>而对于两边不同的 , 会算两遍 , 需要减去 <span class="math inline">\(\binom{f_{\frac{n}{2}}}{2}\)</span></p>
+<h4 id="有标号连通无向图计数">有标号连通无向图计数</h4>
+<p>设 <span class="math inline">\(f_i\)</span> 是 <span class="math inline">\(i\)</span> 个点的有标号无向连通图数 , <span class="math inline">\(g_i\)</span> 是 <span class="math inline">\(i\)</span> 个点有标号无向联通图数 , 枚举点 <span class="math inline">\(1\)</span> 所在的联通块大小 , 有 <span class="math display">\[
+g_n = \sum_{i=1}^n \binom{n-1}{i-1}f_ig_{n-i}
+\]</span> 两边同时除去 <span class="math inline">\((n-1)!\)</span> , 有 <span class="math display">\[
+\frac{g_n}{(n-1)!} = \sum_{i=1}^n\frac{f_i}{(i-1)!}\frac{g_{n-i}}{(n-i)!}
+\]</span> 设 <span class="math inline">\(F(x) = \sum_{i &gt; 0} \frac{f_i}{(i-1)!}x^i\)</span> , <span class="math inline">\(G(x) = \sum_{i} \frac{g_{i}}{i!}x^i\)</span> , 于是有 <span class="math display">\[
+\begin{aligned}
+xG&#39;(x) &amp;= F(x) G(x) \\
+F(x) &amp;= \frac{xG&#39;(x)}{G(x)}
+\end{aligned}
+\]</span> 多项式求逆就行了</p>
+<h4 id="弱连通有标号-dag-计数">弱连通有标号 DAG 计数</h4>
+<p>仿照联通无向图 , 先求出 <span class="math inline">\(n\)</span> 个点由若干不联通 DAG 组成的方案数 <span class="math inline">\(g_n\)</span> , <span class="math inline">\(n\)</span> 个点的弱联通 DAG 数 <span class="math inline">\(f_n\)</span> , 根据 <span class="math inline">\(\exp\)</span> 的组合意义:</p>
+<blockquote>
+<p>将 <span class="math inline">\(1 \sim n\)</span> 分成若干非空部分 , 大小为 <span class="math inline">\(k\)</span> 的部分有 <span class="math inline">\(f_k\)</span> 种方案数 , 求总方案数</p>
+</blockquote>
+<p>设 <span class="math inline">\(F(x)\)</span> 是 <span class="math inline">\(f\)</span> 的 EGF , <span class="math inline">\(G(x)\)</span> 是 <span class="math inline">\(g\)</span> 的 EGF , 有</p>
+<p><span class="math display">\[
+\begin{aligned}
+G(x) &amp;= \exp(F(x))\\
+F(x) &amp;= \ln(G(X))
+\end{aligned}
+\]</span></p>
+<p>于是问题变为求 <span class="math inline">\(g_n\)</span> , 考虑知道 <span class="math inline">\(g_{1\sim n-1}\)</span> 如何求 <span class="math inline">\(g_n\)</span></p>
+<p>为了保证这是个 DAG , 考虑枚举入度为 <span class="math inline">\(0\)</span> 的点数 , 然后和剩下的 DAG 连边</p>
+<p>设 <span class="math inline">\(h_{n,i}\)</span> , 表示有 <span class="math inline">\(n\)</span> 个点时 , 入度为 <span class="math inline">\(0\)</span> 的点数 <strong>恰好</strong> 为 <span class="math inline">\(i\)</span> 的方案数</p>
+<p><span class="math inline">\(p_{n,i}\)</span> , 表示有 <span class="math inline">\(n\)</span> 个点时 , 入度为 <span class="math inline">\(0\)</span> 的点数 <strong>至少</strong> 为 <span class="math inline">\(i\)</span> 的方案数 , 可以得出 <span class="math inline">\(p_{n,i} = \binom{n}{i}2^{i(n-i)}g_{n-i}\)</span> , 就是选出 <span class="math inline">\(i\)</span> 个点度数一定为 <span class="math inline">\(0\)</span> , 其余随意连边</p>
+<p>为方便 , 默认省去第一维 <span class="math inline">\(n\)</span> , 那么 <span class="math inline">\(g_n = \sum_{i=1}^n h_i\)</span> , 考虑 <span class="math inline">\(h\)</span> 和 <span class="math inline">\(p\)</span> 的关系</p>
+<p><span class="math display">\[
+\begin{aligned}
+p_i &amp;= \sum_{j=i}^n \binom{j}{i}h_j \\
+h_i &amp;= \sum_{j=i}^n(-1)^{(j-i)}\binom{j}{i}p_j
+\end{aligned}
+\]</span></p>
+<p>其中二式是 <strong>二项式反演</strong> , 带入原式</p>
+<p><span class="math display">\[
+\begin{aligned}
+g_n &amp;= \sum_{i=1}^n\sum_{j=i}^n(-1)^{(j-i)}\binom{j}{i}p_j \\
+&amp;= \sum_{j=1}^np_j\sum_{i=1}^j(-1)^{(j-i)}\binom{j}{i} \\
+&amp;= \sum_{j=1}^n p_j \left((1-1)^j - (\binom{j}{0}(-1)^j)\right)\\
+&amp;= \sum_{j=1}^n p_j (-1)^{(j+1)} \\
+&amp;= \sum_{i=1}^n (-1)^{(i+1)}\binom{n}{i}2^{i(n-i)}g_{n-i}
+\end{aligned}
+\]</span></p>
+<p>考虑对 <span class="math inline">\(2^{i(n-i)}\)</span> 进行变换</p>
+<p><span class="math display">\[
+\binom{a+b}{2} - \binom{a}{2} - \binom{b}{2} = ab
+\]</span></p>
+<p>上式可以手算验证 , 于是有</p>
+<p><span class="math display">\[
+\begin{aligned}
+g_n &amp;= \sum_{i=1}^n (-1)^{(i+1)}\binom{n}{i}2^{\binom{n}{i}-\binom{i}{2}-\binom{n-i}{2}}g_{n-i} \\
+&amp;=2^{\binom{n}{2}}\sum_{i=1}^n\frac{(-1)^{(i+1)}}{i!\cdot2^{\binom{i}{2}}} \cdot \frac{g_{n-i}}{(n-i)!\cdot2^{\binom{n-i}{2}}}
+\end{aligned}
+\]</span></p>
+<p>设</p>
+<p><span class="math display">\[
+\begin{aligned}
+A(x) &amp;= \sum_{i&gt;0}\frac{(-1)^{(i+1)}}{i!\cdot2^{\binom{i}{2}}}x^i \\
+B(x) &amp;= \sum_{i}\frac{g_i}{i!\cdot2^{\binom{i}{2}}}x^i
+\end{aligned}
+\]</span></p>
+<p>于是有</p>
+<p><span class="math display">\[
+\begin{aligned}
+B(x) &amp;= A(x)B(x) + 1 \\
+B(x) &amp;= \frac{1}{1-A(x)}
+\end{aligned}
+\]</span></p>
+<p>就可以求出 <span class="math inline">\(g_n\)</span> 了 , 最后 <span class="math inline">\(\ln\)</span> 求 <span class="math inline">\(f_n\)</span> 就行了</p>
+<h4 id="强连通有向图计数">强连通有向图计数</h4>
+<p>依旧类似上面 , 求出 <span class="math inline">\(n\)</span> 个点有多个强连通分量的方案数 , 最后做一遍 <span class="math inline">\(\ln\)</span></p>
+<p>设 <span class="math inline">\(n\)</span> 个点的强联通图数目为 <span class="math inline">\(f_n\)</span> , 由多个强联通分量组成的图个数为 <span class="math inline">\(g_n\)</span> , 已知 <span class="math inline">\(g_{1\sim n-1}\)</span> , 考虑如何求 <span class="math inline">\(g_n\)</span></p>
+<p>合法的强联通图不太好求 , 考虑用总数减去不合法的 , 对于不合法的图 , SCC 缩点后有大于一个点的 DAG</p>
+<p>于是依旧可以枚举入度为 <span class="math inline">\(0\)</span> 的点的个数 , 进行连边</p>
+<p>然而这就有问题了 , 因为 <span class="math inline">\(g_n\)</span> 缩点后会有小于等于 <span class="math inline">\(n\)</span> 个点入度为 <span class="math inline">\(0\)</span> , 而上面 DAG 中的容斥系数是与缩点后的点数有关的 ,于是就要更改定义</p>
+<p>设 <span class="math inline">\(t_{n,i}\)</span> 表示 <span class="math inline">\(n\)</span> 个点 , 形成 <span class="math inline">\(i\)</span> 个强联通分量的方案数 , 令 <span class="math inline">\(g_n = \sum_{i=1}^n (-1)^{(i+1)}t_{n,i}\)</span> , 这就将容斥系数加进去了</p>
+<p>那么就有 <span class="math display">\[
+\begin{aligned}
+g_n &amp;= h_n - \sum_{i=1}^{n-1}\binom{n}{i}2^{i(n-i)}h_ig_{n-i} \\
+&amp;= h_n - n!2^{\binom{n}{2}}\sum_{i=1}^{n-1}\frac{h_i}{i!2^{\binom{i}{2}}}\cdot \frac{g_{n-i}}{(n-i)!2^{\binom{n-i}{2}}} \\
+\frac{g_n}{n!2^{\binom{n}{2}}} &amp;= \frac{h_n}{n!2^{\binom{n}{2}}}- \sum_{i=1}^{n-1}\frac{h_i}{i!2^{\binom{i}{2}}}\cdot \frac{g_{n-i}}{(n-i)!2^{\binom{n-i}{2}}}
+\end{aligned}
+\]</span> 多项式求逆就可以求出 <span class="math inline">\(g_n\)</span></p>
+<p>接下来求 <span class="math inline">\(f_n\)</span> , 强联通分量个数为奇数 , 对 <span class="math inline">\(g_n\)</span> 贡献为 <span class="math inline">\(1\)</span> , 偶数个贡献为 <span class="math inline">\(-1\)</span> , 设 <span class="math inline">\(g_n\)</span> 的 EGF 是 <span class="math inline">\(G(x)\)</span> , <span class="math inline">\(f_n\)</span> 的 EGF 是 <span class="math inline">\(F(x)\)</span> , 有 <span class="math display">\[
+\begin{aligned}
+G(x) &amp;= \sum_{i} \frac{(-1)^{(i+1)}F^i(x)}{i!} \\
+-G(x)&amp;=\exp(-F(x)) \\
+-F(x) &amp;= \ln(-G(x))
+\end{aligned}
+\]</span> 依旧多项式求 <span class="math inline">\(\ln\)</span> 就行了</p>
+<h4 id="有标号二分图计数">有标号二分图计数</h4>
+<p>考虑对点进行染色 , 染成黑百两色 , 并在两部分间随意连边 , 对于对于两张图 , 若有点染色不同 , 或有边不同 , 则认为是两个不同的方案 , 设 <span class="math inline">\(i\)</span> 个点时方案数为 <span class="math inline">\(h_i\)</span></p>
+<p>那么有 <span class="math inline">\(h_n = \sum_{i=0}^n \binom{n}{i}2^{i(n-i)}\)</span> , 就是选点连边 , EGF 为 <span class="math inline">\(H(x)\)</span></p>
+<p>设 <span class="math inline">\(g_n\)</span> 表示点数为 <span class="math inline">\(n\)</span> 不一定联通的 , 点不染色的二分图个数 , EGF 为 <span class="math inline">\(G(x)\)</span></p>
+<p>设 <span class="math inline">\(f_n\)</span> 表示点数为 <span class="math inline">\(n\)</span> 联通的 , 点不染色的二分图个数 , EGF 为 <span class="math inline">\(F(x)\)</span></p>
+<p>依照之前的思路 , 有 <span class="math display">\[
+\begin{aligned}
+G(x) = \exp(F(x)) \\
+F(x) = \ln(G(x))
+\end{aligned}
+\]</span> 但是 , <span class="math inline">\(f,g\)</span> 都不能直接求 , 思考与 <span class="math inline">\(h\)</span> 的关系 , <span class="math inline">\(h\)</span> 可以看作很多个二分图组成 , 每个二分图有两种染色方案 , 于是得出 <span class="math display">\[
+\begin{aligned}
+H(x) = \sum_{i}\frac{2^iF^i(x)}{i!} = \exp(2F(x))
+\end{aligned}
+\]</span> 这样就可以求出 <span class="math inline">\(F(x)\)</span> 了 <span class="math display">\[
+\begin{aligned}
+2F(x) = \ln(H(x))
+\end{aligned}
+\]</span> 于是就做完了</p>
+<h4 id="烷基计数">烷基计数</h4>
+<p>就是限制每个点儿子数量小于等于 <span class="math inline">\(3\)</span> 的无标号有根数个数</p>
+<p>设 <span class="math inline">\(f_n\)</span> 表示点数为 <span class="math inline">\(n\)</span> 的方案数 , OGF 是 <span class="math inline">\(F(x)\)</span></p>
+<p>可以像上面一样想到 <span class="math inline">\(\text{Euler}\)</span> 变换 , 但是在这种限制的条件下就不行了</p>
+<p>从 <strong><span class="math inline">\(\text{Burniside}\)</span> 引理</strong> 出发进行推导 , 就是枚举三个儿子的 <span class="math inline">\(3! = 6\)</span> 个排列</p>
+<p>如果循环长度为 <span class="math inline">\(k\)</span> , 这个循环的生成函数就是 <span class="math inline">\(F(x^k)\)</span> , 于是分别考虑 <span class="math inline">\(6\)</span> 个排列 , 有 <span class="math display">\[
+F(x) = x\cdot\frac{F^3(x)+3F(x^2)F(x) + 2 F(x^3)}{6} + 1
+\]</span> 牛顿迭代解决 , 设 <span class="math inline">\(G(F(x)) = F(x) - x\cdot\frac{F^3(x)+3F(x^2)F(x) + 2 F(x^3)}{6}-1\)</span></p>
+<p>考虑怎么对 <span class="math inline">\(F(x)\)</span> 求导 , 由于 <span class="math inline">\(F(x^2),F(x^3),x \bmod x^n\)</span> 的值实际上已经知道了 , 所以视为常数 , 不过这并不意味这对 <span class="math inline">\(F(x)\)</span> 求导后这些项为 <span class="math inline">\(0\)</span></p>
+<p>于是有 <span class="math display">\[
+\begin{aligned}
+F(x) &amp;= F(x)-\frac{G(F(x))}{G&#39;(F(x))} \\
+&amp;=F(x) - \frac{F(x) - x\cdot\frac{F^3(x)+3F(x^2)F(x) + 2 F(x^3)}{6}-1}{1-x\cdot\frac{3F^2(x)+3F(x^2)}{6}}
+\end{aligned}
+\]</span></p>
+<h4 id="有标号仙人掌计数">有标号仙人掌计数</h4>
+<p>先求出有根的个数 , 最后除个 <span class="math inline">\(n\)</span> 就行了</p>
+<p>设 <span class="math inline">\(f_n\)</span> 表示有 <span class="math inline">\(n\)</span> 个点的有根仙人掌个数 , 其 EGF 为 <span class="math inline">\(F(x)\)</span></p>
+<p>选定一个根 , 考虑从根连出的边</p>
+<p>一种是不在环中的边 , 连向一个仙人掌 , 方案数是 <span class="math inline">\(F(x)\)</span></p>
+<p>根在环中 , 枚举环的大小 <span class="math inline">\(k\)</span> , 则有 <span class="math inline">\(\frac{F^k(x)}{2}\)</span> , 除二是因为一个环会从两端记两次</p>
+<p>两种合起来 <span class="math display">\[
+\begin{aligned}
+F(x) &amp;= x\cdot\exp\left(F(x) + \sum_{i&gt;1}\frac{F^k(x)}{2}\right) \\
+&amp;=x\cdot\exp\left(F(x) +\frac{1}{2-2F(x)}-\frac{1}{2}-\frac{F(x)}{2}\right) \\
+&amp;= x\cdot\exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)
+\end{aligned}
+\]</span> 设 <span class="math inline">\(G(F(x)) = x\cdot\exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right) - F(x)\)</span> <span class="math display">\[
+\begin{aligned}
+G&#39;(F(x))&amp;=\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)&#39;\cdot x \cdot \exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)-1 \\
+&amp;=\left(\frac{F^2(x)-2F(x)+2}{2F^2(x)-4F(x)+2}\right)\cdot x \cdot \exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)-1 \\
+&amp;=\left(\frac{1}{2}+\frac{1}{F^2(x)-4F(x)+2}\right)\cdot x \cdot \exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)-1
+\\
+&#39;F(x) &amp;= F(x) - \frac{G(F(x))}{G&#39;(F(x))} \\
+&amp;=F(x) - \frac{x\cdot\exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)-F(x)}{\left(\frac{1}{2}+\frac{1}{2F^2(x)-4F(x)+2}\right)\cdot x \cdot \exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)-1} \\
+&amp;=F(x) - \frac{2x\cdot\exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)-2F(x)}{\left(1+\frac{1}{(F(x)-1)^2}\right)\cdot x \cdot \exp\left(\frac{2F(x)-F^2(x)}{2-2F(x)}\right)-2}
+\end{aligned}
+\]</span> 爆算就行了</p>
+<h4 id="有标号荒漠计数">有标号荒漠计数</h4>
+<p>就是有标号仙人掌计数套个 <span class="math inline">\(\exp\)</span></p>
+<h4 id="无标号有根仙人掌计数">无标号有根仙人掌计数</h4>
+<p>待填</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/08/Tutorial/%E7%9F%A9%E9%98%B5%E6%A0%91%E5%AE%9A%E7%90%86/" rel="prev" title="矩阵树定理">
+      <i class="fa fa-chevron-left"></i> 矩阵树定理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#有标号无根树计数"><span class="nav-number">1.</span> <span class="nav-text">有标号无根树计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有标号有根树计数"><span class="nav-number">2.</span> <span class="nav-text">有标号有根树计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无标号有根树计数"><span class="nav-number">3.</span> <span class="nav-text">无标号有根树计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无标号无根树计数"><span class="nav-number">4.</span> <span class="nav-text">无标号无根树计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有标号连通无向图计数"><span class="nav-number">5.</span> <span class="nav-text">有标号连通无向图计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#弱连通有标号-dag-计数"><span class="nav-number">6.</span> <span class="nav-text">弱连通有标号 DAG 计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强连通有向图计数"><span class="nav-number">7.</span> <span class="nav-text">强连通有向图计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有标号二分图计数"><span class="nav-number">8.</span> <span class="nav-text">有标号二分图计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#烷基计数"><span class="nav-number">9.</span> <span class="nav-text">烷基计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有标号仙人掌计数"><span class="nav-number">10.</span> <span class="nav-text">有标号仙人掌计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有标号荒漠计数"><span class="nav-number">11.</span> <span class="nav-text">有标号荒漠计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#无标号有根仙人掌计数"><span class="nav-number">12.</span> <span class="nav-text">无标号有根仙人掌计数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
