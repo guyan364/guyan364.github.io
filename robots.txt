@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+
+Disallow: /js/
+Disallow: /css/
+
+Sitemap: http://blog.junyu.pro/sitemap.xml
+Sitemap: http://blog.junyu.pro/baidusitemap.xml
