@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Great_Influence 《集合幂级数的性质与应用及其快速算法》—— 吕凯风 ( 2015 国家集训队论文 )">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集合幂级数">
+<meta property="og:url" content="http://yoursite.com/2020/04/17/Tutorial/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="Great_Influence 《集合幂级数的性质与应用及其快速算法》—— 吕凯风 ( 2015 国家集训队论文 )">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-17T13:32:34.000Z">
+<meta property="article:modified_time" content="2020-04-17T17:06:15.786Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/17/Tutorial/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>集合幂级数 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/17/Tutorial/%E9%9B%86%E5%90%88%E5%B9%82%E7%BA%A7%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          集合幂级数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-17 21:32:34" itemprop="dateCreated datePublished" datetime="2020-04-17T21:32:34+08:00">2020-04-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-18 01:06:15" itemprop="dateModified" datetime="2020-04-18T01:06:15+08:00">2020-04-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://www.luogu.com.cn/blog/user7035/zi-ji-juan-ji-ji-ji-gao-ji-yun-suan" target="_blank" rel="noopener">Great_Influence</a></p>
+<p>《集合幂级数的性质与应用及其快速算法》—— 吕凯风 ( 2015 国家集训队论文 )</p>
+<a id="more"></a>
+<h4 id="定义">定义</h4>
+<p>设 <span class="math inline">\(F\)</span> 是一个域 , 则称函数 <span class="math inline">\(f: 2^{U} \rightarrow F\)</span> 是定义在 <span class="math inline">\(F\)</span> 上的形式幂级数</p>
+<p>定义 <span class="math inline">\(f_S\)</span> 表示集合 <span class="math inline">\(S\)</span> 带入 <span class="math inline">\(f\)</span> 后的值 , 则 <span class="math inline">\(f\)</span> 可以表示为 <span class="math display">\[
+f = \sum_{S \subseteq U} f_S x^S
+\]</span> 这与数列的形式幂级数十分相像 , 类比定义加法运算 <span class="math display">\[
+f + g = \sum_{S \subseteq U} (f_S + g_S)x^S
+\]</span> 乘法运算需要定义其下标的运算规则 , 以满足交换律 , 结合律 , 对加法有分配律 , 也就是说 <span class="math display">\[
+f \cdot g = \sum_{S\subseteq U,T \subseteq U}( f_S \cdot g_T)x^{S \oplus T}
+\]</span> 对于 <span class="math inline">\(\oplus\)</span> 运算 , 具有交换律 , 结合律 , 并有单位元为 <span class="math inline">\(\varnothing\)</span></p>
+<h4 id="集合并卷积">集合并卷积</h4>
+<p>在这个问题 , 我们希望求出 <span class="math display">\[
+h_S = \sum_{L \subseteq U}\sum_{ R \subseteq U} f_Lg_R[L\cup R =S]
+\]</span> 于是定义集合幂级数的乘法运算 <span class="math display">\[
+\begin{aligned}
+h = f\cdot g &amp;= \sum_{L \subseteq U}\sum_{R\subseteq U}f_Lg_Rx^{L\cup R} \\
+\end{aligned}
+\]</span> 这里引入 <strong>莫比乌斯变换</strong> <span class="math display">\[
+\hat{f}_S = \sum_{T\subseteq U}f_T
+\]</span> 以及 <strong>莫比乌斯反演</strong> <span class="math display">\[
+f_S = \sum_{T \subseteq S}(-1)^{|S|-|T|}\hat f_T
+\]</span> 可以得到 <span class="math display">\[
+\begin{aligned}
+\hat{h}_S &amp;= \sum_{L\subseteq U}\sum_{R \subseteq U}f_Lg_R[L\cup R \subseteq S] \\
+&amp;=\left(\sum_{L\subseteq U}f_L[L\subseteq S]\right) \left(\sum_{R\subseteq U}f_R [R \subseteq S]\right) \\
+&amp;=\hat{f}_S\cdot \hat{g}_S
+\end{aligned}
+\]</span> 于是转化成了点乘 , 接下来的问题变为如何快速进行莫比乌斯变换及其反演</p>
+<p>考虑按位递推 , 设 <span class="math inline">\(f_{i,S}\)</span> 表示满足 <span class="math inline">\(S\setminus T \subseteq \{1,\cdots, i\}\)</span> 的所有 <span class="math inline">\(T\)</span> 为 <span class="math inline">\(S\)</span> 子集 , <span class="math inline">\(f_T\)</span> 的和 , 于是对于 <span class="math inline">\(i \notin S\)</span> 有 , <span class="math inline">\(f_{i,S} = f_{i - 1,S} , f_{i,S\cup {i}} = f_{i-1,S\cup{i}} + f_{i-1,S}\)</span> , 就可以 <span class="math inline">\(O(n2^n)\)</span> 完成莫比乌斯变换及反演</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i )</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> s = <span class="number">0</span> ; s &lt; ( <span class="number">1</span> &lt;&lt; n ) ; ++s )</span><br><span class="line">    <span class="keyword">if</span>( ( s &gt;&gt; i ) &amp; <span class="number">1</span> )</span><br><span class="line">      f[s] += f[s ^ ( <span class="number">1</span> &lt;&lt; i )];</span><br><span class="line"><span class="comment">// inverse</span></span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i )</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> s = <span class="number">0</span> ; s &lt; ( <span class="number">1</span> &lt;&lt; n ) ; ++s )</span><br><span class="line">    <span class="keyword">if</span>( ( s &gt;&gt; i ) &amp; <span class="number">1</span> )</span><br><span class="line">      f[s] -= f[s ^ ( <span class="number">1</span> &lt;&lt; i )];</span><br></pre></td></tr></table></figure>
+<p>这是一个线性变换 , 于是可以对变换后的数组做任意操作最后逆变换回去</p>
+<h4 id="集合交卷积">集合交卷积</h4>
+<p>想要求出 <span class="math display">\[
+h_S = \sum_{L\subseteq U}\sum_{R\subseteq U}f_Lg_R [L\cap R=S]
+\]</span> 类比并卷积 , 设 <span class="math display">\[
+\begin{aligned}
+\hat{f}_S &amp;= \sum_{T\supseteq S} f_T \\
+f_S &amp;= \sum_{T \supseteq S}(-1)^{|T|-|S|}f_T
+\end{aligned}
+\]</span> 于是有 <span class="math display">\[
+\begin{aligned}
+\hat{h}_S &amp;= \sum_{L\subseteq U}\sum_{R \subseteq U}f_Lg_R[L\cap R \supseteq S] \\
+&amp;= \left(\sum_{L\subseteq U}f_L[L \supseteq S]\right)\left(\sum_{R\supseteq U}g_R[R \supseteq S]\right) \\
+&amp;=\hat{f}_S \cdot \hat{g}_S
+\end{aligned}
+\]</span> 依旧按位递推 , 设 <span class="math inline">\(f_{i,S}\)</span> 表示满足 <span class="math inline">\(T \setminus S \subseteq \{1,\cdots ,i\}\)</span> , 所有 <span class="math inline">\(S\)</span> 的超集 <span class="math inline">\(T\)</span> 的 <span class="math inline">\(f_T\)</span> 的和 , 对 <span class="math inline">\(i \in S\)</span> , 有 <span class="math inline">\(f_{i,S} = f_{i-1,S} , f_{i,S\setminus \{i\}} = f_{i-1,S\setminus \{i\}}+f_{i-1,S}\)</span></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i )</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> s = <span class="number">0</span> ; s &lt; ( <span class="number">1</span> &lt;&lt; n ) ; ++s )</span><br><span class="line">    <span class="keyword">if</span>( ( s &gt;&gt; i ) &amp; <span class="number">1</span> )</span><br><span class="line">      f[s ^ ( <span class="number">1</span> &lt;&lt; i )] += f[s];</span><br><span class="line">\\ inverse</span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i )</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> s = <span class="number">0</span> ; s &lt; ( <span class="number">1</span> &lt;&lt; n ) ; ++s )</span><br><span class="line">    <span class="keyword">if</span>( ( s &gt;&gt; i ) &amp; <span class="number">1</span> )</span><br><span class="line">      f[s ^ ( <span class="number">1</span> &lt;&lt; i )] -= f[s];</span><br></pre></td></tr></table></figure>
+<h4 id="集合对称差卷积">集合对称差卷积</h4>
+<p>令 <span class="math inline">\(S \oplus T\)</span> 表示只在 <span class="math inline">\(S\)</span> 或 <span class="math inline">\(T\)</span> 一个集合中出现的元素组成的集合 <span class="math display">\[
+h_S = \sum_{L\subseteq U}\sum_{R \subseteq U}f_Lg_R[L\oplus R = S]
+\]</span> 将元素的 <span class="math inline">\(i\)</span> 有无视为二进制第 <span class="math inline">\(i\)</span> 位的 <span class="math inline">\(1/0\)</span> , 可以将 <span class="math inline">\(\oplus\)</span> 视为异或操作</p>
+<p>为了解决这个问题 , 引入 <strong>快速沃尔什变换</strong></p>
+<p>首先注意到 , 对于一个集合 <span class="math inline">\(S\)</span> , 有 <span class="math display">\[
+\frac{1}{2^n}\sum_{T\subseteq U}(-1)^{|S\cap T|} = [S = \varnothing]
+\]</span> 当 <span class="math inline">\(S = \varnothing\)</span> 时 , <span class="math inline">\(|S\cap T|\)</span> 恒为 <span class="math inline">\(0\)</span> , 当 <span class="math inline">\(S\)</span> 不为空时 , 设 <span class="math inline">\(v \in S\)</span> , 则有 <span class="math inline">\(|S\cap(T\oplus \{v\})| = |(S\cap T)\oplus\{v\}| = |S\cap T|-1\)</span> , 贡献为 <span class="math inline">\((-1)\)</span> 和 <span class="math inline">\(1\)</span> , 和为 <span class="math inline">\(0\)</span></p>
+<p>利用这个性质 , 可以得到 <span class="math display">\[
+\begin{aligned}
+h_S &amp;= \sum_{L\subseteq U}\sum_{R \subseteq U}f_Lg_R[L\oplus R \oplus S= \varnothing] \\
+&amp;=\sum_{L\subseteq U}\sum_{R \subseteq U}\frac{1}{2^n}\sum_{T\subseteq U}(-1)^{|T\cap(L\oplus R \oplus S)|}f_Lg_R \\
+&amp;=\sum_{L\subseteq U}\sum_{R \subseteq U}\frac{1}{2^n}\sum_{T\subseteq U}(-1)^{|T\cap L|}(-1)^{|T\cap R|}(-1)^{|T\cap S|}f_Lg_R \\
+&amp;=\frac{1}{2^n}\sum_{T\subseteq U}(-1)^{|T\cap S|}\left(\sum_{L\subseteq U}(-1)^{|L\cap T|}f_L\right)\left(\sum_{R\subseteq U}(-1)^{|R\cap T|}g_R\right)
+\end{aligned}
+\]</span> 定义沃尔什变换及其逆变换 <span class="math display">\[
+\begin{aligned}
+\hat{f}_S &amp;= \sum_{T\subseteq U}(-1)^{|T\cap S|}f_T \\
+f_S &amp;= \frac{1}{2^n}\sum_{T\subseteq U}(-1)^{|T\cap S|}\hat{f}_T
+\end{aligned}
+\]</span> 于是有</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{h}_S &amp;= \sum_{V\subseteq U}(-1)^{|V\cap S|}h_V \\
+&amp;=\sum_{V\subseteq U}(-1)^{|V\cap S|}
+\frac{1}{2^n}\sum_{T\subseteq U}(-1)^{|T\cap V|}\left(\sum_{L\subseteq U}(-1)^{|L\cap T|}f_L\right)\left(\sum_{R\subseteq U}(-1)^{|R\cap T|}g_R\right) \\
+&amp;=\sum_{V\subseteq U}(-1)^{|V\cap S|}
+\left(\frac{1}{2^n}\sum_{T\subseteq U}(-1)^{|T\cap V|}\hat{f}_T\hat{g}_T\right) \\
+&amp;=\hat{f}_S \cdot \hat{g}_S
+\end{aligned}
+\]</span> 快速沃尔什变换依旧像上面一样递推 , 设 <span class="math inline">\(f_{i,S}\)</span> , 表示满足 <span class="math inline">\(T \oplus S \subseteq \{1,\cdots,i\}\)</span> 的集合 <span class="math inline">\(T\)</span> 对于 <span class="math inline">\(f_S\)</span> 的贡献 , 若 <span class="math inline">\(i\notin S\)</span> , 则有 <span class="math inline">\(f_{i,S} = f_{i-1,S} + f_{i-1,S\oplus \{i\}}, f_{i,S \oplus \{i\}} = f_{i-1,S}-f_{i-1,S\oplus \{i\}}\)</span></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; ++i )</span><br><span class="line">	<span class="keyword">for</span>( <span class="keyword">int</span> s = <span class="number">0</span> ; s &lt; ( <span class="number">1</span> &lt;&lt; i ) ; ++s )</span><br><span class="line">    <span class="keyword">if</span>( ( s &gt;&gt; i ) &amp; <span class="number">1</span> ) &#123;</span><br><span class="line">      <span class="keyword">int</span> l = f[s ^ ( <span class="number">1</span> &lt;&lt; i )] , r = f[s];</span><br><span class="line">      f[s ^ ( <span class="number">1</span> &lt;&lt; i )] = l + r;</span><br><span class="line">      f[s] = l - r;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>注意 , 这要求对 <span class="math inline">\(\frac{1}{2^n}\)</span> 有定义</p>
+<h4 id="子集卷积">子集卷积</h4>
+<p>定义子集卷积为 <span class="math display">\[
+h_S = \sum_{L\subseteq S}\sum_{R \subseteq S}[L\cup R=S][L \cap R = \varnothing]f_Lg_R
+\]</span> 考虑进行转化 , 对于条件 <span class="math inline">\([L\cup R=S][L \cap R = \varnothing]\)</span> 其等价于 <span class="math inline">\([L\cup R=S][|L|+|R|=S]\)</span> 利用枚举 <span class="math inline">\(|L|\)</span> , <span class="math inline">\(|R|\)</span> 的大小来使其变为集合并卷积</p>
+<p>定义集合幂级数 <span class="math inline">\(\sigma\)</span> 为 <span class="math inline">\(f\)</span> 的 <strong>集合占位幂级数</strong> <span class="math display">\[
+\sigma_{i} = \sum_{S \subseteq U}f_S[|S| = i]x^{S}
+\]</span> 设 <span class="math inline">\(f,g\)</span> 的占位幂级数为 <span class="math inline">\(\sigma ,\tau\)</span> , <span class="math inline">\(\sigma \cdot \tau = \delta\)</span> , 于是有 <span class="math inline">\(h_S = \delta_{|S|,S}\)</span></p>
+<p>当然也可以用对称差卷积 , 因为 <span class="math inline">\([L \oplus R=S]\)</span> 在这种情况下与第一个条件等价 , 不过更受限制 , 并不推荐使用</p>
+<p>对于子集卷积 , 想要进行逆运算 , 就要找出占位幂级数的逆 , 这个可以每一位进行一次 <span class="math inline">\(O(n^2)\)</span> 的多项式求逆 , 复杂度 <span class="math inline">\(O(n^22^n)\)</span></p>
+<p>子集卷积也可以求 <span class="math inline">\(\ln\)</span> , 求 <span class="math inline">\(\exp\)</span> , 具体见后面的习题</p>
+<h4 id="problem">Problem</h4>
+<h5 id="entropyincreaser-与山林"><a href="https://loj.ac/problem/6673" target="_blank" rel="noopener">EntropyIncreaser 与山林</a></h5>
+<p>设 <span class="math inline">\(f\)</span> 表示联通的欧拉子图个数的集合占位幂级数 , <span class="math inline">\(g\)</span> 表示不一定连通的欧拉子图的集合占位幂级数</p>
+<p>于是有 <span class="math inline">\(g = \exp(f)\)</span> , <span class="math inline">\(f = \ln(g)\)</span> , <span class="math inline">\(f\)</span> 不好求 , 求 <span class="math inline">\(g\)</span></p>
+<p>考虑对于一个点集 <span class="math inline">\(S\)</span> , 如何求出只包含这些点欧拉子图个数</p>
+<p>欧拉路径一定由许多个环组成 , 方案数就是 <span class="math inline">\(2^{环数}\)</span></p>
+<p>得出 <span class="math inline">\(g\)</span> , 求一遍 <span class="math inline">\(\ln\)</span> 就可以了</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/15/Solutions/CF635-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="[CF635] 简要题解">
+      <i class="fa fa-chevron-left"></i> [CF635] 简要题解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合并卷积"><span class="nav-number">2.</span> <span class="nav-text">集合并卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合交卷积"><span class="nav-number">3.</span> <span class="nav-text">集合交卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合对称差卷积"><span class="nav-number">4.</span> <span class="nav-text">集合对称差卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子集卷积"><span class="nav-number">5.</span> <span class="nav-text">子集卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem"><span class="nav-number">6.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#entropyincreaser-与山林"><span class="nav-number">6.1.</span> <span class="nav-text">EntropyIncreaser 与山林</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
