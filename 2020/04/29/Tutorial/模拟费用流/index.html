@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="《模拟费用流问题》—— 陈江伦 ( WC2019 营员交流 ) 模拟费用流模型总结 以模拟费用流过程的思想 , 用更优复杂度的算法解决一类问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模拟费用流">
+<meta property="og:url" content="http://yoursite.com/2020/04/29/Tutorial/%E6%A8%A1%E6%8B%9F%E8%B4%B9%E7%94%A8%E6%B5%81/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="《模拟费用流问题》—— 陈江伦 ( WC2019 营员交流 ) 模拟费用流模型总结 以模拟费用流过程的思想 , 用更优复杂度的算法解决一类问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-29T05:34:17.000Z">
+<meta property="article:modified_time" content="2020-04-29T09:03:08.900Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/29/Tutorial/%E6%A8%A1%E6%8B%9F%E8%B4%B9%E7%94%A8%E6%B5%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>模拟费用流 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/Tutorial/%E6%A8%A1%E6%8B%9F%E8%B4%B9%E7%94%A8%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          模拟费用流
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-29 13:34:17 / 修改时间：17:03:08" itemprop="dateCreated datePublished" datetime="2020-04-29T13:34:17+08:00">2020-04-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>《模拟费用流问题》—— 陈江伦 ( WC2019 营员交流 )</p>
+<p><a href="https://blog.csdn.net/litble/article/details/88410435" target="_blank" rel="noopener">模拟费用流模型总结</a></p>
+<p>以模拟费用流过程的思想 , 用更优复杂度的算法解决一类问题</p>
+<a id="more"></a>
+<h4 id="引入">引入</h4>
+<p>先给出一个模型 , 数轴上有 <span class="math inline">\(n\)</span> 只老鼠和 <span class="math inline">\(m\)</span> 个老鼠洞 , 第 <span class="math inline">\(i\)</span> 只老鼠的位置是 <span class="math inline">\(x_i\)</span> , 第 <span class="math inline">\(i\)</span> 个洞的位置是 <span class="math inline">\(y_i\)</span> , 需要求出一组老鼠和洞的匹配.</p>
+<p><strong>Problem1</strong> : 每只老鼠只能向左走 , 求所有老鼠进洞的最小代价 ( 行走距离和最小 )</p>
+<p>问题等价于洞的权值为 <span class="math inline">\(-y_i\)</span> , 老鼠的权值为 <span class="math inline">\(x_i\)</span> , 求最小权匹配</p>
+<p>贪心即可 , 将老鼠和洞按坐标从小到大排序 , 从前往后扫一遍 , 维护一个栈保存未匹配的洞 , 遇到一只老鼠就和栈顶匹配</p>
+<p><strong>Problem2</strong> : 每只老鼠可以向左右走 , 求所有老鼠进洞的最小代价</p>
+<p>首先发现 , 老鼠和洞的匹配不会交叉 , 假设两只老鼠在 <span class="math inline">\(1,4\)</span> , 洞在 <span class="math inline">\(2,3\)</span> , 匹配 <span class="math inline">\((1,3),(2,4)\)</span> 不是最优</p>
+<p>考虑一个 DP , <span class="math inline">\(f_{i,j}\)</span> 表示考虑了前 <span class="math inline">\(i\)</span> 个老鼠和洞 , 如果 <span class="math inline">\(j\)</span> 为正数 , 表示前面有 <span class="math inline">\(j\)</span> 个洞没有匹配 , 如果 <span class="math inline">\(j\)</span> 为负数 , 表示前面有 <span class="math inline">\(-j\)</span> 只老鼠没有匹配 , 在此状态下 , 提前算入贡献的最小值</p>
+<p>当 <span class="math inline">\(i\)</span> 是老鼠时 , 有转移 <span class="math display">\[
+\begin{aligned}f_{i,j} = f_{i-1,j+1} +\begin{cases}x_i &amp;, j\geq0 \\ -x_i &amp;,j&lt;0\end{cases}\end{aligned}
+\]</span></p>
+<p>当 <span class="math inline">\(i\)</span> 是洞时 , 有转移 <span class="math display">\[
+\begin{aligned}f_{i,j} = \min\left( f_{i-1,j} , f_{i-1,j-1} +\begin{cases}y_i  &amp;,j\leq 0 \\ -y_i &amp;,j &gt; 0\end{cases}\right)\end{aligned}
+\]</span></p>
+<p>观察这个转移 , 因为是在数轴上从左向右进行的 , 所以 <span class="math inline">\(-y_i\)</span> 是不断变小的 , 也就是说在 <span class="math inline">\(j&gt;0\)</span> 时 , 由于 <span class="math inline">\(f_{i,j}\)</span> 是由若干匹配和孤立洞的相反数组成的 , 不等式 <span class="math inline">\(f_{i,j-1} - y_i &lt; f_{i,j}\)</span> 成立 , 同时 , 对于 <span class="math inline">\(j&lt;0\)</span> 的情况 , 让老鼠隔一个洞再匹配一定不优 , 所以 <span class="math inline">\(f_{i,j} = f_{i,j-1} + y_i\)</span> , 于是只有 <span class="math inline">\(j = 0\)</span> 的时候需要决策 , 可以用两个栈维护 <span class="math inline">\(j &lt; 0\)</span> 和 <span class="math inline">\(j&gt; 0\)</span> 的部分 , 转移时打上整体标记</p>
+<p><strong>Problem3</strong>: 每只老鼠只能进入左边的洞 , 每个洞有代价 <span class="math inline">\(w_i\)</span> , 第 <span class="math inline">\(i\)</span> 只老鼠进第 <span class="math inline">\(j\)</span> 个洞的代价是 <span class="math inline">\(x_i - y_j + w_j\)</span> , 最大化总代价 , 不要求所有老鼠都进洞</p>
+<p>依旧可以写出 DP 式子</p>
+<p>当 <span class="math inline">\(i\)</span> 为老鼠 , 有转移 <span class="math display">\[
+\begin{aligned}f_{i,j} = \max(f_{i-1,j+1} +x_i,f_{i-1,j})\end{aligned}
+\]</span> 当 <span class="math inline">\(i\)</span> 为洞 , 有转移 <span class="math display">\[
+\begin{aligned}f_{i,j} = \max( f_{i-1,j-1} - y_i + w_i , f_{i-1,j})\end{aligned}
+\]</span> 当 <span class="math inline">\(i\)</span> 为老鼠时 , 依旧时数组的平移 , 但是对于洞需要再作考虑</p>
+<p><span class="math inline">\(f_{i,j}\)</span> 表示现在还有 <span class="math inline">\(j\)</span> 个洞没有匹配的带权匹配值 , 如果 <span class="math inline">\(f_{i,j+1} - f_{i,j} &gt; f_{i,j} - f_{i,j-1}\)</span> , 那么可以交换从 <span class="math inline">\(j-1\)</span> 到 <span class="math inline">\(j\)</span> 和从 <span class="math inline">\(j\)</span> 到 <span class="math inline">\(j+1\)</span> 多选的两个洞 , 令 <span class="math inline">\(f_{i,j}\)</span> 更大 , 所以 <span class="math inline">\(f_{i,j+1} - f_{i,j} \leq f_{i,j} - f_{i,j-1}\)</span> , 这个 DP 是凸的</p>
+<p>定义 <span class="math inline">\(d_{i,j} = f_{i,j} - f_{i,j-1}\)</span> , 于是有 <span class="math inline">\(d_{i,j} \leq d_{i,j-1}\)</span> , 再看洞的转移 , 从 <span class="math inline">\(d_{i-1}\)</span> 到 <span class="math inline">\(d_i\)</span> 就是选择一个位置 , 插入 <span class="math inline">\(w_i - y_i\)</span> , 并保证其递减 , 再看老鼠的转移 , 设 <span class="math inline">\(i\)</span> 之前洞的总数为 <span class="math inline">\(T\)</span> , 差分数组 <span class="math inline">\(d_i\)</span> 就有 <span class="math display">\[
+\begin{aligned}d_{i,j} &amp;= \begin{cases} d_{i-1,j+1} &amp;,j\in [1,T-1] \\ -x_i &amp;,j = T\end{cases} \\f_{i,0} &amp;= f_{i-1,0} + d_{i-1,1}+x_i\end{aligned}
+\]</span> 于是只用维护 <span class="math inline">\(d_i\)</span> , 每次只会用到 <span class="math inline">\(d_{i,1}\)</span> , 根据凸性 , 是最大值 , 还要能插入 , 可以用堆来维护</p>
+<h4 id="费用流">费用流</h4>
+<p>再看 Problem3 , 就是最大权匹配问题 , 直接费用流就可以 , 考虑如何进行建图 , 对于老鼠 <span class="math inline">\(i\)</span> , 和洞 <span class="math inline">\(j\)</span> , 如果 <span class="math inline">\(y_j &lt; x_i\)</span> , 则可以连边 <span class="math inline">\(i \rightarrow j\)</span> , 每个洞向汇点连边 , 容量 <span class="math inline">\(1\)</span> , 费用 <span class="math inline">\(w_j-y_j\)</span> , 从源点向老鼠连边 , 容量 <span class="math inline">\(1\)</span> , 费用 <span class="math inline">\(x_i\)</span> , 因为老鼠可以不全匹配 , 增广为负时停止</p>
+<p>当然 , 这个费用流的复杂度并不优 , 但是建出的图很特殊 , 最多只会增广 <span class="math inline">\(n\)</span> 次 , 可以模拟增广的过程</p>
+<p>增广路一定从一只老鼠节点开始 , 于是依旧按坐标从小到大排序 , 考虑每个老鼠和洞</p>
+<p>如果 <span class="math inline">\(i\)</span> 是老鼠 , 肯定要选择前面的洞中 , 匹配权值最大的进行匹配 , 权值为 <span class="math inline">\(x_i - y_j + w_j\)</span> , 那么只用维护一个堆保存 <span class="math inline">\(w_j - y_j\)</span> 的最大值 , 但是费用流中有反向边 , 后面的老鼠可以抢走这个洞 , 也就是 <span class="math inline">\(x_i\)</span> 失配 , 这条反向边为 <span class="math inline">\(-x_i\)</span> , 如果后面老鼠 <span class="math inline">\(k\)</span> 抢走了这个洞 , 这条增广路的权值就是 <span class="math inline">\(x_k - x_i\)</span> , 所以还要向堆中加入 <span class="math inline">\(-x_i\)</span>. 这样 , 依照费用流模型的推导 , 依旧得到了上面的贪心做法 , 这就是模拟费用流的思想</p>
+<p>再看 Problem2 , 考虑用最小权匹配解决这个问题 , 这里匹配要分两种情况 , <span class="math inline">\(x_i &gt; y_j\)</span> , 和 <span class="math inline">\(x_i &lt; y_j\)</span> , 依旧对坐标排序后 , 从左往右考虑 .</p>
+<p>对于一组匹配 , 由于可以两个方向进行匹配, 所以洞会反悔 , 老鼠可以反悔 , 不过由于只会增广 <span class="math inline">\(n\)</span> 次 , 每次使得流量加 <span class="math inline">\(1\)</span> , 所以不会出现老鼠和洞同时反悔的情况.</p>
+<p>为了防止老鼠前面没有洞匹配 , 可以增加 <span class="math inline">\(\infty\)</span> 个左边为 <span class="math inline">\(-\infty\)</span> 的洞</p>
+<p>如果 <span class="math inline">\(i\)</span> 是老鼠 , 要让其与前面一个洞进行匹配 , 直接找出 <span class="math inline">\(-y_j\)</span> 中最小的. 然后考虑反悔操作. 对于老鼠被洞 <span class="math inline">\(k\)</span> 抢走 , 会有 <span class="math inline">\(( y_k - x_i ) - ( x_i - y_j )=y_k - y_j-2x_i\)</span> , 所以要加一只权值为 <span class="math inline">\(-y_j-2x_i\)</span> 的老鼠. 如果 $i $ 是洞 , 可以抢之前的老鼠 , 也可以不匹配 , 不匹配就是加一个权值为 <span class="math inline">\(-y_i\)</span> 的洞 , 抢到一只老鼠 <span class="math inline">\(j\)</span> 权值为 <span class="math inline">\(w\)</span> , 考虑反悔操作 , 后面有一只老鼠 <span class="math inline">\(k\)</span> 与 <span class="math inline">\(i\)</span> 匹配 , 则有 <span class="math inline">\((x_k - y_i) - ( y_i + w)=x_k -w-2y_i\)</span> , 于是要加一个权值为 <span class="math inline">\(-w-2y_i\)</span> 的洞</p>
+<p>所以只用维护两个堆 , 贪心取就行了</p>
+<p>再以模拟费用流的思路看几道题</p>
+<p><strong>Problem4</strong>: 在 Problem2 的基础上 , 每个洞可以容纳 <span class="math inline">\(c_i\)</span> 只老鼠</p>
+<p>给表示洞的堆中每个元素加上容量 , 由于每次只有匹配一只未匹配的老鼠 , 或者让一只向左的老鼠向右 , 所以总操作次数依旧是线性</p>
+<p><strong>Problem5</strong>: 老鼠和洞都有无限个分身 , 要求每只老鼠至少有一个分身进洞 , 每个洞至少有一只老鼠</p>
+<p>将老鼠和洞拆成两类 , 一类容量为 <span class="math inline">\(1\)</span> , 费用为 <span class="math inline">\(-\infty\)</span> , 另一类容量 <span class="math inline">\(\infty\)</span> , 费用 <span class="math inline">\(0\)</span></p>
+<p>此时两边都有容量 , 需要重新分析复杂度</p>
+<p>如果第一类点 <span class="math inline">\(a\)</span> 匹配了左边的 <span class="math inline">\(b\)</span> , 则 <span class="math inline">\(b\)</span> 不能反悔 , 否则 <span class="math inline">\(a\)</span> 就没有匹配了</p>
+<p>如果第二类点 <span class="math inline">\(a\)</span> 匹配了左边的 <span class="math inline">\(b\)</span> , <span class="math inline">\(b\)</span> 一定是第一类点 , <span class="math inline">\(a\)</span> 如果反悔连向右边的点 , <span class="math inline">\(b\)</span> 也要连向右边 , 匹配交叉 , 不优</p>
+<p>因此总的操作次数是 <span class="math inline">\(O(n)\)</span></p>
+<p><strong>Problem6</strong>: 在 Problem2 的基础上 , 洞有权值 <span class="math inline">\(w_i\)</span></p>
+<p>此时老鼠和洞都会反悔 , 但是不会同时反悔 , 如果都与后面的匹配 , 匹配就产生了交叉 , 不优 , 于是操作次数依旧是线性</p>
+<p><strong>Problem7</strong>: 在 Problem4 的基础上 , 洞有权值 <span class="math inline">\(w_i\)</span></p>
+<p>这时又要重新考虑复杂度了 , 因为可能后面一个洞让前面所有老鼠都反悔这不就 <span class="math inline">\(n^2\)</span> 了吗</p>
+<p>此时考虑两只老鼠 <span class="math inline">\(x,y\)</span> , 两个洞 <span class="math inline">\(a,b\)</span> , 位置关系为 <span class="math inline">\(x \rightarrow y \rightarrow a \rightarrow b\)</span> , 假设 <span class="math inline">\(x,y\)</span> 都匹配 <span class="math inline">\(a\)</span> , 在堆中加入的元素都是 <span class="math inline">\(-w_a -y_a\)</span> , 也就是说向老鼠堆中放到权值相等 , 就可以附加个数信息来维护. 这就转化成了 Problem6 , 操作是线性的 , 每次操作只会增加两个节点</p>
+<p><strong>Problem8</strong>: 在 Problem7 的基础上 , 老鼠有容量</p>
+<p>依旧按上面的分析 , 复杂度依旧</p>
+<p><strong>Problem9</strong>: 在 Problem8 的基础上 , 老鼠有权值</p>
+<p>复杂度不会证 , 暴力骗分用</p>
+<h4 id="problem">Problem</h4>
+<h5 id="uer-8-雪灾与外卖"><a href="http://uoj.ac/contest/47/problem/455" target="_blank" rel="noopener">[UER #8] 雪灾与外卖</a></h5>
+<p>就是上面的 Problem7</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IO &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1</span> &lt;&lt; <span class="number">18</span> | <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN] , *s , *t;</span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Getchar</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> s == t &amp;&amp; ( t = ( s = buf ) + fread( buf , <span class="number">1</span> , IN_LEN , <span class="built_in">stdin</span> ) ) , s == t ? <span class="number">-1</span> : *s++; &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">inline</span> <span class="title">void</span> <span class="title">read</span>( <span class="title">T</span> &amp; <span class="title">x</span> ) &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c , f; c = Getchar() , x = f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>( c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span> ) &#123; <span class="keyword">if</span>( c == <span class="string">'-'</span> ) f = <span class="number">1</span>; c = Getchar(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( c &lt;= <span class="string">'9'</span> &amp;&amp; c &gt;= <span class="string">'0'</span> ) x = x * <span class="number">10</span> + c - <span class="number">48</span> , c = Getchar();</span><br><span class="line">    x = f ? -x : x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">using</span> IO::read;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> lol;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;lol,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> lol INF = <span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;pii,<span class="built_in">vector</span>&lt;pii&gt;,greater&lt;pii&gt; &gt; qa , qb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n , m;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Ele</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> type , x , w , c;</span><br><span class="line">  <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; ( <span class="keyword">const</span> Ele &amp; rhs ) <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x &lt; rhs.x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; dat[N];</span><br><span class="line">lol ans , S;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  read( n ) , read( m );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) read( dat[i].x );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= m ; ++i ) &#123;</span><br><span class="line">    read( dat[i + n].x );</span><br><span class="line">    read( dat[i + n].w );</span><br><span class="line">    read( dat[i + n].c );</span><br><span class="line">    S += dat[i + n].c;</span><br><span class="line">    dat[i + n].type = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>( S &lt; n ) <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"-1"</span>),<span class="number">0</span>;</span><br><span class="line">  sort( dat + <span class="number">1</span> , dat + <span class="number">1</span> + n + m );</span><br><span class="line">  qb.push( pii( INF , n ) );  </span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> , sum , fl ; i &lt;= n + m ; ++i ) </span><br><span class="line">    <span class="keyword">if</span>( dat[i].type ) &#123;</span><br><span class="line">      sum = <span class="number">0</span>; </span><br><span class="line">      <span class="keyword">while</span>( sum &lt; dat[i].c &amp;&amp; !qa.empty() ) &#123;</span><br><span class="line">        pii tmp = qa.top();</span><br><span class="line">        fl = min( tmp.second , dat[i].c - sum );</span><br><span class="line">        <span class="keyword">if</span>( dat[i].w + dat[i].x + tmp.first &gt;= <span class="number">0</span> ) <span class="keyword">break</span>;</span><br><span class="line">        sum += fl , ans += <span class="number">1L</span>L * fl * ( dat[i].w + dat[i].x + tmp.first );</span><br><span class="line">        qa.pop(); tmp.second -= fl; <span class="keyword">if</span>( tmp.second ) qa.push( tmp );</span><br><span class="line">        qb.push( pii( -tmp.first - <span class="number">2</span> * dat[i].x , fl ) );</span><br><span class="line">      &#125; <span class="keyword">if</span>( dat[i].c - sum ) qb.push( pii( dat[i].w - dat[i].x , dat[i].c - sum ) );</span><br><span class="line">      <span class="keyword">if</span>( sum ) qa.push( pii( -dat[i].w - dat[i].x , sum ) );</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      pii tmp = qb.top(); qb.pop();</span><br><span class="line">      --tmp.second , ans += tmp.first + dat[i].x;</span><br><span class="line">      qa.push( pii( -tmp.first - <span class="number">2</span> * dat[i].x , <span class="number">1</span> ) );</span><br><span class="line">      <span class="keyword">if</span>( tmp.second ) qb.push( tmp );</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; ans;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="neerc2016mole-tunnels"><a href="https://www.luogu.com.cn/problem/P6122" target="_blank" rel="noopener">[Neerc2016]Mole Tunnels</a></h5>
+<p>题中给出了一个二叉树 , 树高为 <span class="math inline">\(\log n\)</span> , 树上每个节点有容量为 <span class="math inline">\(c_i\)</span> 的洞 , 每次给出一只新的老鼠的位置 , 求每给出一只老鼠 , 所有老鼠匹配的最小花费 ( 老鼠行走长度最小 )</p>
+<p>考虑如何建费用流 , 树上每个节点连汇点 , 容量 <span class="math inline">\(c_i\)</span> , 两个节点间如果有边 , 连双向边 , 费用 <span class="math inline">\(1\)</span></p>
+<p>于是就可以考虑直接维护这些边的容量 , 首先注意到 , 不会有一条边上又有上去的又有下来的 , 于是可以保存边上有多少向上的 , 就可以知道走这条边的费用了</p>
+<p>由于树高是 <span class="math inline">\(\log\)</span> 的 , 每次暴力维护从这个点走到子树内的还有容量的洞的最花费以及洞的位置 , 新加一个老鼠 , 就找行走路线的 <span class="math inline">\(\text{lca}\)</span> , 找出增广路径后 , 直接模拟一遍增广过程 , 再更新所有祖先节点的最小值位置即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IO &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1</span> &lt;&lt; <span class="number">18</span> | <span class="number">1</span>; <span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN] , *s , *t; </span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Getchar</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> s == t &amp;&amp; ( t = ( s = buf ) + fread( buf , <span class="number">1</span> , IN_LEN , <span class="built_in">stdin</span> ) ) , s == t ? <span class="number">-1</span> : *s++; &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">inline</span> <span class="title">void</span> <span class="title">read</span>( <span class="title">T</span> &amp; <span class="title">x</span> ) &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c , f; c = Getchar() , x = f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>( c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span> ) &#123; <span class="keyword">if</span>( c == <span class="string">'-'</span> ) f = <span class="number">1</span>; c = Getchar(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( c &lt;= <span class="string">'9'</span> &amp;&amp; c &gt;= <span class="string">'0'</span> ) x = x * <span class="number">10</span> + c - <span class="number">48</span> , c = Getchar();</span><br><span class="line">    x = f ? -x : x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">using</span> IO::read;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n , m , c[N] , f[N] , mn[N] , id[N];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">UP</span><span class="params">( <span class="keyword">int</span> u )</span> </span>&#123; <span class="keyword">return</span> f[u] &lt;= <span class="number">0</span> ? <span class="number">1</span> : <span class="number">-1</span>; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">DN</span><span class="params">( <span class="keyword">int</span> u )</span> </span>&#123; <span class="keyword">return</span> f[u] &gt;= <span class="number">0</span> ? <span class="number">1</span> : <span class="number">-1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">up</span><span class="params">( <span class="keyword">int</span> u )</span> </span>&#123;</span><br><span class="line">  mn[u] = c[u] ? <span class="number">0</span> : INF , id[u] = u;</span><br><span class="line">  <span class="keyword">int</span> ls = u &lt;&lt; <span class="number">1</span> , rs = u &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span>( ls &lt;= n &amp;&amp; mn[u] &gt; mn[ls] + DN( ls ) ) mn[u] = mn[ls] + DN( ls ) , id[u] = id[ls];</span><br><span class="line">  <span class="keyword">if</span>( rs &lt;= n &amp;&amp; mn[u] &gt; mn[rs] + DN( rs ) ) mn[u] = mn[rs] + DN( rs ) , id[u] = id[rs];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  read( n ) , read( m );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) read( c[i] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = n ; i ; --i ) up( i );</span><br><span class="line">  <span class="keyword">int</span> x , lca , y , k , cost;</span><br><span class="line">  <span class="keyword">while</span>( m-- ) &#123;</span><br><span class="line">    read( x ) , k = INF , cost = <span class="number">0</span> , lca = y = x;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> t = x ; t ; cost += UP( t ) , t &gt;&gt;= <span class="number">1</span> ) </span><br><span class="line">      <span class="keyword">if</span>( mn[t] + cost &lt; k )</span><br><span class="line">        k = mn[t] + cost , lca = t , y = id[t];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld "</span>,(ans+=k));</span><br><span class="line">    --c[y];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> t = x ; t != lca ; t &gt;&gt;= <span class="number">1</span> ) up( t ) , --f[t];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> t = y ; t != lca ; t &gt;&gt;= <span class="number">1</span> ) up( t ) , ++f[t];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> t = lca ; t ; t &gt;&gt;= <span class="number">1</span> ) up( t );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="icpc-world-finals-2018-征服世界"><a href="https://loj.ac/problem/6405" target="_blank" rel="noopener">[ICPC World Finals 2018] 征服世界</a></h5>
+<p>就是上树版 , 洞有容量 , 老鼠有只数</p>
+<p>先将同一节点的老鼠和洞匹配 , 然后考虑如何维护</p>
+<p>如果老鼠 <span class="math inline">\(x\)</span> 匹配洞 <span class="math inline">\(y\)</span> , 花费变成了 <span class="math inline">\(\text{dep}_x + \text{dep}_y - 2\text{dep}_{\text{lca(x,y)}}\)</span></p>
+<p>如果老鼠反悔 , 匹配洞 <span class="math inline">\(k\)</span> , 花费变为 <span class="math inline">\(\text{dep}_x + \text{dep}_k - 2\text{dep}_{\text{lca}(x,k)}\)</span> ,</p>
+<p>所以加入老鼠堆中的权值为 <span class="math inline">\(-(\text{dep}_y - 2\text{dep}_{\text{lca(x,y)}})\)</span></p>
+<p>洞反悔同理 , 加入洞堆中的权值为 <span class="math inline">\(-(\text{dep}_x - 2\text{dep}_{\text{lca(x,y)}})\)</span></p>
+<p>于是树上堆合并 , 每次贪心选</p>
+<p>由于老鼠一定要进洞 , 每只老鼠附加权值 <span class="math inline">\(-\infty\)</span> , 最后答案加回去就行</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IO &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1</span> &lt;&lt; <span class="number">18</span> | <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN] , *s , *t;</span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Getchar</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> s == t &amp;&amp; ( t = ( s = buf ) + fread( buf , <span class="number">1</span> , IN_LEN , <span class="built_in">stdin</span> ) ) , s == t ? <span class="number">-1</span> : *s++; &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">inline</span> <span class="title">void</span> <span class="title">read</span>( <span class="title">T</span> &amp; <span class="title">x</span> ) &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c , f; c = Getchar() , x = f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>( c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span> ) &#123; <span class="keyword">if</span>( c == <span class="string">'-'</span> ) f = <span class="number">1</span>; c = Getchar(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( c &lt;= <span class="string">'9'</span> &amp;&amp; c &gt;= <span class="string">'0'</span> ) x = x * <span class="number">10</span> + c - <span class="number">48</span> , c = Getchar();</span><br><span class="line">    x = f ? -x : x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">using</span> IO::read;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> lol;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;lol,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> lol INF = <span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> d , son[<span class="number">2</span>]; pii v;</span><br><span class="line">&#125; nd[N &lt;&lt; <span class="number">5</span>];</span><br><span class="line"><span class="keyword">int</span> nidx;</span><br><span class="line"></span><br><span class="line">lol ans;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Heap</span> &#123;</span> </span><br><span class="line">  <span class="keyword">int</span> rt;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">( <span class="keyword">int</span> u , <span class="keyword">int</span> v )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( !u || !v ) <span class="keyword">return</span> u + v;</span><br><span class="line">    <span class="keyword">if</span>( nd[u].v &gt; nd[v].v ) swap( u , v );</span><br><span class="line">    nd[u].son[<span class="number">1</span>] = merge( nd[u].son[<span class="number">1</span>] , v );</span><br><span class="line">    <span class="keyword">if</span>( nd[nd[u].son[<span class="number">1</span>]].d &gt; nd[nd[u].son[<span class="number">0</span>]].d ) </span><br><span class="line">      swap( nd[u].son[<span class="number">0</span>] , nd[u].son[<span class="number">1</span>] );</span><br><span class="line">    nd[u].d = nd[nd[u].son[<span class="number">1</span>]].d + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> u;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">( pii v )</span> </span>&#123; nd[++nidx].v = v; rt = merge( rt , nidx ); &#125;</span><br><span class="line">  <span class="function">pii <span class="title">top</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> nd[rt].v; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> rt == <span class="number">0</span>; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">pop</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; rt = merge( nd[rt].son[<span class="number">0</span>] , nd[rt].son[<span class="number">1</span>] ); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">( Heap &amp; v )</span> </span>&#123; rt = merge( rt , v.rt ); &#125;</span><br><span class="line">&#125; qa[N] , qb[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n , head[N] , eidx , dat[N]; lol dis[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span> <span class="keyword">int</span> nxt , to , val; &#125; edge[N &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">( <span class="keyword">int</span> u , <span class="keyword">int</span> v , <span class="keyword">int</span> w )</span> </span>&#123;</span><br><span class="line">  edge[++eidx] = (Edge) &#123; head[u] , v , w &#125;; head[u] = eidx;</span><br><span class="line">  edge[++eidx] = (Edge) &#123; head[v] , u , w &#125;; head[v] = eidx;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">( <span class="keyword">int</span> u , <span class="keyword">int</span> fa )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( dat[u] &gt; <span class="number">0</span> ) qb[u].push( pii( dis[u] , dat[u] ) );</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>( dat[u] &lt; <span class="number">0</span> ) qa[u].push( pii( dis[u] - INF , -dat[u] ) );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = head[u] , v ; i ; i = edge[i].nxt )</span><br><span class="line">    <span class="keyword">if</span>( ( v = edge[i].to ) != fa ) &#123;</span><br><span class="line">      dis[v] = dis[u] + edge[i].val;</span><br><span class="line">      dfs( v , u );</span><br><span class="line">      qa[u].merge( qa[v] );</span><br><span class="line">      qb[u].merge( qb[v] );</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">while</span>( !qa[u].empty() &amp;&amp; !qb[u].empty() ) &#123;</span><br><span class="line">    pii ta = qa[u].top() , tb = qb[u].top();</span><br><span class="line">    <span class="keyword">if</span>( ta.first + tb.first - <span class="number">2</span> * dis[u] &gt;= <span class="number">0</span> ) <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">int</span> fl = min( ta.second , tb.second );</span><br><span class="line">    ta.second -= fl , tb.second -= fl; qa[u].pop() , qb[u].pop();</span><br><span class="line">    ans += <span class="number">1L</span>L * fl * ( ta.first + tb.first - <span class="number">2</span> * dis[u] );</span><br><span class="line">    <span class="keyword">if</span>( ta.second ) qa[u].push( ta ); </span><br><span class="line">    <span class="keyword">if</span>( tb.second ) qb[u].push( tb );</span><br><span class="line">    qa[u].push( pii( -tb.first + <span class="number">2</span> * dis[u] , fl ) );</span><br><span class="line">    qb[u].push( pii( -ta.first + <span class="number">2</span> * dis[u] , fl ) );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  read( n );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> , u , v , w ; i &lt; n ; ++i ) &#123;</span><br><span class="line">    read( u ) , read( v ) , read( w );</span><br><span class="line">    addedge( u , v , w );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> S = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> , x , y ; i &lt;= n ; ++i ) &#123;</span><br><span class="line">    read( x ) , read( y );</span><br><span class="line">    dat[i] = x - y;</span><br><span class="line">    <span class="keyword">if</span>( dat[i] &lt; <span class="number">0</span> ) S -= dat[i];</span><br><span class="line">  &#125;</span><br><span class="line">  dfs( <span class="number">1</span> , <span class="number">1</span> );</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; ans + INF * S;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="noi2019序列"><a href="https://loj.ac/problem/3158" target="_blank" rel="noopener">[NOI2019]序列</a></h5>
+<p>考虑费用流如何建图</p>
+<p>源点连向左边的序列 , 容量 <span class="math inline">\(1\)</span> , 费用是权值</p>
+<p>左边的序列连向右边的序列 , 一对一 , 容量 <span class="math inline">\(1\)</span></p>
+<p>右边的序列连汇点 , 容量 <span class="math inline">\(1\)</span> , 费用是权值</p>
+<p>同时 , 左边的序列连向点 <span class="math inline">\(s\)</span> , 容量 <span class="math inline">\(1\)</span> , <span class="math inline">\(s\)</span> 连向 <span class="math inline">\(t\)</span> , 容量 <span class="math inline">\(K - L\)</span> , <span class="math inline">\(t\)</span> 连向右边的序列</p>
+<p>发现这个图十分特殊 , 考虑模拟费用流</p>
+<p>记 <span class="math inline">\(s\)</span> 到 <span class="math inline">\(t\)</span> 的剩余流量为 <span class="math inline">\(c\)</span> , 左边序列为 <span class="math inline">\(A\)</span> , 右边序列为 <span class="math inline">\(B\)</span></p>
+<p>第一种增广路 , 就是 <span class="math inline">\(A\)</span> 最大匹配 <span class="math inline">\(B\)</span> 最大</p>
+<p>第二种增广路 , <span class="math inline">\(A,B\)</span> 两个下标对应的没有匹配的直接匹配 , <span class="math inline">\(c\)</span> 减一</p>
+<p>第三种增广路 , <span class="math inline">\(A_i\)</span> 匹配 <span class="math inline">\(B_j\)</span> , 其中 <span class="math inline">\(B_i\)</span> 已经匹配过了 , 所以让 <span class="math inline">\(A_i\)</span> 与 <span class="math inline">\(B_i\)</span> 匹配 , <span class="math inline">\(B_j\)</span> 与原来和 <span class="math inline">\(B_i\)</span> 匹配的 <span class="math inline">\(A_k\)</span> 匹配 , <span class="math inline">\(c\)</span> 不变</p>
+<p>第四种增广路 , <span class="math inline">\(A_i\)</span> 匹配 <span class="math inline">\(B_j\)</span> , 其中 <span class="math inline">\(A_j\)</span> 已经匹配过了 , 所以让 <span class="math inline">\(A_j\)</span> 与 <span class="math inline">\(B_j\)</span> 匹配 , <span class="math inline">\(A_i\)</span> 与原来和 <span class="math inline">\(A_j\)</span> 匹配的 <span class="math inline">\(B_k\)</span> 匹配 , <span class="math inline">\(c\)</span> 不变</p>
+<p>第五种增广路 , <span class="math inline">\(A_i\)</span> 匹配 <span class="math inline">\(B_j\)</span> , 其中 <span class="math inline">\(B_i\)</span> 和 <span class="math inline">\(A_j\)</span> 都匹配过了 , 让 <span class="math inline">\(A_i\)</span> 和 <span class="math inline">\(B_i\)</span> 匹配 , <span class="math inline">\(A_j\)</span> 和 <span class="math inline">\(B_j\)</span> 匹配 , <span class="math inline">\(c\)</span> 加一</p>
+<p>然后直接用堆维护就行了</p>
+<p>第一个堆维护 <span class="math inline">\(A\)</span> 中最大值</p>
+<p>第二个堆维护 <span class="math inline">\(B\)</span> 中最大值</p>
+<p>第三个堆维护 <span class="math inline">\(A_i+B_i\)</span> 的最大值</p>
+<p>第四个维护 <span class="math inline">\(A_i+B_i\)</span> 最大值 , 其中 <span class="math inline">\(A_i\)</span> 匹配过 , <span class="math inline">\(B_i\)</span> 没匹配过</p>
+<p>第五个维护 <span class="math inline">\(A_i+B_i\)</span> 最大值 , 其中 <span class="math inline">\(A_i\)</span> 每匹配过 , <span class="math inline">\(B_i\)</span> 匹配过</p>
+<p>第一种增广就是第一二个堆取最大</p>
+<p>第二种增广就是第三个堆取最大</p>
+<p>第三四种增广就是堆 <span class="math inline">\(1,5\)</span> , 和堆 <span class="math inline">\(2,4\)</span></p>
+<p>第五种增广特判一下 , 上面的增广都有可能是这种情况</p>
+<p>分 <span class="math inline">\(c\)</span> 是否为正分类讨论</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IO &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1</span> &lt;&lt; <span class="number">18</span> | <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN] , *s , *t;</span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Getchar</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> s == t &amp;&amp; ( t = ( s = buf ) + fread( buf , <span class="number">1</span> , IN_LEN , <span class="built_in">stdin</span> ) ) , s == t ? <span class="number">-1</span> : *s++; &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">inline</span> <span class="title">void</span> <span class="title">read</span>( <span class="title">T</span> &amp; <span class="title">x</span> ) &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c , f; c = Getchar() , x = f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>( c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span> ) &#123; <span class="keyword">if</span>( c == <span class="string">'-'</span> ) f = <span class="number">1</span>; c = Getchar(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( c &lt;= <span class="string">'9'</span> &amp;&amp; c &gt;= <span class="string">'0'</span> ) x = x * <span class="number">10</span> + c - <span class="number">48</span> , c = Getchar();</span><br><span class="line">    x = f ? -x : x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">using</span> IO::read;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> lol;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;lol,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">file</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; FILE * _f; _f = freopen(<span class="string">"sequence.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>); _f = freopen(<span class="string">"sequence.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>); &#125;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;pii&gt; a , b , c , d , e;</span><br><span class="line">pii ta , tb , tc , td , te;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A[N] , B[N] , n , k , l , s , type;</span><br><span class="line"><span class="keyword">bool</span> bka[N] , bkb[N]; lol ans , mx;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clr</span><span class="params">( priority_queue&lt;pii&gt; &amp; Q )</span> </span>&#123; <span class="keyword">while</span>( !Q.empty() ) Q.pop(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  read( n ) , read( k ) , read( l ) , ans = <span class="number">0</span>;</span><br><span class="line">  s = k - l; clr( a ) , clr( b ) , clr( c ) , clr( d ) , clr( e );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) read( A[i] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) read( B[i] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) &#123;</span><br><span class="line">    bka[i] = bkb[i] = <span class="number">0</span>;</span><br><span class="line">    a.push( pii( A[i] , i ) ) , b.push( pii( B[i] , i ) );</span><br><span class="line">    c.push( pii( A[i] + B[i] , i ) );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>( k-- ) &#123;</span><br><span class="line">    <span class="keyword">while</span>( !a.empty() ) &#123; ta = a.top(); <span class="keyword">if</span>( !bka[ta.second] ) <span class="keyword">break</span>; a.pop(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( !b.empty() ) &#123; tb = b.top(); <span class="keyword">if</span>( !bkb[tb.second] ) <span class="keyword">break</span>; b.pop(); &#125;</span><br><span class="line">    <span class="keyword">if</span>( s ) &#123;</span><br><span class="line">      <span class="keyword">if</span>( bkb[ta.second] ) ++s;</span><br><span class="line">      <span class="keyword">if</span>( bka[tb.second] ) ++s;</span><br><span class="line">      <span class="keyword">if</span>( ta.second == tb.second ) ++s;</span><br><span class="line">      --s; bka[ta.second] = bkb[tb.second] = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span>( !bkb[ta.second] ) d.push( pii( B[ta.second] , ta.second ) );</span><br><span class="line">      <span class="keyword">if</span>( !bka[tb.second] ) e.push( pii( A[tb.second] , tb.second ) );</span><br><span class="line">      ans += ta.first + tb.first , a.pop() , b.pop();</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>( !c.empty() ) &#123; tc = c.top(); <span class="keyword">if</span>( !bka[tc.second] &amp;&amp; !bkb[tc.second] ) <span class="keyword">break</span>; c.pop(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( !d.empty() ) &#123; td = d.top(); <span class="keyword">if</span>( !bkb[td.second] ) <span class="keyword">break</span>; d.pop(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( !e.empty() ) &#123; te = e.top(); <span class="keyword">if</span>( !bka[te.second] ) <span class="keyword">break</span>; e.pop(); &#125;</span><br><span class="line">    type = mx = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span>( !c.empty() &amp;&amp; tc.first &gt; mx ) mx = tc.first , type = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>( !d.empty() &amp;&amp; !a.empty() &amp;&amp; td.first + ta.first &gt; mx ) mx = td.first + ta.first , type = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>( !e.empty() &amp;&amp; !b.empty() &amp;&amp; te.first + tb.first &gt; mx ) mx = te.first + tb.first , type = <span class="number">3</span>;</span><br><span class="line">    ans += mx; </span><br><span class="line">    <span class="keyword">if</span>( type == <span class="number">1</span> ) c.pop() , bka[tc.second] = bkb[tc.second] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>( type == <span class="number">2</span> ) &#123;</span><br><span class="line">      a.pop() , d.pop();</span><br><span class="line">      <span class="keyword">if</span>( bkb[ta.second] ) ++s;</span><br><span class="line">      <span class="keyword">else</span> d.push( pii( B[ta.second] , ta.second ) );</span><br><span class="line">      bka[ta.second] = bkb[td.second] = <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      b.pop() , e.pop();</span><br><span class="line">      <span class="keyword">if</span>( bka[tb.second] ) ++s;</span><br><span class="line">      <span class="keyword">else</span> e.push( pii( A[tb.second] , tb.second ) );</span><br><span class="line">      bka[te.second] = bkb[tb.second] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  file();</span><br><span class="line">  <span class="keyword">int</span> T; read( T );</span><br><span class="line">  <span class="keyword">while</span>( T-- ) solve();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/28/Solutions/CTSC2010-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="prev" title="[CTSC2010] 性能优化">
+      <i class="fa fa-chevron-left"></i> [CTSC2010] 性能优化
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#费用流"><span class="nav-number">2.</span> <span class="nav-text">费用流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#problem"><span class="nav-number">3.</span> <span class="nav-text">Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#uer-8-雪灾与外卖"><span class="nav-number">3.1.</span> <span class="nav-text">[UER #8] 雪灾与外卖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#neerc2016mole-tunnels"><span class="nav-number">3.2.</span> <span class="nav-text">[Neerc2016]Mole Tunnels</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#icpc-world-finals-2018-征服世界"><span class="nav-number">3.3.</span> <span class="nav-text">[ICPC World Finals 2018] 征服世界</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#noi2019序列"><span class="nav-number">3.4.</span> <span class="nav-text">[NOI2019]序列</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">67</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
