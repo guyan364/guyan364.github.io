@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="link 求从 \(0 \sim N – 1\) 中选出 \(K\) 个互不相同的数，使得这些数的和 \(\bmod N &#x3D; 0\) 的方案数。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ 4314] 倍数? 倍数!">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/Solutions/BZOJ-4314-%E5%80%8D%E6%95%B0-%E5%80%8D%E6%95%B0/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="link 求从 \(0 \sim N – 1\) 中选出 \(K\) 个互不相同的数，使得这些数的和 \(\bmod N &#x3D; 0\) 的方案数。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-06T09:03:26.000Z">
+<meta property="article:modified_time" content="2020-05-06T15:10:27.527Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/06/Solutions/BZOJ-4314-%E5%80%8D%E6%95%B0-%E5%80%8D%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>[BZOJ 4314] 倍数? 倍数! | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/Solutions/BZOJ-4314-%E5%80%8D%E6%95%B0-%E5%80%8D%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ 4314] 倍数? 倍数!
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-06 17:03:26 / 修改时间：23:10:27" itemprop="dateCreated datePublished" datetime="2020-05-06T17:03:26+08:00">2020-05-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://www.lydsy.com/JudgeOnline/problem.php?id=4314" target="_blank" rel="noopener">link</a> 求从 <span class="math inline">\(0 \sim N – 1\)</span> 中选出 <span class="math inline">\(K\)</span> 个互不相同的数，使得这些数的和 <span class="math inline">\(\bmod N = 0\)</span> 的方案数。</p>
+<a id="more"></a>
+<h5 id="动态规划">动态规划</h5>
+<p>首先考虑 , 前 <span class="math inline">\(k-1\)</span> 个数随便选 , 不管和是多少 , 都可以调整第 <span class="math inline">\(k\)</span> 个数 , 使其和 <span class="math inline">\(\bmod N =0\)</span> , 但是这样会有数字重复的情况 , 将选出的数的集合改为一个序列 , 最后答案要除以 <span class="math inline">\(k!\)</span> , 考虑将前面与第 <span class="math inline">\(k\)</span> 个数相同的数放在序列最后 , 于是减去后两个数相同的情况 , 这就要求方程 <span class="math inline">\(2x \equiv S \pmod N\)</span> 解的个数. 考虑对于一般的 <span class="math inline">\(ax \equiv S \pmod N\)</span> , 如果 <span class="math inline">\((a,N)=d\)</span> , 那么对于所有 <span class="math inline">\(x \in [0,N)\)</span> , 会取到所有 <span class="math inline">\(d\)</span> 的倍数 , 并且每个数都会取到 <span class="math inline">\(d\)</span> 次.</p>
+<p>然后这就递归到了一个子问题 , 选 <span class="math inline">\(k-1\)</span> 个互不相同的数 , 有多少种选数的方法使得和是 <span class="math inline">\((2,N)\)</span> 的倍数 , 设 <span class="math inline">\(f_{i,j,k}\)</span> 表示在 <span class="math inline">\([0,N)\)</span> 内选 <span class="math inline">\(i\)</span> 个不同数 , 最后一个数重复 <span class="math inline">\(k\)</span> 次 , 和是 <span class="math inline">\(j\)</span> 的倍数的方案数.</p>
+<p>有用的 <span class="math inline">\(j\)</span> 只有 <span class="math inline">\(\sqrt N\)</span> 个 , 除了 <span class="math inline">\(k=1\)</span> 以外的状态不会多次访问 , 于是就能 DP 了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> _w;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a + b &gt;= mod ? a + b - mod : a + b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; <span class="keyword">return</span> a - b &lt; <span class="number">0</span> ? a - b + mod : a - b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    k &gt;&gt;= <span class="number">1</span>; b = <span class="number">1L</span>L * b * b % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> f[N][N] , n , k , A[N];</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">( <span class="keyword">int</span> _a , <span class="keyword">int</span> _b )</span> </span>&#123; <span class="keyword">return</span> _b ? gcd( _b , _a % _b ) : _a; &#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">( <span class="keyword">int</span> k , <span class="keyword">int</span> d , <span class="keyword">int</span> z )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> g = gcd( d , z );</span><br><span class="line">  <span class="keyword">if</span>( k == <span class="number">1</span> ) <span class="keyword">return</span> n / d * g;</span><br><span class="line">  <span class="keyword">if</span>( d == <span class="number">1</span> ) <span class="keyword">return</span> A[k];</span><br><span class="line">  <span class="keyword">if</span>( z == <span class="number">1</span> &amp;&amp; d &lt;= <span class="number">1000</span> ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( ~f[k][d] ) <span class="keyword">return</span> f[k][d];</span><br><span class="line">    <span class="keyword">int</span> &amp; res = f[k][d]; res = <span class="number">0</span>;</span><br><span class="line">    res = mns( <span class="number">1L</span>L * ( n / d * g ) * solve( k - <span class="number">1</span> , g , <span class="number">1</span> ) % mod , <span class="number">1L</span>L * ( k - <span class="number">1</span> ) * solve( k - <span class="number">1</span> , d , z + <span class="number">1</span> ) % mod );</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> mns( <span class="number">1L</span>L * ( n / d * g ) * solve( k - <span class="number">1</span> , g , <span class="number">1</span> ) % mod , <span class="number">1L</span>L * ( k - <span class="number">1</span> ) * solve( k - <span class="number">1</span> , d , z + <span class="number">1</span> ) % mod );</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>( f , <span class="number">-1</span> , <span class="keyword">sizeof</span> f );</span><br><span class="line">  _w = <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k);</span><br><span class="line">  <span class="keyword">if</span>( n &lt; k ) <span class="keyword">return</span> <span class="built_in">puts</span>(<span class="string">"0"</span>),<span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> fac = <span class="number">1</span>;</span><br><span class="line">  A[<span class="number">1</span>] = n;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= k ; ++i ) &#123;</span><br><span class="line">    A[i] = <span class="number">1L</span>L * A[i - <span class="number">1</span>] * ( n - i + <span class="number">1</span> ) % mod;</span><br><span class="line">    fac = <span class="number">1L</span>L * fac * i % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  cout &lt;&lt; 1LL * solve( k , n , 1 ) * fpow( fac , mod - 2 ) % mod;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="单位根反演">单位根反演</h5>
+<p>考虑构造一个二元函数 <span class="math inline">\(f(x,y)\)</span> 表示选 <span class="math inline">\(y\)</span> 个数和为 <span class="math inline">\(S\)</span> 的生成函数 <span class="math display">\[
+f(x,y) = \prod_{i=0}^{N-1}(1+x^iy)
+\]</span> 答案就是 <span class="math inline">\(y\)</span> 的次数为 <span class="math inline">\(k\)</span> , <span class="math inline">\(x\)</span> 的次数是 <span class="math inline">\(N\)</span> 的倍数的系数和 , 直接套入单位根反演 <span class="math display">\[
+\begin{aligned}
+\frac{1}{N}\sum_{t=0}^{N-1} f(w_n^t,y) &amp;= \prod_{i=0}^{N-1}(1+w_n^{ti}y) \\
+\end{aligned}
+\]</span> 然后对于 <span class="math inline">\((t,n) = d \neq 1\)</span> , 可以直接化简 , 设 <span class="math inline">\(t = ad , n = bd\)</span> <span class="math display">\[
+\begin{aligned}
+f(w_n^t,y) &amp;= f(w_b^a,y) = \prod_{i=0}^{N-1}(1+w_b^{ai}y)
+\end{aligned}
+\]</span> 由于 <span class="math inline">\(w_b^{ai}\)</span> 有循环 , 可以简化计算 <span class="math display">\[
+\begin{aligned}
+f(w_b^a,y) = \left(\prod_{i=0}^{b-1}(1+w_b^{ai}y)\right)^{\frac{N}{b}}
+\end{aligned}
+\]</span> 此时发现 , 对于所有 <span class="math inline">\((x,b) = 1\)</span> 的 <span class="math inline">\(x\)</span> 其贡献都是一样的 , 因为 <span class="math inline">\(xi \bmod b\)</span> 会取遍 <span class="math inline">\([0,b)\)</span> , 这样就可以对于 <span class="math inline">\(N\)</span> 的每个因数 <span class="math inline">\(b\)</span> , 只算 <span class="math inline">\(\phi(b)\)</span> 个这些贡献就行了 , 接下来的问题是如何对于 <span class="math inline">\(N\)</span> 的一个因数 <span class="math inline">\(b\)</span> 算贡献</p>
+<p>观察里面的积式 , 发现都是关于 <span class="math inline">\(y\)</span> 的一次多项式相乘 , 考虑找零点 , 对于 <span class="math inline">\(b\)</span> 为偶数的情况 <span class="math display">\[
+\begin{aligned}
+\prod_{i=0}^{b-1}(1+w_b^iy)=\prod_{i=0}^{b-1}w_{b}^i(w_b^{b-i}+y)
+\end{aligned}
+\]</span> 那么零点就是全体 <span class="math inline">\(b\)</span> 次单位根的相反数 , 由于 <span class="math inline">\(b\)</span> 为偶数 , 这就是全体 <span class="math inline">\(b\)</span> 次单位根 , 这就是方程 <span class="math inline">\(x^b - 1 =0\)</span> 的所有解. 原积式的常数项是 <span class="math inline">\(1\)</span> , 所以乘起来就是 <span class="math inline">\((1-x^b)\)</span></p>
+<p>对于 <span class="math inline">\(b\)</span> 为奇数的情况 , 零点是所有 <span class="math inline">\(b\)</span> 次单位根的相反数 , 这是方程 <span class="math inline">\(x^b + 1 = 0\)</span> 的所有解 , 于是当 <span class="math inline">\(b\)</span> 为奇数时 , 结果为 <span class="math inline">\((1+x^b)\)</span></p>
+<p>最终答案的形式就是 <span class="math display">\[
+\begin{aligned}[]
+[y^k]\sum_{d\mid N}\phi(d)\left(1-(-y)^d\right)^{\frac{N}{d}}
+\end{aligned}
+\]</span> 就可以 <span class="math inline">\(O(\sqrt N)\)</span> 做了</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n , k , fac[N] , ifac[N] , inv[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">phi</span><span class="params">( <span class="keyword">int</span> n )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = n;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n / i ; ++i )</span><br><span class="line">    <span class="keyword">if</span>( n % i == <span class="number">0</span> ) &#123;</span><br><span class="line">      res = ( res / i ) * ( i - <span class="number">1</span> ); </span><br><span class="line">      <span class="keyword">while</span>( n % i == <span class="number">0</span> ) n /= i;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">if</span>( n &gt; <span class="number">1</span> ) res = ( res / n ) * ( n - <span class="number">1</span> );</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binom</span><span class="params">( <span class="keyword">int</span> n , <span class="keyword">int</span> m )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( m &gt; n ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = n - m + <span class="number">1</span> ; i &lt;= n ; ++i )</span><br><span class="line">    res = <span class="number">1L</span>L * res * i % mod;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1L</span>L * res * ifac[m] % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">( <span class="keyword">int</span> d )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( k % d ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1L</span>L * binom( n / d , k / d ) * phi( d ) % mod;</span><br><span class="line">  <span class="keyword">if</span>( (~d &amp; <span class="number">1</span>) &amp;&amp; ((k / d) &amp; <span class="number">1</span>) ) res = mns( <span class="number">0</span> , res );</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">  fac[<span class="number">0</span>] = fac[<span class="number">1</span>] = ifac[<span class="number">0</span>] = ifac[<span class="number">1</span>] = inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= k ; ++i ) &#123;</span><br><span class="line">    fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[i] = <span class="number">1L</span>L * ( mod - mod / i ) * inv[mod % i] % mod;</span><br><span class="line">    ifac[i] = <span class="number">1L</span>L * ifac[i - <span class="number">1</span>] * inv[i] % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n / i ; ++i )</span><br><span class="line">    <span class="keyword">if</span>( n % i == <span class="number">0</span> ) &#123;</span><br><span class="line">      inc( res , calc( i ) );</span><br><span class="line">      <span class="keyword">if</span>( i != n / i ) inc( res , calc( n / i ) );</span><br><span class="line">    &#125;</span><br><span class="line">  res = <span class="number">1L</span>L * res * fpow( n , mod - <span class="number">2</span> ) % mod;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; res;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/06/Solutions/BZOJ3569-DZY-Loves-Chinese-II/" rel="prev" title="[BZOJ3569] DZY Loves Chinese II">
+      <i class="fa fa-chevron-left"></i> [BZOJ3569] DZY Loves Chinese II
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#动态规划"><span class="nav-number">1.</span> <span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单位根反演"><span class="nav-number">2.</span> <span class="nav-text">单位根反演</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
