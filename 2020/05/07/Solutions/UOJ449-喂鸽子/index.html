@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="link">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[UOJ449] 喂鸽子">
+<meta property="og:url" content="http://yoursite.com/2020/05/07/Solutions/UOJ449-%E5%96%82%E9%B8%BD%E5%AD%90/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="link">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-07T01:17:02.000Z">
+<meta property="article:modified_time" content="2020-05-07T05:45:36.143Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/07/Solutions/UOJ449-%E5%96%82%E9%B8%BD%E5%AD%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>[UOJ449] 喂鸽子 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/Solutions/UOJ449-%E5%96%82%E9%B8%BD%E5%AD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [UOJ449] 喂鸽子
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-07 09:17:02 / 修改时间：13:45:36" itemprop="dateCreated datePublished" datetime="2020-05-07T09:17:02+08:00">2020-05-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="http://uoj.ac/problem/449" target="_blank" rel="noopener">link</a></p>
+<a id="more"></a>
+<h5 id="min-max-容斥">min-max 容斥</h5>
+<p>先套上一个 <span class="math inline">\(\text{min-max}\)</span> 容斥 , <span class="math inline">\(\text{Ans} = E(\max S) = \sum_{T\subseteq S,T \neq \varnothing}(-1)^{|T|+1}E(\min T)\)</span> , 注意到<del>天下的</del>鸽子都是一样的 , 所以后面的 <span class="math inline">\(E(\min T)\)</span> 只与 <span class="math inline">\(|T|\)</span> 有关 , 考虑如何求 <span class="math inline">\(E(\min T)\)</span></p>
+<p>这里有一个很经典的转化 , 求到达某种状态的期望时间 , 就是求 <span class="math inline">\(\sum_{i=1}^{\infty} P(i) \cdot i\)</span> 其中 <span class="math inline">\(P(i)\)</span> 表示到 <span class="math inline">\(i\)</span> 时刻恰好到达最终状态的概率 , 设 <span class="math inline">\(Q(i)\)</span> 表示直到 <span class="math inline">\(i\)</span> 时刻 , 仍没有到达最终状态的概率 <span class="math display">\[
+\begin{aligned}
+E(S) &amp;= \sum_{i=1}^{\infty} P(i) \cdot i \\
+Q(i) &amp;= 1 - \sum_{j=0}^i P(j) \\
+P(i) &amp;= Q(i-1) - Q(i) \\
+E(S) &amp;= \sum_{i=1}^{\infty}(Q(i-1)-Q(i))\cdot i \\
+&amp;=\sum_{i=0}^{\infty} Q(i)
+\end{aligned}
+\]</span> 到 <span class="math inline">\(i\)</span> 时刻仍然没有鸽子饱 , 也就是每只鸽子最多喂了 <span class="math inline">\(k-1\)</span> 次 , 总共喂了 <span class="math inline">\(i\)</span> 次 , 由于喂鸽子有顺序 , 可以写出每只鸽子的 EGF 是 <span class="math inline">\(\sum_{i} \frac{x^i}{i!}\)</span> , <span class="math inline">\(\rm NTT\)</span> 乘起来就好了</p>
+<p>注意求出之后要乘上 <span class="math inline">\(\frac{n}{|T|}\)</span> , 这时因为每次喂鸽子 , 有 <span class="math inline">\(\frac{|T|}{n}\)</span> 的概率喂到集合 <span class="math inline">\(T\)</span> 中的一只鸽子 , 那么期望喂 <span class="math inline">\(\frac{n}{|T|}\)</span> 次鸽子 , 可以喂一次 <span class="math inline">\(T\)</span> 集合中的鸽子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IO &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">int</span> IN_LEN = <span class="number">1</span> &lt;&lt; <span class="number">18</span> | <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">char</span> buf[IN_LEN] , *s , *t;</span><br><span class="line">  <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Getchar</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123; <span class="keyword">return</span> s == t &amp;&amp; ( t = ( s = buf ) + fread( buf , <span class="number">1</span> , IN_LEN , <span class="built_in">stdin</span> ) ) , s == t ? <span class="number">-1</span> : *s++; &#125;</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt; <span class="title">inline</span> <span class="title">void</span> <span class="title">read</span>( <span class="title">T</span> &amp; <span class="title">x</span> ) &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c , f; c = Getchar() , x = f = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>( c &lt; <span class="string">'0'</span> || c &gt; <span class="string">'9'</span> ) &#123; <span class="keyword">if</span>( c == <span class="string">'-'</span> ) f = <span class="number">1</span>; c = Getchar(); &#125;</span><br><span class="line">    <span class="keyword">while</span>( c &lt;= <span class="string">'9'</span> &amp;&amp; c &gt;= <span class="string">'0'</span> ) x = x * <span class="number">10</span> + c - <span class="number">48</span> , c = Getchar();</span><br><span class="line">    x = f ? -x : x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">using</span> IO::read;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">55</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> K = <span class="number">1e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = M * K * <span class="number">4</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> _wn[N] = &#123;<span class="number">1</span>&#125; , _now , _r[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> _init( <span class="keyword">int</span> n ) &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> l; <span class="keyword">if</span>( _now == n ) <span class="keyword">return</span>;</span><br><span class="line">  _now = n , l = <span class="number">1</span>; <span class="keyword">while</span>( ( <span class="number">1</span> &lt;&lt; l ) &lt; n ) ++l;</span><br><span class="line">  --l; <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> , w = fpow( <span class="number">3</span> , ( mod - <span class="number">1</span> ) / n ) ; i &lt; n ; ++i )</span><br><span class="line">    _r[i] = ( _r[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span> ) | ( (i&amp;<span class="number">1</span>) &lt;&lt; l ) , _wn[i] = <span class="number">1L</span>L * _wn[i - <span class="number">1</span>] * w % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFT</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> n )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> x , y; _init( n );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; n ; ++i ) <span class="keyword">if</span>( i &lt; _r[i] ) swap( f[i] , f[_r[i]] );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> mid = <span class="number">1</span> , tk = n / <span class="number">2</span> ; mid &lt; n ; mid &lt;&lt;= <span class="number">1</span> , tk &gt;&gt;= <span class="number">1</span> )</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i += ( mid &lt;&lt; <span class="number">1</span> ) )</span><br><span class="line">      <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; mid ; ++j ) &#123;</span><br><span class="line">        x = f[i + j] , y = <span class="number">1L</span>L * f[i + j + mid] * _wn[tk * j] % mod;</span><br><span class="line">        f[i + j] = pls( x , y );</span><br><span class="line">        f[i + j + mid] = mns( x , y );</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">IDFT</span><span class="params">( <span class="keyword">int</span> * f , <span class="keyword">int</span> n )</span> </span>&#123;</span><br><span class="line">  reverse( f + <span class="number">1</span> , f + n ); DFT( f , n );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> , w = fpow( n , mod - <span class="number">2</span> ) ; i &lt; n ; ++i )</span><br><span class="line">    f[i] = <span class="number">1L</span>L * f[i] * w % mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[N] , ans , n , k , g[N] , h[N] , ifac[N] , fac[N] , inv[N] , lim = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binom</span><span class="params">( <span class="keyword">int</span> n , <span class="keyword">int</span> m )</span> </span>&#123; <span class="keyword">return</span> m &gt; n ? <span class="number">0</span> : <span class="number">1L</span>L * fac[n] * ifac[m] % mod * ifac[n - m] % mod; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k; </span><br><span class="line">  <span class="keyword">while</span>( lim &lt; n * k ) lim &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">  fac[<span class="number">0</span>] = fac[<span class="number">1</span>] = ifac[<span class="number">0</span>] = ifac[<span class="number">1</span>] = inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> , t = max( lim , n ) ; i &lt;= t ; ++i ) &#123;</span><br><span class="line">    fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[i] = <span class="number">1L</span>L * ( mod - mod / i ) * inv[mod % i] % mod;</span><br><span class="line">    ifac[i] = <span class="number">1L</span>L * ifac[i - <span class="number">1</span>] * inv[i] % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; k ; ++i ) g[i] = ifac[i];</span><br><span class="line">  DFT( g , lim );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; lim ; ++i ) f[i] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> , res ; i &lt;= n ; ++i ) &#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; lim ; ++j )</span><br><span class="line">      h[j] = f[j] = <span class="number">1L</span>L * f[j] * g[j] % mod;</span><br><span class="line">    IDFT( h , lim ) , res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> , t = i * ( k - <span class="number">1</span> ) , w = <span class="number">1</span> ; j &lt;= t ; ++j  , w = <span class="number">1L</span>L * w * inv[i] % mod )</span><br><span class="line">      inc( res , <span class="number">1L</span>L * h[j] * fac[j] % mod * w % mod );</span><br><span class="line">    res = <span class="number">1L</span>L * res * n % mod * inv[i] % mod;</span><br><span class="line">    res = <span class="number">1L</span>L * res * binom( n , i ) % mod;</span><br><span class="line">    <span class="keyword">if</span>( i &amp; <span class="number">1</span> ) inc( ans , res );</span><br><span class="line">    <span class="keyword">else</span> dec( ans , res );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="dp">DP</h5>
+<p>定义一个玉米是有效的当且仅当其喂给了一只还没有饱的鸽子 , 于是有效玉米序列的长度是 <span class="math inline">\(nk\)</span> , 令 <span class="math inline">\(r_i\)</span> 表示在第 <span class="math inline">\(i\)</span> 个有效玉米之前有几只鸽子饱了对于一个有效玉米序列 , 可以得到其贡献为 <span class="math display">\[
+\begin{aligned}
+\left(\prod_{i=1}^{nk}P(r_i)\right)\cdot\left(\sum_{i=1}^{nk}E(r_i)\right) 
+\end{aligned}
+\]</span> 其中 <span class="math inline">\(P(x) = \frac{1}{n-x}\)</span> , <span class="math inline">\(E(x) = \frac{n}{n-x}\)</span> 前面表示得到这个有效玉米序列的概率 , 后面表示这个有效玉米序列的期望长度</p>
+<p>直接 DP 的话无法知道这次喂鸽子这只鸽子会不会饱 , 注意到一只鸽子吃饱之前是不会对 <span class="math inline">\(r_i\)</span> 造成影响的 , 于是只要在最后其吃饱的时候算上就行了 , 具体来说 , 在这只鸽子吃饱前 , 喂给它的有效玉米为白玉米 , 在其吃饱的时候将白玉米染色</p>
+<p>然后就可以 DP 了 , 强制吃饱的顺序是 <span class="math inline">\(1 \sim n\)</span> , 最后乘上 <span class="math inline">\(n!\)</span> 就行了 , <span class="math inline">\(f_{m,c}\)</span> 表示投喂了 <span class="math inline">\(m\)</span> 粒有效玉米 , <span class="math inline">\(c\)</span> 只鸽子已经饱了的贡献之和 , <span class="math inline">\(g_{m,c}\)</span> 表示概率之和 , 考虑从 <span class="math inline">\(m\)</span> 到 <span class="math inline">\(m+1\)</span> 时贡献的变化 <span class="math display">\[
+\begin{aligned}
+&amp;\sum \left(P(r_{m+1})\prod_{i=1}^mP(r_i)\right)\cdot \left(E(r_{m+1})\sum_{i=1}^mE(r_i)\right) \\
+&amp;=P(r_{m+1})
+\left(\sum\prod_{i=1}^mP(r_i)\sum_{i=1}^mE(r_i)\right)+
+P(r_{m+1})E(r_{m+1})\left(\sum\prod_{i=1}^mP(r_i)\right) \\
+&amp;=P(r_{m+1}) f_{m-1,c}+P(r_{m+1})E(r_{m+1})g_{m-1,c}
+\end{aligned}
+\]</span> 注意到 <span class="math inline">\(r_{m+1} = c\)</span> , 这就可以直接转移了 , 分两种情况 , 第一种是没有鸽子喂饱 , 直接转移就行 , 第二种是有一只鸽子饱了 , 这时要乘上对前面白玉米染色的方案数</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">55</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> K = <span class="number">1e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> NK = N * K;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pls</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mns</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; <span class="keyword">return</span> a + ( a &gt;&gt; <span class="number">31</span> &amp; mod ); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">inc</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a += b - mod; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">( <span class="keyword">int</span> &amp; a , <span class="keyword">int</span> b )</span> </span>&#123; a -= b; a += a &gt;&gt; <span class="number">31</span> &amp; mod; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[NK][N] , g[NK][N] , fac[NK] , ifac[NK] , inv[NK] , n , k , m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binom</span><span class="params">( <span class="keyword">int</span> n , <span class="keyword">int</span> m )</span> </span>&#123; <span class="keyword">return</span> n &lt; m ? <span class="number">0</span> : <span class="number">1L</span>L * fac[n] * ifac[m] % mod * ifac[n - m] % mod; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">  m = n * k;</span><br><span class="line">  ifac[<span class="number">0</span>] = ifac[<span class="number">1</span>] = fac[<span class="number">0</span>] = fac[<span class="number">1</span>] = inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= m ; ++i ) &#123;</span><br><span class="line">    fac[i] = <span class="number">1L</span>L * fac[i - <span class="number">1</span>] * i % mod;</span><br><span class="line">    inv[i] = <span class="number">1L</span>L * ( mod - mod / i ) * inv[mod % i] % mod;</span><br><span class="line">    ifac[i] = <span class="number">1L</span>L * ifac[i - <span class="number">1</span>] * inv[i] % mod;</span><br><span class="line">  &#125;</span><br><span class="line">  g[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; m ; ++i )</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> , A , B ; j * k &lt;= i ; ++j ) <span class="keyword">if</span>( f[i][j] || g[i][j] ) &#123;</span><br><span class="line">      A = <span class="number">1L</span>L * inv[n - j] * f[i][j] % mod;</span><br><span class="line">      inc( A , <span class="number">1L</span>L * inv[n - j] * n % mod * inv[n - j] % mod * g[i][j] % mod );</span><br><span class="line">      B = <span class="number">1L</span>L * g[i][j] * inv[n - j] % mod;</span><br><span class="line">      inc( f[i + <span class="number">1</span>][j] , A );</span><br><span class="line">      inc( f[i + <span class="number">1</span>][j + <span class="number">1</span>] , <span class="number">1L</span>L * A * binom( i - j * k , k - <span class="number">1</span> ) % mod );</span><br><span class="line">      inc( g[i + <span class="number">1</span>][j] , B );</span><br><span class="line">      inc( g[i + <span class="number">1</span>][j + <span class="number">1</span>] , <span class="number">1L</span>L * B * binom( i - j * k , k - <span class="number">1</span> ) % mod );</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,<span class="number">1L</span>L * f[m][n] * fac[n] % mod );</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/Solutions/%E6%B8%85%E5%8D%8E%E9%9B%86%E8%AE%AD2014-%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2/" rel="prev" title="[清华集训2014] 矩阵变换">
+      <i class="fa fa-chevron-left"></i> [清华集训2014] 矩阵变换
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#min-max-容斥"><span class="nav-number">1.</span> <span class="nav-text">min-max 容斥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dp"><span class="nav-number">2.</span> <span class="nav-text">DP</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">81</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
