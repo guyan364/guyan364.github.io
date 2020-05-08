@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="定义两个字符串相同当且仅当长度相同且一一对应后最多有一位不同 , 给出两个字符串 \(S,T\) , 要求分别找出 \(S\) 和 \(T\) 的子串 , 使得这两个子串按上面的标准相等且长度最长 , 输出这个长度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[BZOJ3145] Str">
+<meta property="og:url" content="http://yoursite.com/2020/05/08/Solutions/BZOJ3145-Str/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="定义两个字符串相同当且仅当长度相同且一一对应后最多有一位不同 , 给出两个字符串 \(S,T\) , 要求分别找出 \(S\) 和 \(T\) 的子串 , 使得这两个子串按上面的标准相等且长度最长 , 输出这个长度">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-08T00:17:20.000Z">
+<meta property="article:modified_time" content="2020-05-08T01:44:33.909Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/08/Solutions/BZOJ3145-Str/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>[BZOJ3145] Str | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/Solutions/BZOJ3145-Str/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [BZOJ3145] Str
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-08 08:17:20 / 修改时间：09:44:33" itemprop="dateCreated datePublished" datetime="2020-05-08T08:17:20+08:00">2020-05-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>定义两个字符串相同当且仅当长度相同且一一对应后最多有一位不同 , 给出两个字符串 <span class="math inline">\(S,T\)</span> , 要求分别找出 <span class="math inline">\(S\)</span> 和 <span class="math inline">\(T\)</span> 的子串 , 使得这两个子串按上面的标准相等且长度最长 , 输出这个长度</p>
+<a id="more"></a>
+<p>就是在 <span class="math inline">\(S\)</span> 中找出一个 <span class="math inline">\(i\)</span> , 在 <span class="math inline">\(T\)</span> 中找出一个 <span class="math inline">\(j\)</span> , 求 <span class="math inline">\(\max\left(\text{LCP}(i+1,j+1)+\text{LCS}(i-1,j-1)\right) + 1\)</span></p>
+<p>考虑枚举 <span class="math inline">\(\text{LCP}\)</span> 的值 , 如果 <span class="math inline">\(S\)</span> 和 <span class="math inline">\(T\)</span> 的两个后缀 <span class="math inline">\((i,j)\)</span> 的 <span class="math inline">\(\text{LCP}\)</span> 大于等于当前枚举的值 , 那么将 <span class="math inline">\(i,j\)</span> 扔到同一个集合 , 随着枚举的 <span class="math inline">\(\text{LCP}\)</span> 的增加 , 集合会不断合并 , 每次合并两个集合 <span class="math inline">\(A,B\)</span> , 找出 <span class="math inline">\(A\)</span> 中每个元素 <span class="math inline">\(i\)</span> , 与 <span class="math inline">\(B\)</span> 集合中元素 <span class="math inline">\(j\)</span> 的最大 <span class="math inline">\(\text{LCS}\)</span> , 这样就可以统计答案了. 合并两个集合可以启发式合并 , 找出 <span class="math inline">\(A\)</span> 中一个元素 <span class="math inline">\(i\)</span> 与 <span class="math inline">\(B\)</span> 中元素的 <span class="math inline">\(\text{LCS}\)</span> , 可以对 <span class="math inline">\(B\)</span> 维护两个平衡树 , 分别保存 <span class="math inline">\(S\)</span> 和 <span class="math inline">\(T\)</span> 中的下标 , 每次找 <span class="math inline">\(\text{LCS}\)</span> 就是在反串的后缀数组上找前驱和后继</p>
+<p><span class="math inline">\(\rm SAM\)</span> 的话由于 <span class="math inline">\(\text{LCP}\)</span> 和 <span class="math inline">\(\text{LCS}\)</span> 就是找 <span class="math inline">\(\rm LCA\)</span> , 建出正串和反串两颗 <span class="math inline">\(\rm SAM\)</span> , 在第一棵树上 <span class="math inline">\(\rm DFS\)</span> , 枚举 <span class="math inline">\(\rm LCA\)</span> , 每次合并集合 , 就是找出在第二棵树上与其最近的 <span class="math inline">\(\text{LCA}\)</span> , 这个可以以第二棵树的 <span class="math inline">\(\rm DFS\)</span> 序排序解决</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,pii&gt; pp;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> LG = <span class="number">19</span>;</span><br><span class="line"><span class="keyword">int</span> _w;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Log[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SA</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> sa[N] , c[N] , tp[N] , kc[N] , ht[LG][N] , rnk[N];</span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">( <span class="keyword">int</span> a , <span class="keyword">int</span> b , <span class="keyword">int</span> k )</span> </span>&#123; <span class="keyword">return</span> tp[a] == tp[b] &amp;&amp; tp[a + k] == tp[b + k]; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">SuffixSort</span><span class="params">( <span class="keyword">char</span> * str , <span class="keyword">int</span> n , <span class="keyword">int</span> m = <span class="number">256</span> )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">int</span> i , p , k;</span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">1</span> ; i &lt;= n ; ++i ) ++c[rnk[i] = str[i]];</span><br><span class="line">    <span class="keyword">for</span>( i = <span class="number">1</span> ; i &lt;= m ; ++i ) c[i] += c[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>( i = n ; i ; --i ) sa[c[rnk[i]]--] = i;</span><br><span class="line">    <span class="keyword">for</span>( k = <span class="number">1</span> , p = <span class="number">0</span> ; p &lt; n ; m = p , k &lt;&lt;= <span class="number">1</span> ) &#123;</span><br><span class="line">      p = <span class="number">0</span>; <span class="keyword">for</span>( i = n - k + <span class="number">1</span> ; i &lt;= n ; ++i ) tp[++p] = i;</span><br><span class="line">      <span class="keyword">for</span>( i = <span class="number">1</span> ; i &lt;= n ; ++i ) <span class="keyword">if</span>( sa[i] &gt; k ) tp[++p] = sa[i] - k;</span><br><span class="line">      <span class="keyword">for</span>( i = <span class="number">0</span> ; i &lt;= m ; ++i ) c[i] = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span>( i = <span class="number">1</span> ; i &lt;= n ; ++i ) ++c[rnk[i]] , kc[i] = rnk[tp[i]];</span><br><span class="line">      <span class="keyword">for</span>( i = <span class="number">1</span> ; i &lt;= m ; ++i ) c[i] += c[i - <span class="number">1</span>];</span><br><span class="line">      <span class="keyword">for</span>( i = n ; i ; --i ) sa[c[kc[i]]--] = tp[i];</span><br><span class="line">      swap( tp , rnk ); rnk[sa[<span class="number">1</span>]] = p = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span>( i = <span class="number">2</span> ; i &lt;= n ; ++i ) rnk[sa[i]] = cmp( sa[i - <span class="number">1</span>] , sa[i] , k ) ? p : ++p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>( k = <span class="number">0</span> , i = <span class="number">1</span> ; i &lt;= n ; ++i ) &#123;</span><br><span class="line">      <span class="keyword">if</span>( k ) --k; </span><br><span class="line">      p = sa[rnk[i] - <span class="number">1</span>];</span><br><span class="line">      <span class="keyword">while</span>( str[i + k] == str[p + k] ) ++k;</span><br><span class="line">      ht[<span class="number">0</span>][rnk[i]] = k;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>( k = <span class="number">1</span> ; k &lt; LG ; ++k )</span><br><span class="line">      <span class="keyword">for</span>( i = n - ( <span class="number">1</span> &lt;&lt; k ) + <span class="number">1</span> ; i &gt; <span class="number">0</span> ; --i )</span><br><span class="line">        ht[k][i] = min( ht[k - <span class="number">1</span>][i] , ht[k - <span class="number">1</span>][i + ( <span class="number">1</span> &lt;&lt; ( k - <span class="number">1</span> ) )] );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">LCP</span><span class="params">( <span class="keyword">int</span> l , <span class="keyword">int</span> r )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> k; l = rnk[l] , r = rnk[r];</span><br><span class="line">    <span class="keyword">if</span>( !l || !r ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>( l &gt; r ) swap( l , r );</span><br><span class="line">    k = Log[r - l];</span><br><span class="line">    <span class="keyword">return</span> min( ht[k][l + <span class="number">1</span>] , ht[k][r - ( <span class="number">1</span> &lt;&lt; k ) + <span class="number">1</span>] );</span><br><span class="line">  &#125;</span><br><span class="line">&#125; A , B;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cmp</span> &#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">operator</span> <span class="params">()</span> <span class="params">( <span class="keyword">const</span> <span class="keyword">int</span> &amp; lhs , <span class="keyword">const</span> <span class="keyword">int</span> rhs )</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> B.rnk[lhs] &lt; B.rnk[rhs];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> S[N] , T[N] , str[N];</span><br><span class="line"><span class="keyword">int</span> n , m , f[N] , tot , ans; pp dat[N];</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>,cmp&gt; a[N] , b[N];</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>,cmp&gt;::iterator it;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">( <span class="keyword">int</span> x )</span> </span>&#123; <span class="keyword">return</span> x == f[x] ? x : f[x] = find( f[x] ); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">merge</span><span class="params">( <span class="keyword">int</span> u , <span class="keyword">int</span> v )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> res = <span class="number">-0x3f3f3f3f</span>;</span><br><span class="line">  u = find( u ) , v = find( v );</span><br><span class="line">  <span class="keyword">if</span>( a[u].size() + b[u].size() &gt; a[v].size() + b[v].size() ) swap( u , v );</span><br><span class="line">  f[u] = v; <span class="keyword">for</span>( <span class="keyword">const</span> <span class="keyword">int</span> &amp; t : a[u] ) &#123;</span><br><span class="line">    it = b[v].lower_bound( t );</span><br><span class="line">    <span class="keyword">if</span>( it != b[v].end() ) </span><br><span class="line">      res = max( res , B.LCP( t , *it ) );</span><br><span class="line">    <span class="keyword">if</span>( it != b[v].begin() ) &#123;</span><br><span class="line">      --it;</span><br><span class="line">      res = max( res , B.LCP( t , *it ) );</span><br><span class="line">    &#125;</span><br><span class="line">    a[v].insert( t );</span><br><span class="line">  &#125;</span><br><span class="line">  a[u].clear();</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">const</span> <span class="keyword">int</span> &amp; t : b[u] ) &#123;</span><br><span class="line">    it = a[v].lower_bound( t );</span><br><span class="line">    <span class="keyword">if</span>( it != a[v].end() ) </span><br><span class="line">      res = max( res , B.LCP( t , *it ) );</span><br><span class="line">    <span class="keyword">if</span>( it != a[v].begin() ) &#123;</span><br><span class="line">      --it;</span><br><span class="line">      res = max( res , B.LCP( t , *it ) );</span><br><span class="line">    &#125;</span><br><span class="line">    b[v].insert( t );</span><br><span class="line">  &#125;</span><br><span class="line">  b[u].clear();</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  _w = <span class="built_in">scanf</span>(<span class="string">"%s%s"</span>,S+<span class="number">1</span>,T+<span class="number">1</span>);</span><br><span class="line">  n = <span class="built_in">strlen</span>( S + <span class="number">1</span> ) , m = <span class="built_in">strlen</span>( T + <span class="number">1</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n + m + <span class="number">1</span> ; ++i ) Log[i] = Log[i &gt;&gt; <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">memcpy</span>( str + <span class="number">1</span> , S + <span class="number">1</span> , <span class="keyword">sizeof</span>( <span class="keyword">char</span> ) * n );</span><br><span class="line">  str[n + <span class="number">1</span>] = <span class="string">'#'</span>; <span class="built_in">memcpy</span>( str + n + <span class="number">2</span> , T + <span class="number">1</span> , <span class="keyword">sizeof</span>( <span class="keyword">char</span> ) * m );</span><br><span class="line">  A.SuffixSort( str , n + m + <span class="number">1</span> );</span><br><span class="line">  str[n + m + <span class="number">2</span>] = <span class="string">'\0'</span>;</span><br><span class="line">  reverse( str + <span class="number">1</span> , str + <span class="number">1</span> + n );</span><br><span class="line">  reverse( str + n + <span class="number">2</span> , str + <span class="number">2</span> + n + m );</span><br><span class="line">  B.SuffixSort( str , n + m + <span class="number">1</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i &lt;= n + m + <span class="number">1</span> ; ++i )</span><br><span class="line">    <span class="keyword">if</span>( A.sa[i] != n + <span class="number">1</span> &amp;&amp; A.sa[i - <span class="number">1</span>] != n + <span class="number">1</span> )</span><br><span class="line">      dat[++tot] = pp( A.ht[<span class="number">0</span>][i] , pii( A.sa[i] - <span class="number">1</span> , A.sa[i - <span class="number">1</span>] - <span class="number">1</span> ) );</span><br><span class="line">  sort( dat + <span class="number">1</span> , dat + <span class="number">1</span> + tot );</span><br><span class="line">  reverse( dat + <span class="number">1</span> , dat + <span class="number">1</span> + tot );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n + m + <span class="number">1</span> ; ++i ) f[i] = i;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; ++i ) a[i].insert( n - i + <span class="number">2</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = n + <span class="number">2</span> ; i &lt;= n + m + <span class="number">1</span> ; ++i ) b[i].insert( n + m - i + <span class="number">3</span> + n + <span class="number">1</span> );</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= tot ; ++i ) &#123;</span><br><span class="line">    ans = max( ans , merge( dat[i].second.first , dat[i].second.second ) + dat[i].first );</span><br><span class="line">    <span class="keyword">if</span>( dat[i].second.first &gt; dat[i].second.second ) swap( dat[i].second.first , dat[i].second.second );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; ans + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/07/Solutions/UOJ390-%E7%99%BE%E9%B8%BD%E7%AC%BC/" rel="prev" title="[UOJ390] 百鸽笼">
+      <i class="fa fa-chevron-left"></i> [UOJ390] 百鸽笼
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/08/Solutions/How-Many-Substrings/" rel="next" title="How Many Substrings">
+      How Many Substrings <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
