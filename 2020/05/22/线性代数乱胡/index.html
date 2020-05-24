@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="link 考虑树高就是在 BFS 序上分的层数 先将排列映射一下 , 让 BFS 序为 \(1 \sim n\) , 设此时 DFS 序为 \(a[i]\) , \(pos[i]\) 表示 \(i\) 在 DFS 序中的位置">
+  <meta name="description" content="我根本就不会线性代数.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[NOI2013] 树的计数">
-<meta property="og:url" content="http://yoursite.com/2020/03/28/Solutions/[NOI2013]%20%E6%A0%91%E7%9A%84%E8%AE%A1%E6%95%B0/index.html">
+<meta property="og:title" content="线性代数乱胡">
+<meta property="og:url" content="http://yoursite.com/2020/05/22/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E4%B9%B1%E8%83%A1/index.html">
 <meta property="og:site_name" content="Guyan&#39;s blog">
-<meta property="og:description" content="link 考虑树高就是在 BFS 序上分的层数 先将排列映射一下 , 让 BFS 序为 \(1 \sim n\) , 设此时 DFS 序为 \(a[i]\) , \(pos[i]\) 表示 \(i\) 在 DFS 序中的位置">
+<meta property="og:description" content="我根本就不会线性代数.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-03-28T01:17:00.000Z">
-<meta property="article:modified_time" content="2020-03-30T15:12:47.015Z">
+<meta property="article:published_time" content="2020-05-21T23:43:08.000Z">
+<meta property="article:modified_time" content="2020-05-24T11:06:10.161Z">
 <meta property="article:author" content="Guyan">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/28/Solutions/[NOI2013]%20%E6%A0%91%E7%9A%84%E8%AE%A1%E6%95%B0/">
+<link rel="canonical" href="http://yoursite.com/2020/05/22/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E4%B9%B1%E8%83%A1/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>[NOI2013] 树的计数 | Guyan's blog</title>
+  <title>线性代数乱胡 | Guyan's blog</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/Solutions/[NOI2013]%20%E6%A0%91%E7%9A%84%E8%AE%A1%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/22/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E4%B9%B1%E8%83%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [NOI2013] 树的计数
+          线性代数乱胡
         </h1>
 
         <div class="post-meta">
@@ -189,14 +189,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-03-28 09:17:00" itemprop="dateCreated datePublished" datetime="2020-03-28T09:17:00+08:00">2020-03-28</time>
+              <time title="创建时间：2020-05-22 07:43:08" itemprop="dateCreated datePublished" datetime="2020-05-22T07:43:08+08:00">2020-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-30 23:12:47" itemprop="dateModified" datetime="2020-03-30T23:12:47+08:00">2020-03-30</time>
+                <time title="修改时间：2020-05-24 19:06:10" itemprop="dateModified" datetime="2020-05-24T19:06:10+08:00">2020-05-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -204,7 +204,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                  <a href="/categories/%E5%BE%85%E5%88%A0%E9%99%A4/" itemprop="url" rel="index"><span itemprop="name">待删除</span></a>
                 </span>
             </span>
 
@@ -219,23 +219,91 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a href="https://loj.ac/problem/2665" target="_blank" rel="noopener">link</a></p>
-<p>考虑树高就是在 BFS 序上分的层数</p>
-<p>先将排列映射一下 , 让 BFS 序为 <span class="math inline">\(1 \sim n\)</span> , 设此时 DFS 序为 <span class="math inline">\(a[i]\)</span> , <span class="math inline">\(pos[i]\)</span> 表示 <span class="math inline">\(i\)</span> 在 DFS 序中的位置</p>
+        <p>我根本就不会线性代数.</p>
 <a id="more"></a>
-<p>考虑这么一个数组 <span class="math inline">\(x[i]\)</span></p>
-<p>在 BFS 序上 , 若 <span class="math inline">\(i\)</span> 与 <span class="math inline">\(i + 1\)</span> 不在同一层则 <span class="math inline">\(x[i] = 1\)</span> 否则为 <span class="math inline">\(0\)</span></p>
-<p>那么答案就是 <span class="math inline">\(1 + \sum x[i]\)</span> 的期望 , 也就是 <span class="math inline">\(x[i]\)</span> 期望的和</p>
-<p>于是有 <span class="math inline">\(x[1] = 1\)</span></p>
-<p>同时 , 设 BFS 序上 <span class="math inline">\(l \sim r\)</span> 在同一层 , 则有</p>
-<p><span class="math inline">\(pos[l] &lt; pos[l + 1] &lt; pos[l + 2] &lt; \cdots &lt; pos[r]\)</span></p>
-<p>若 <span class="math inline">\(pos[i] &gt; pos[i + 1]\)</span> , <span class="math inline">\(x[i] = 1\)</span></p>
-<p>若 <span class="math inline">\(a[i] &lt; a[i+1]\)</span> , <span class="math inline">\(\left(\sum_{j=a[i]}^{a[i+1]-1} x[j]\right) \leq 1\)</span></p>
-<p>因为 <span class="math inline">\(a[i+1]\)</span> 只能是 <span class="math inline">\(a[i]\)</span> 或其祖先的孩子</p>
-<p>第一二种情况 <span class="math inline">\(x[i]\)</span> 固定 , 只用考虑第三种</p>
-<p>若有 <span class="math inline">\(a[i] &lt; a[i+1]\)</span> 且 <span class="math inline">\(\sum x[j]\)</span> 为 <span class="math inline">\(1\)</span> , 那么其他一定全 <span class="math inline">\(0\)</span> , 打上差分标记</p>
-<p>其他的 <span class="math inline">\(0,1\)</span> 都可以</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> _w;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> A[N], B[N], mp[N], pos[N], sum[N], x[N], n, mark[N];</span><br><span class="line"><span class="keyword">double</span> ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>, A + i);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>, B + i);</span><br><span class="line">        mp[B[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        A[i] = mp[A[i]], B[i] = mp[B[i]];</span><br><span class="line">        pos[A[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    x[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="keyword">if</span> (pos[i] &gt; pos[i + <span class="number">1</span>])</span><br><span class="line">            x[i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) sum[i] = sum[i - <span class="number">1</span>] + x[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="keyword">if</span> (A[i] &lt; A[i + <span class="number">1</span>] &amp;&amp; sum[A[i + <span class="number">1</span>] - <span class="number">1</span>] - sum[A[i] - <span class="number">1</span>])</span><br><span class="line">            mark[A[i]] += <span class="number">1</span>, mark[A[i + <span class="number">1</span>]] -= <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, cnt = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        cnt += mark[i];</span><br><span class="line">        <span class="keyword">if</span> (cnt)</span><br><span class="line">            ans += x[i];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            ans += <span class="number">0.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.3f"</span>, ans + <span class="number">1.0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并没有学过线性代数 , 这里的东西都是假的 , 记录只是为了更假地推式子. 以后学了再删.</p>
+<h4 id="矩阵的特征值和特征向量">矩阵的特征值和特征向量</h4>
+<p>对于一个矩阵 <span class="math inline">\(A\)</span> , 若 <span class="math inline">\(A\overrightarrow v = \lambda \overrightarrow v\)</span> , 则称 <span class="math inline">\(\lambda\)</span> 是 <span class="math inline">\(A\)</span> 的特征值 , <span class="math inline">\(\overrightarrow v\)</span> 是 <span class="math inline">\(A\)</span> 的特征向量. 注意到 <span class="math inline">\(A\)</span> 作用于 <span class="math inline">\(\overrightarrow v\)</span> 相当于将这个向量拉伸.</p>
+<h5 id="求特征值">求特征值</h5>
+<p>根据定义方程 <span class="math inline">\((A-\lambda I)\overrightarrow v=0\)</span> , 存在非 <span class="math inline">\(0\)</span> 向量解. 根据<a href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84" target="_blank" rel="noopener">齐次线性方程的内容</a> <span class="math inline">\(\det(A- \lambda I) = 0\)</span> , 则可以列出关于 <span class="math inline">\(\lambda\)</span> 的 <span class="math inline">\(n\)</span> 次方程. 这个方程有 <span class="math inline">\(n\)</span> 个根 , 于是一个 <span class="math inline">\(n\)</span> 阶矩阵有 <span class="math inline">\(n\)</span> 个特征值.</p>
+<h5 id="用处">用处</h5>
+<p>常系数齐次线性递推 , 以及数列的通项. 对于原初的向量 <span class="math inline">\(\overrightarrow v\)</span> , 想要知道 <span class="math inline">\(A^n \overrightarrow v\)</span> , 可以将 <span class="math inline">\(\overrightarrow v\)</span> 分解乘特征向量之和 ( 这里默认 <span class="math inline">\(n\)</span> 个特征向量线性无关 ) , 然后根据 <span class="math inline">\(A\)</span> 作用于特征向量的性质 , 可以快速求出这 <span class="math inline">\(n\)</span> 个特征向量.</p>
+<p>下面以斐波那契数列为例 , 演示一下</p>
+<p>对于斐波那契数列的转移矩阵 <span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1\\
+1 &amp;0
+\end{bmatrix}
+\]</span> 列出特征方程 <span class="math display">\[
+\begin{aligned}
+\det(A - \lambda I) &amp;= 0 \\
+ \lambda^2 -\lambda-1 &amp;= 0 \\
+ \lambda_1 = \frac{1 + \sqrt 5}{2} , &amp;\lambda_2 =\frac{1-\sqrt 5}{2}
+\end{aligned}
+\]</span></p>
+<p>两个特征值对应的特征向量为 <span class="math display">\[
+\begin{aligned}
+\xi_1= \begin{bmatrix} \frac{1+\sqrt 5}{2} \\1\end{bmatrix} , \xi_2 = \begin{bmatrix}\frac{1-\sqrt 5}{2} \\ 1\end{bmatrix}
+\end{aligned}
+\]</span> 于是可以得到 <span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}f_{n+1} \\ f_{n}\end{bmatrix}  &amp;= \begin{bmatrix}1 &amp; 1\\1 &amp; 0\end{bmatrix}^n\begin{bmatrix}1\\1\end{bmatrix}\\ &amp;=\begin{bmatrix}1 &amp; 1\\1 &amp; 0\end{bmatrix}^n\left(\frac{\sqrt 5 + 1}{2\sqrt 5}\xi_1+\frac{\sqrt 5 - 1}{2\sqrt 5}\xi_2\right) \\
+&amp;=\left(\frac{\sqrt 5 + 1}{2\sqrt 5}\lambda_1^n\xi_1+\frac{\sqrt 5 - 1}{2\sqrt 5}\lambda_2^n\xi_2\right) \\
+f_n&amp;=\left(\frac{\sqrt 5 + 1}{2\sqrt 5}\left(\frac{1+\sqrt 5}{2}\right)^n+\frac{\sqrt 5 - 1}{2\sqrt 5}\left(\frac{1-\sqrt 5}{2}\right)^n\right) \\
+&amp;=\frac{1}{\sqrt 5}\left(\left(\frac{1+\sqrt 5}{2}\right)^{n+1}-\left(\frac{1 - \sqrt 5}{2}\right)^{n+1}\right)
+\end{aligned}
+\]</span> 这就是斐波那契数列的通项公式.</p>
+<h5 id="有重根的情况">有重根的情况</h5>
+<p>对于一个 <span class="math inline">\(k\)</span> 重特征值 <span class="math inline">\(\lambda\)</span> , 在通项公式中与 <span class="math inline">\(\lambda\)</span> 相关的是一个关于 <span class="math inline">\(n\)</span> 的 <span class="math inline">\(k-1\)</span> 次多项式.</p>
+<h4 id="常系数非齐次线性递推">常系数非齐次线性递推</h4>
+<p>有递推式 <span class="math display">\[
+\begin{aligned}
+a_n = P(n) + \sum_{i=1}^kf_ia_{n-i}
+\end{aligned}
+\]</span> 其中 <span class="math inline">\(P(n)\)</span> 是一个系数固定的 <span class="math inline">\(m\)</span> 次多项式.</p>
+<p>考虑将其转化为齐次. 先写出转移矩阵 <span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}
+B_{1,1,k\times k} &amp; B_{1,2,k\times (m+1)} \\
+0 &amp; B_{2,2,(m+1)\times (m+1)}
+\end{bmatrix}
+\end{aligned}
+\]</span> 其中 <span class="math display">\[
+\begin{aligned}
+B_{1,1} &amp;= \begin{bmatrix}f_1 &amp; f_2 &amp; f_3 &amp; \cdots&amp; f_k \\ 
+1 &amp; 0 &amp; 0 &amp; \cdots &amp;0 \\
+0 &amp; 1 &amp; 0 &amp; \cdots &amp;0 \\
+\vdots &amp; \vdots &amp;\vdots &amp; \ddots &amp;\vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp;0
+\end{bmatrix}
+\\
+B_{1,2}&amp;= \begin{bmatrix} 
+p_m &amp; p_{m-1} &amp; p_{m-2}&amp; \cdots &amp; p_0 \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp;0  \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\
+\vdots&amp; \vdots&amp; \vdots&amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0
+\end{bmatrix}
+\\
+B_{2,2} &amp;= \begin{bmatrix}
+\binom{m}{m} &amp;\binom{m}{m-1} &amp; \binom{m}{m-2} &amp;\cdots &amp; \binom{m}{0} \\ 
+0 &amp;\binom{m-1}{m-1} &amp; \binom{m-1}{m-2} &amp; \cdots &amp; \binom{m-1}{0} \\
+0 &amp; 0 &amp; \binom{m-2}{m-2} &amp; \cdots &amp; \binom{m-2}{0} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; \binom{0}{0}
+\end{bmatrix}
+\end{aligned}
+\]</span> 其特征方程为 <span class="math inline">\(\det(B- \lambda I )\)</span> , 根据矩阵分块的相关理论 , 有 <span class="math inline">\(\det( B - \lambda I ) = \det( B_{1,1} - \lambda I) \det( B_{2,2} - \lambda I)\)</span> .</p>
+<p>对于 <span class="math inline">\(\det(B_{1,1} - \lambda I)\)</span> , 根据常系数齐次线性递推的内容 , 等于 <span class="math inline">\(\sum_{i=0}^{k-1} f_{k-i} \lambda^i- \lambda^k\)</span> , 而对于 <span class="math inline">\(\det(B_{2,2} - \lambda I)\)</span> , 可以得到 <span class="math inline">\((1 - \lambda)^{m+1}\)</span> , 将这两部分卷起来就是这个转移矩阵的特征方程了. 然后就可以常系数齐次线性递推了.</p>
+<p>可以发现这个特征方程是 <span class="math inline">\(k+m+1\)</span> 次的 , 于是还要求出 <span class="math inline">\(a_{k} , a_{k+1} , a_{k+2} , \cdots , a_{k+m+1}\)</span> .</p>
+<p>令 <span class="math inline">\(a_n = b_n + \sum_{i=1}^k f_i a_{n-i}\)</span> , 于是有 <span class="math display">\[
+\begin{aligned}
+A(x) &amp;= B(x) + F(x)A(x) \\
+A(x) &amp;= \frac{B(x)}{1-F(x)}
+\end{aligned}
+\]</span> 只要求出 <span class="math inline">\(B(x)\)</span> , 就可以求逆得出 <span class="math inline">\(A(x)\)</span> .</p>
+<p>对于 <span class="math inline">\(B(x)\)</span> 的前 <span class="math inline">\(k-1\)</span> 项 <span class="math inline">\(b_n = a_n - \sum_{i=1}^n f_i a_{n-i}\)</span> , 直接求</p>
+<p>对于后面几项 , <span class="math inline">\(b_n = P(n)\)</span>, 多项式多点求值即可.</p>
 
     </div>
 
@@ -251,12 +319,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/28/Solutions/%5BLG4705%5D%20%E7%8E%A9%E6%B8%B8%E6%88%8F/" rel="prev" title="[LG4705] 玩游戏">
-      <i class="fa fa-chevron-left"></i> [LG4705] 玩游戏
+    <a href="/2020/05/21/Solutions/SNOI2017-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="[SNOI2017] 简要题解">
+      <i class="fa fa-chevron-left"></i> [SNOI2017] 简要题解
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/03/28/Solutions/%5BSDOI2016%5D%20%E5%A2%99%E4%B8%8A%E7%9A%84%E6%96%91%E7%82%B9/" rel="next" title="[SDOI2016] 墙上的斑点">
-      [SDOI2016] 墙上的斑点 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/05/23/Solutions/SNOI2017-%E7%A4%BC%E7%89%A9-%E5%8A%A0%E5%BC%BA%E7%89%88/" rel="next" title="[SNOI2017] 礼物 加强版">
+      [SNOI2017] 礼物 加强版 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -317,6 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#矩阵的特征值和特征向量"><span class="nav-number">1.</span> <span class="nav-text">矩阵的特征值和特征向量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#求特征值"><span class="nav-number">1.1.</span> <span class="nav-text">求特征值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用处"><span class="nav-number">1.2.</span> <span class="nav-text">用处</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#有重根的情况"><span class="nav-number">1.3.</span> <span class="nav-text">有重根的情况</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常系数非齐次线性递推"><span class="nav-number">2.</span> <span class="nav-text">常系数非齐次线性递推</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
