@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="link">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[CGR8] 简要题解">
+<meta property="og:url" content="http://yoursite.com/2020/07/15/Solutions/CGR8-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="link">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/CGR8G1.png">
+<meta property="og:image" content="http://yoursite.com/images/CGR8G2.png">
+<meta property="og:image" content="http://yoursite.com/images/CGR8H1.png">
+<meta property="og:image" content="http://yoursite.com/images/CGR8H2.png">
+<meta property="og:image" content="http://yoursite.com/images/CGR8H3.png">
+<meta property="article:published_time" content="2020-07-15T08:21:12.000Z">
+<meta property="article:modified_time" content="2020-07-16T03:42:30.910Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/CGR8G1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/15/Solutions/CGR8-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>[CGR8] 简要题解 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/Solutions/CGR8-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="水平低啊">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [CGR8] 简要题解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-15 16:21:12" itemprop="dateCreated datePublished" datetime="2020-07-15T16:21:12+08:00">2020-07-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-16 11:42:30" itemprop="dateModified" datetime="2020-07-16T11:42:30+08:00">2020-07-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://codeforces.com/contest/1368" target="_blank" rel="noopener">link</a></p>
+<a id="more"></a>
+<p>图片来自<a href="https://codeforces.com/blog/entry/79027" target="_blank" rel="noopener">官方题解</a>.</p>
+<h5 id="and-or-and-square-sum"><a href="https://codeforces.com/contest/1368/problem/D" target="_blank" rel="noopener">AND, OR and square sum</a></h5>
+<p>首先注意到 <span class="math inline">\(x \vee y + x\wedge y = x + y\)</span> , 所以操作前后和不变. <span class="math inline">\((a-k)^2 + (b+k)^2 = a^2 + b^2 + 2k( b - a ) + 2k^2\)</span> , 于是操作不会变劣. 同时 <span class="math inline">\((b-a)\)</span> 越大越好. 可以发现 , 这就是一个数将某些二进制下为 <span class="math inline">\(1\)</span> 的位给另一个数. 于是可以对于每个二进制位开桶 , 贪心取最大值.</p>
+<h5 id="ski-accidents"><a href="https://codeforces.com/contest/1368/problem/E" target="_blank" rel="noopener">Ski Accidents</a></h5>
+<p>按拓扑序从小到大依次考虑.</p>
+<p>可以将点分为 <span class="math inline">\(3\)</span> 个集合 , <span class="math inline">\(V_0,V_1,V_2\)</span> .</p>
+<p>对于 <span class="math inline">\(V_0\)</span> , 其入边只来自 <span class="math inline">\(V_2\)</span> , 亦或是没有入边. 对于 <span class="math inline">\(V_1\)</span> 其入边只来自 <span class="math inline">\(V_0\)</span> , <span class="math inline">\(V_2\)</span> 的入边只来自 <span class="math inline">\(V_1\)</span> .</p>
+<p>由于每个点最多有 <span class="math inline">\(2\)</span> 条出边. 于是 <span class="math inline">\(|V_2| \leq \frac{1}{2}|V_1|\)</span> , 同理可得 <span class="math inline">\(|V_1| \leq \frac{1}{2} |V_0|\)</span> , 由于 <span class="math inline">\(|V_0| + |V_1| + |V_2| = n\)</span> , 于是 <span class="math inline">\(\frac{7}{4}|V_2| \leq n\)</span> , 所以删除所有 <span class="math inline">\(V_2\)</span> 中的点就好了.</p>
+<h5 id="lamps-on-a-circle"><a href="https://codeforces.com/contest/1368/problem/F" target="_blank" rel="noopener">Lamps on a Circle</a></h5>
+<p>考虑如果一次操作后 , 有 <span class="math inline">\(k\)</span> 盏连续的灯亮着 , 对方就可以消去这 <span class="math inline">\(k\)</span> 个连续的灯. 相当于这一轮没有增加亮灯的数目. 令当前亮着的灯个数为 <span class="math inline">\(x\)</span> . 下一轮就有 <span class="math inline">\(x+k\)</span> 个. 其中必须有 <span class="math inline">\(\lceil \frac{x+k}{k-1}\rceil\)</span> 个灯是灭的. 否则就会出现 <span class="math inline">\(k\)</span> 个连续的灯为亮着. 可以得到 <span class="math inline">\(x + k + \lceil \frac{x+k}{k-1}\rceil\leq n\)</span> . 化简一下. <span class="math display">\[
+\begin{aligned}
+x+k+ \frac{x+k}{k-1} &amp;\leq n \\
+k(x+k) &amp;\leq n(k-1) \\
+xk+k^2 &amp; \leq nk - n \\
+x+k+\frac{n}{k} &amp;\leq n
+\end{aligned}
+\]</span> 枚举 <span class="math inline">\(k\)</span> , 找出最大的 <span class="math inline">\(x\)</span> , 就是 <span class="math inline">\(R(n)\)</span> . 交互策略 , 就是先定下几个点距离为 <span class="math inline">\(k\)</span> . 可以直接选 <span class="math inline">\(\bmod k\)</span> 为 <span class="math inline">\(0\)</span> 的编号. 保证这些点不选. 然后每轮选择其他点 , 直到达到上界.</p>
+<h5 id="shifting-dominoes"><a href="https://codeforces.com/contest/1368/problem/G" target="_blank" rel="noopener">Shifting Dominoes</a></h5>
+<p>先二分图染色. 考虑对于一个多米诺骨牌 , 其白色部分最终是空的. 于是其整体要向黑色部分移动. 这与另一个多米诺骨牌重叠 , 又要求另一个多米诺骨牌向黑色方向移动. 可以以此画出一张有向图 , 每个点最多有 <span class="math inline">\(1\)</span> 的出度. 可以发现 , 黑白两色之间没有边. 最终合法的两个空位颜色一定不同.</p>
+<p><img src="/images/CGR8G1.png" /></p>
+<p>同时发现 , 这个图没有环. 如果有环</p>
+<p><img src="/images/CGR8G2.png" /></p>
+<p>根据 <span class="math inline">\(\rm Pick\)</span> 定理 , 其面积 <span class="math inline">\(S = I + \frac{B}{2} - 1\)</span> , <span class="math inline">\(I\)</span> 是内部格点数. <span class="math inline">\(B\)</span> 是轮廓格点数. 由于是多米诺骨牌 , 其每个方向上投影长度一定为奇数. 同时上下与左右投影长度相等. 也就是 <span class="math inline">\(2A+2B - 4\)</span> , 其中 <span class="math inline">\(A,B\)</span> 都是奇数. 除 <span class="math inline">\(2\)</span> 后是 <span class="math inline">\(A+B - 2\)</span> , 仍是偶数. 于是 <span class="math inline">\(\frac{B}{2}\)</span> 是偶数. 同时 <span class="math inline">\(S\)</span> 一定是偶数. <span class="math inline">\(I\)</span> 也要是偶数. 但这与式子矛盾. 故图中没有环.</p>
+<p>然后就是由有向链组成的森林. 对于两个格子 , 可以成为最终空下来的格子 , 要求从其出发 , 可以到达同一个多米诺骨牌. 在 <span class="math inline">\(\rm dfs\)</span> 的过程中每加入一个格子 , 找出另一边所在链 , 到根标记一下就好了. 可以线段树维护.</p>
+<h5 id="breadboard-capacity"><a href="https://codeforces.com/contest/1368/problem/H2" target="_blank" rel="noopener">Breadboard Capacity</a></h5>
+<p>首先有建模 , 每个无向边容量为 <span class="math inline">\(1\)</span> . 红点出发有 <span class="math inline">\(1\)</span> 的流量 , 蓝点接受 <span class="math inline">\(1\)</span> 的流量. 然后求最大流.</p>
+<p>转化成最小割 , 将格点上的点染色 , 使得连接不同颜色格点的边最少.</p>
+<p><img src="/images/CGR8H1.png" /></p>
+<p>对于成环的最小割 , 可以将环内的点颜色翻转. 就可以将环消去 , 割变小.</p>
+<p>对于一个连接两个相邻方向边界的路径 , 可以将路径移动到边界上. 也就是割去边界上的点与格点的连边.</p>
+<p><img src="/images/CGR8H2.png" /></p>
+<p>对于一个连接两个相对方向边界的路径 , 可以转化成一条直线.</p>
+<p><img src="/images/CGR8H3.png" /></p>
+<p>于是最后割中的边 , 只有边界上的点与格点的连边. 以及一个从上到下 / 从左到右的直线.</p>
+<p>考虑如何维护. 对于边界上格点的连边 , 就是改变格点颜色. 对于一条直线 , 就是翻转一边所有的颜色. 于是考虑对于上下 / 左右分别维护线段树. 代表每个方向的直线. 找出最优位置就好了.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/14/Solutions/CGR9-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="prev" title="[CGR9] 简要题解">
+      <i class="fa fa-chevron-left"></i> [CGR9] 简要题解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#and-or-and-square-sum"><span class="nav-number">1.</span> <span class="nav-text">AND, OR and square sum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ski-accidents"><span class="nav-number">2.</span> <span class="nav-text">Ski Accidents</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#lamps-on-a-circle"><span class="nav-number">3.</span> <span class="nav-text">Lamps on a Circle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shifting-dominoes"><span class="nav-number">4.</span> <span class="nav-text">Shifting Dominoes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#breadboard-capacity"><span class="nav-number">5.</span> <span class="nav-text">Breadboard Capacity</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description">水平低啊</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
