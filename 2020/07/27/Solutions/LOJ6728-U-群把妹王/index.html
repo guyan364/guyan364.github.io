@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="link">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[LOJ6728] U 群把妹王">
+<meta property="og:url" content="http://yoursite.com/2020/07/27/Solutions/LOJ6728-U-%E7%BE%A4%E6%8A%8A%E5%A6%B9%E7%8E%8B/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="link">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-27T08:45:40.000Z">
+<meta property="article:modified_time" content="2020-07-28T00:26:50.952Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/27/Solutions/LOJ6728-U-%E7%BE%A4%E6%8A%8A%E5%A6%B9%E7%8E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>[LOJ6728] U 群把妹王 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/27/Solutions/LOJ6728-U-%E7%BE%A4%E6%8A%8A%E5%A6%B9%E7%8E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="水平低啊">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [LOJ6728] U 群把妹王
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-27 16:45:40" itemprop="dateCreated datePublished" datetime="2020-07-27T16:45:40+08:00">2020-07-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-28 08:26:50" itemprop="dateModified" datetime="2020-07-28T08:26:50+08:00">2020-07-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://loj.ac/problem/6728" target="_blank" rel="noopener">link</a></p>
+<a id="more"></a>
+<p>首先考虑 <span class="math inline">\(m=1\)</span> 的情况. 对于每种颜色 , 其出现次数是 <span class="math inline">\(\{0\} \cup S\)</span> , 那么对于每种颜色有 <span class="math inline">\(\rm EGF\)</span> , <span class="math inline">\(1+\sum_{i\in S}\frac{x^i}{i!}\)</span> . 最后答案就是 <span class="math inline">\(\left(1+\sum_{i\in S}\frac{x^i}{i!}\right)^k\)</span> .</p>
+<p>对于二维的情况 , 考虑枚举集合划分容斥. 枚举每行所在集合 , 保证集合中行的染色方案相同 , 不同集合不一定相同. 那么对于划分出 <span class="math inline">\(p\)</span> 个集合的方案数就是 <span class="math inline">\(k^p\)</span>. 考虑对于一个真实的划分方案 , 这样可能会将其中多个集合取并后进行计算. 对于枚举的集合划分 , 其贡献为各集合的贡献乘积. 由于有 <span class="math inline">\(S\)</span> 的限制 , 每个合法的集合划分中的集合大小应该在 <span class="math inline">\(S\)</span> 中. 由于规定了一个集合划分的贡献是其集合的贡献积. 令一个大小为 <span class="math inline">\(t\)</span> 的集合贡献为 <span class="math inline">\(a_t\)</span>. 由于要满足 <span class="math inline">\(S\)</span> 的限制可以得到 <span class="math display">\[
+\begin{aligned}
+\exp( \sum_{t}a_t\frac{x^t}{t!} ) &amp;= 1 + \sum_{i\in S}\frac{x^i}{i!} 
+\end{aligned}
+\]</span> 可以发现 , 当 <span class="math inline">\(S = \{1\}\)</span> 时 <span class="math display">\[
+\begin{aligned}
+\exp(\sum_{i}a_i\frac{x^i}{i!}) &amp;= 1+x \\
+\sum_{i}a_i\frac{x^i}{i!} &amp;= \ln(1+x) \\ 
+&amp;=\sum_{i&gt;0}(-1)^{i-1}\frac{x^i}{i} \\
+a_n &amp;=(-1)(n-1)!
+\end{aligned}
+\]</span> 其实就是  中推导的斯特林反演系数.</p>
+<p>令 <span class="math inline">\(f_{n,i}\)</span> 表示将所有 <span class="math inline">\(n\)</span> 行划分到 <span class="math inline">\(i\)</span> 个集合的所有方案的 <span class="math inline">\(a_t\)</span> 乘积之和. <span class="math inline">\(g_{m,j}\)</span> 为 <span class="math inline">\(m\)</span> 列的 <span class="math inline">\(i\)</span> 划分贡献和. 于是答案就是 <span class="math display">\[
+\begin{aligned}
+\sum_{i=1}^n\sum_{j=1}^mf_{n,i}g_{m,i}k^{ij}
+\end{aligned}
+\]</span> 对于 <span class="math inline">\(k^{ij}\)</span> 直接用 <span class="math inline">\(\binom{i+j}{2} - \binom{i}{2} - \binom{j}{2} = ij\)</span> 处理就好了. 问题在于求出 <span class="math inline">\(f,g\)</span>.</p>
+<p>令 <span class="math inline">\(F(x)\)</span> 为 <span class="math inline">\(\sum_{i\in S}\frac{x^i}{i!}\)</span> 求 <span class="math inline">\(f_{n,i}\)</span> , 实际上就是求出多项式. <span class="math display">\[
+\begin{aligned}
+{[x^n]}\exp(u\ln(1+F(x)))
+\end{aligned}
+\]</span> 这是拉格朗日反演的形式 <span class="math display">\[
+\begin{aligned}
+H(u,x)&amp;= \exp(ux) \\
+G(x) &amp;= \ln(1+F(x)) \\
+{[x^n]\exp(u\ln(1+F(x))} &amp;= \frac{1}{n}[z^{n-1}]\frac{\mathrm{d}H(u,x)}{\mathrm{d}x}\left(\frac{z}{G(z)^{-1}}\right)^n
+\end{aligned}
+\]</span> <span class="math inline">\(H(u,x)\)</span> 对 <span class="math inline">\(x\)</span> 求偏导就是 <span class="math inline">\(u\exp(ux)\)</span> . 现在的问题是求出 <span class="math inline">\(G(x)\)</span> 的复合逆. <span class="math display">\[
+\begin{aligned}
+\exp(G(x)) &amp;= 1+\sum_{i \in S}\frac{x^i}{i!} \\
+e^x&amp;= 1+\sum_{i \in S}\frac{(G(x)^{-1})^i}{i!}
+\end{aligned}
+\]</span> 于是可以牛顿迭代 , 也可以分治 <span class="math inline">\(\rm FFT\)</span> .</p>
+<p><a href="https://loj.ac/submission/879316" target="_blank" rel="noopener">code</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/21/Tutorial/Lyndon%20Word/" rel="prev" title="Lyndon Word">
+      <i class="fa fa-chevron-left"></i> Lyndon Word
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description">水平低啊</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">128</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
