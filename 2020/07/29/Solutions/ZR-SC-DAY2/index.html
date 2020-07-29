@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="link">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[CGR9] 简要题解">
-<meta property="og:url" content="http://yoursite.com/2020/07/14/Solutions/CGR9-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:title" content="[ZR SC] DAY2">
+<meta property="og:url" content="http://yoursite.com/2020/07/29/Solutions/ZR-SC-DAY2/index.html">
 <meta property="og:site_name" content="Guyan&#39;s blog">
-<meta property="og:description" content="link">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-07-13T18:11:55.000Z">
-<meta property="article:modified_time" content="2020-07-15T08:19:32.729Z">
+<meta property="article:published_time" content="2020-07-29T10:00:54.000Z">
+<meta property="article:modified_time" content="2020-07-29T14:29:54.691Z">
 <meta property="article:author" content="Guyan">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/07/14/Solutions/CGR9-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+<link rel="canonical" href="http://yoursite.com/2020/07/29/Solutions/ZR-SC-DAY2/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>[CGR9] 简要题解 | Guyan's blog</title>
+  <title>[ZR SC] DAY2 | Guyan's blog</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/14/Solutions/CGR9-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/Solutions/ZR-SC-DAY2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [CGR9] 简要题解
+          [ZR SC] DAY2
         </h1>
 
         <div class="post-meta">
@@ -188,16 +188,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-07-14 02:11:55" itemprop="dateCreated datePublished" datetime="2020-07-14T02:11:55+08:00">2020-07-14</time>
+              <time title="创建时间：2020-07-29 18:00:54 / 修改时间：22:29:54" itemprop="dateCreated datePublished" datetime="2020-07-29T18:00:54+08:00">2020-07-29</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-15 16:19:32" itemprop="dateModified" datetime="2020-07-15T16:19:32+08:00">2020-07-15</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -219,27 +213,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><a href="https://codeforces.com/contest/1375" target="_blank" rel="noopener">link</a></p>
-<a id="more"></a>
-<h5 id="element-extermination"><a href="https://codeforces.com/contest/1375/problem/C" target="_blank" rel="noopener">Element Extermination</a></h5>
-<p>令 <span class="math inline">\(a_r\)</span> 是 <span class="math inline">\(1\)</span> 后面第一个大于 <span class="math inline">\(a_1\)</span> 的数. 由于 <span class="math inline">\(a_p(p \in [2,r-1]) &lt; a_r\)</span> , 则将 <span class="math inline">\(a_r\)</span> 操作至与 <span class="math inline">\(a_1\)</span> 相邻 , 然后删除 <span class="math inline">\(a_r\)</span>. 可以发现 , 最终 <span class="math inline">\(a_1\)</span> 与 <span class="math inline">\(a_n\)</span> 相邻. 于是最后的条件就是 <span class="math inline">\(a_1 &lt; a_n\)</span> .</p>
-<p>如果 <span class="math inline">\(a_1 &gt; a_n\)</span> . 最后至少剩下两个数不满足条件. 因为对于序列前半只能大于等于 <span class="math inline">\(a_1\)</span> , 后半只能小于等于 <span class="math inline">\(a_n\)</span> .</p>
-<h5 id="replace-by-mex"><a href="https://codeforces.com/contest/1375/problem/D" target="_blank" rel="noopener">Replace by MEX</a></h5>
-<p>如果当前 <span class="math inline">\(\rm mex\)</span> 是 <span class="math inline">\(n\)</span> , 则将其覆盖任意一个 <span class="math inline">\(a_i \neq i-1\)</span> 的位置. 如果为 <span class="math inline">\(k ( k &lt; n )\)</span> , 则将其放在 <span class="math inline">\(k+1\)</span> . 最后序列是 <span class="math inline">\([0,n-1]\)</span> . 每两次操作使一个位置达到目标状态 , 操作次数不超过 <span class="math inline">\(2n\)</span> .</p>
-<h5 id="inversion-swapsort"><a href="https://codeforces.com/contest/1375/problem/E" target="_blank" rel="noopener">Inversion SwapSort</a></h5>
-<p>对于相等的 <span class="math inline">\(a_i = a_j\)</span> , 令下标较大的比较大.</p>
-<p>考虑从后向前按位处理. 对于当前位 <span class="math inline">\(k\)</span> , 要将所有 <span class="math inline">\((p,k)\)</span> 二元组进行交换. 设有 <span class="math inline">\(m\)</span> 个 , 将这些二元组按照 <span class="math inline">\(p\)</span> 从小大到排序 , 令排序后第 <span class="math inline">\(i\)</span> 个二元组为 <span class="math inline">\((p_i,k)\)</span> . 按照排序后的顺序进行交换. 可以发现最后 <span class="math inline">\(p_i\)</span> 的相对位置不变 , <span class="math inline">\(k\)</span> 到了最前面 , 于是恰好减少了 <span class="math inline">\(m\)</span> 个逆序对. 接着处理下一位即可.</p>
-<h5 id="integer-game"><a href="https://codeforces.com/contest/1375/problem/F" target="_blank" rel="noopener">Integer Game</a></h5>
-<p>考虑这样进行构造 , 对于三个堆 <span class="math inline">\(a,b,c\)</span> , 先令 <span class="math inline">\(y = \max( a , b , c )\)</span> , 这样保证操作之后这一堆一定是最大的. 令 <span class="math inline">\(a&lt;b&lt;c\)</span> , 此时 <span class="math inline">\(c\)</span> 不能操作. 令 <span class="math inline">\(y = 2c - a - b\)</span> , 如果加到 <span class="math inline">\(a\)</span> 上 , 得到 <span class="math inline">\(2c - b , b , c\)</span> , 此时令 <span class="math inline">\(y = c - b\)</span> , 发现不管加在 <span class="math inline">\(b\)</span> 还是加在 <span class="math inline">\(c\)</span> 上 , 都会使得两个堆相同. 第一步加在 <span class="math inline">\(b\)</span> 上同理. 于是 <span class="math inline">\(3\)</span> 步就可以赢了.</p>
-<h5 id="tree-modification"><a href="https://codeforces.com/contest/1375/problem/G" target="_blank" rel="noopener">Tree Modification</a></h5>
-<p>考虑对树二分图染色 , 手玩一次操作 , 发现会改变一个点的染色状态. 对于目标的菊花图 , 相当于只有一个白色点或只有一个黑色点 , 于是两种颜色取较少的就好了.</p>
-<h5 id="set-merging"><a href="https://codeforces.com/contest/1375/problem/H" target="_blank" rel="noopener">Set Merging</a></h5>
-<p>注意<del>不</del>到 <span class="math inline">\(2n\sqrt q \approx 2.2\cdot 10^6\)</span> , 考虑分块.</p>
-<p>将值域分为 <span class="math inline">\(\frac{n}{S}\)</span> 块 , 每块大小为 <span class="math inline">\(S\)</span> . 对保证每块内部的数在原序列中的先后顺序不变. 例如 <span class="math inline">\(2314\)</span> , 的 <span class="math inline">\([1,2]\)</span> 块 , 就是 <span class="math inline">\(21\)</span> , 而 <span class="math inline">\([3,4]\)</span> 块是 <span class="math inline">\(34\)</span> . 这样对于每个询问 <span class="math inline">\([l,r]\)</span> 都可以分为 <span class="math inline">\(\frac{n}{S}\)</span> 个子序列. 使得在不同的块中 , 且连续. 这部分操作数是 <span class="math inline">\(q\frac{n}{S}\)</span> . 接下来的问题是对于每个块 , 求出所有 <span class="math inline">\(\frac{S(S+1)}{2}\)</span> 个连续子序列. 总共有 <span class="math inline">\(\frac{n(S+1)}{2}\)</span> 个连续子序列. 取 <span class="math inline">\(S = \sqrt q\)</span> , 得到操作数为 <span class="math inline">\(O(n\sqrt q)\)</span> .满足条件.</p>
-<p>求出每个连续子序列 , 可以分治. 对于一个为 <span class="math inline">\(14532\)</span> 的块. 可以将其分为 <span class="math inline">\(132\)</span> 和 <span class="math inline">\(45\)</span> , 由于 <span class="math inline">\(132\)</span> 与 <span class="math inline">\(45\)</span> 最大最小值满足条件 , 其所有子序列都可以合并.</p>
-<h5 id="cubic-lattice"><a href="https://codeforces.com/contest/1375/problem/I" target="_blank" rel="noopener">Cubic Lattice</a></h5>
-<p>没有数理基础的眼泪 , 流了下来.</p>
-
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="6ed6836d5d45ade9a8762d492f54ec222ce0c1b729d7fd646b778eb43b5b1fad">d6387eb38793ae9dfa859eeda520f40fb66789c4a3d2485ba689b129aa92a6eb2a627842d3ddcb59cf906ed9c242a74ea6dde0106b7eccfad8bcb24f163af2bad2005ca9fb5247a8d05194826be3f235f4bbb38706531ab1d9e5225d32c7668b2a75a3019a0ef5d3ed2a6025d88837c69a1db0cfaf34ace3ff3e663c60c248aea0cd735b907d1edc43d9362c187b5ff96335a5ddae36df615e9521a25dcfbfc09d38fc32b6c0f8c632c5c182d70f3a84e832e06d72c9c0e885714015ce241709b8b373cf877e6c9223dac8a5e4fbef12043da8f6f1128f1e6212d99395d341648cb9569538158ac7de075f949a147a3c71db421856aa788ba03e7b14e569b91470e928b505e3be01f179c24f51e9a237f4afb9b055b4d9b7f9e55345f3b1db20184382b40f33d67e89b84584e0198958e41f776c23d01c9b046d2995d329d896e35559d52859902291a3b1efadee5a6cf903eef01dfecb9646e75525bd489e522baee79862b3ff3e84bdf3658712772fbc6557f203984805d7a12edc11e07051b1897ca88b33e90aa4ba893e98b529aee765aa08067e33784d8fec1b6761ebd494c376f3c084e455cd92ca162b0b72c7af60fa0ae9ef7b841765f177ed7fdab6739fbfabb0ea9a99ab548d90d196816ecaa7bee0e3556d76e4050505f0993f3d241435d3a73322a8c1a51a11d72a00053f1a4d5be98f624b4398da6d4cf372d65cfb5ebc7fc404dafcdfbb7bbe87c067ba689086d1a08c05910e9a799f7e3cd063a617954273f291dfd0659688de9c642d2c6406d03d176c2c78a74d835945ab0e0d3fa5d124c91ecd861f10c4fc2a8ba69017ff443a800068bda4c1e2abe2561f859cd3fdfd95aed2547c65df1f9352498489739e2201a4509def000f10d022c2c5cccfb640b0eb417919fa86dceb967255fedc084e9fbbf6119eaaca40bd9d858c37bf18dbbb3b446b266d3a37bf8fe9facff058901ad32039ce00ef63ee0719c3f40d5e76442e3baa0b1b71db180279733460a8e9d1c55af0e43595234c98e89351582a4fe5dbb0bb163bcfa19635c04dbce31ecb1e79c8a873399efec6006c40b04d5c58bbd4e7b49c4c69aff7533ab622e4b3f3df774547536225ce59d419be244727ee316fd1af338f34d9de4a7ea7803653dadb7efed286088120a89efe3affca5f1cf1b484fdb0c5440aadcdb9d725fca89625a174e652c78c7d939c7913053f9fe6a2550ab55813d82300785b25890905c0eed47e85f3830c9f27248c0904eb19a39eb2540560a04c712539df1d239b87015976324c8cfc16158e857fde2c516dbee3ff8c4bb1156df3e28243d0491730784eceb34b4d12d1ae055c06b0cadedf0961176043cecd70be7aa04051ec55369aeb60c6de8320a49281d394b5e0e957e1c45e5ab3147727070c4a50c5babd5994da61b1138e518d09de30a7a3779285cb5f9bfccd02adb2a83ac9f21ab154e4006a9194126e8efcb185bbe4db7fa6a6d0243f3d897444d4f08d76d62d7736cf5a58af1ccf04f766547ea64a2d81c6f9883886165b236bffefc5e80d3bfb984bf4450a3595d3d4156ab0e4b4e734643cfe86f7c20526069473a215146e288722c70488f72cfece59a19c19185c01a9fd501d80dcfeb2e9856da3b15061a6ef74c0f9e931a8e117967ff76b67a820a3729aa5353932159f8b3066a954525433c464040a53aab97d6637a5665feaef5030cce733a8df815cdf714656c62b4d638de4f2704a5cb9db22594619d10c331921b59aa9fd547d7df6ab722210ade39dcbf0c030e3e718a3ca568d647a18991719af1d11ccc7ab557bee99476e9ea17d3b7603f09d54c4bc4148aa0a03fd39d8bccb869f1968eefa1f275594fb569f0e4174e9988e3a81521f0a3b8c8031a2f088d44927e18d7b5bb2c720867bc10c66aebdf5c48453a0006e69982c7639e28fd544373b69cfaf34c9298890a3c36a2fdb7fd26962ea2e5240f1641d60daf4cdca97a07723898d855c53d79ee7bcbcf4b9e1cc39bcba21caeeee3aa81770980498fc515572403bc314261a6f6160ea0c9a297a85f791c69237792fe729367995f3da90bb592297640eb7781f820edd9737dabf42c7dbd5fbec45e5cd961a6cc91f8f1a3c886b0e152bb3b0552468125bfb85b348b5db6457facec01e54a44ef5a29f27c3b8b350ef3188c31f936d3dd33faf9cdbe96ee667c0af6173b253c1a642992d65099b5d4befda7d561631440a322bc041c7f9bb892e8da1ac9efb8d1910d5dd1812500a45d7cbe267ad74916e7ac9db38cfa2b0fa6822e20459b05441dd338b6ad50f367082b2758dc5b14f686794217d6250041c589f388834d0f506ab1362532966ecf2cc5629ded37ef2e1bec09cdce6f27786e4dd9f1020fae83dc4bfc13642f2845dbb49fbfc1041593f2d34dd22bff18ed03806392dbe3e48c69b283c93d73cafbf3df493d610cc552b1c472b67eec77ed9844d84da53f3f9f2da7c58678bc9142499fc6c833913687e404a406b98b2016fdfcc7af3429ca02a152eec84d89f7382c138f600ea49be155829e620c63496d3e6ff2877630e335664545310a5c1c5f3d3ddf3a2e6f0ecbf8e2763fa86bc3c25a49af3ba84fdd51a6323704718fcaefdf374fc0c149e7d3f7baa43c359492d990314077640f236ce7444f3c06dc50e5adef29e124d791b71d526a9f31e871a84aba18ea6fdb4eb54119329ce80f02527fbc2dfe3978ebcdc3b76b26b3e607aa109131083ebb489cb1693b1b2ddc5c10f924a685f2216441377a1e5f4af3ac087066ce75f597f798af52a54ae7b393c3b4937bc5fdc24acbe9e9cff252fbbfc6a6031b49622b2e060a7455e04f328ae16a4a54eab5dc58ad27f609a5f6a15b32b070237bfae4bb19ef70fea8ee0914fc6c8ff749fd4d27dacb2a009aec7d6f6c8e33df9b040ef40bf8c123ff6bdc37c264aec6dae6234d92e1eeb338ac23c941b6aecf4aa036731d2ac70f8e604bb713da502a69fc3ee7fb013888f2a3360dbb7e88f37fb626564943640f513f8824f7b52a38047d14854755724c813de61cb5e9bb56ec758ef6eebc6ba37999688fe484b9494ab2082fbc9906495e71d25f651180466b215f90690c04988026bdbbb1bdcaf6ff09a388d6baf335b6dd8fb4ecc50dec655c936f7ef00d6c19136e396d4660ef065b61fbb2d7045505addce0757b09b6c949ffea78febff1347b1787ba0ab5c8d6019d9e0920aa5139a007c5b329051824b42313bc0361b9f202c992253f024f56d0bfed0071858f842ca6b87f79f783eeff4bfc78917032e8aee173e85c251f7528f67d755ce6d6ddeb816b0798677c90aedd90dba93102d039677ebe87eea1f1e75a0e5cd1f5bfb1cd803799505019391c3b413e333d66f51431ebe59596230bea68a58f91fff99e05f4f37af7f4ec3f6696c288615fda95777e7edf8e15740a12983389388fb364531961bf880f1e61a3d3a64557db93bdea3198050f85a708ecb06a20cee1bbf4ac96b4f3afd21acf5db09b2cd357b40612ca3759f0f7600abf94a70529de3308d09f19881a2b85a2c75ed2aab4c02746132e10ea52baccc78f11b1106a0497a168c5caf638a21887bf88ceef9b21bdab92fdc57c8736ffaa2cb49f58a15ae4429e269da8a88413c9461ef350083bfed031cf1feaf3cb521699803abf76525166aaa1f18d20aba66f5753e4ace65b4ac21cdaf8b51627b0439801d06df6be10dd5caba877efc5d590261f65678ae78eabe3414a1daa10256e11471923e566ee3bea429365bd1f4b9a796427b7eeafd8aa721c967696b0da0d82a8941881cc54e58f980bcada6bba6e9611d054ab3dc6c473fb21fa2d4eca11f8dc70112ec5ae8208ef3bbc450e6bc8e75b7edae45d45028e3987becd4c81ce2d6df35a93245426e7da79103cf353412c30ee54e7e92d694cdee62a8d6735af955bded8fbdbf79630159e714193dd3b73e972fd5f524fba35624cba1ba4e4706c0332cf4b6cadbf74cd0a480b5cafa82ac2885238b105f199fcdc1742a336619caf6e8875424b409e06eb1353b6997307cefd74192f6da605163f1d8a4b71908538cfc821ee37255518890fcd53cd0e26cafecb41e4414c1b5825ecb3d4989b160c6fb748fbb47b7479cec0f4429b35fc5abe33ac493eada6d5ee89308480e1e470131849b2a322812bdab5936cffa05c6249116a90eb0e568442e8d7878772459c4cd6ea267b1fe658729a66d22d27f2585f5a94ff9be02aedef58e2bb4ebb6667c56382a2aa140dcd4ea919989f0b0c86c23010c13b25a63d6001333b601422004f9fd01b4940ec6347d563fd162a125626bc6b2d2b5af189154dcb61c2db817f8f02a6788869bc0e2bdcdd80def8ac68e449c44cd0ba66029aa56df4c9a4377fe588ea61e57018fe6a18c20c2453ff363743cb3a889016aaf093de6bdf7cf78652af68a40e62bdff409c99c8bc1c5f80415cb0beae7af6451f423629455cede38fcf886add3795d1aed518b1eab1013837043891c5f65b8bcef91da5b823e1e324539c7079ab656618a0cace3ef7a026c898fc8623ed9d6941fcbcfef27fe2e5f9afd9718e78fbba6a00337384981177f5a8e1743e2f0e270208918cb40553bcc440ce3f20764fa2c6b26401ebfeb4d4da92f5c9a174fae509f42e86f8dfb0c5501cd679958fb3159ea0a13adc0416cf3128f9ea6135072fb7ed2647b64e8f93790b1488436dfe9f3490946a2a31d06463d5cbd3df106b2d31a7e72154a4481faaa43bb24641e875b120f468a97378a3bc2ad75cb2d591d27b9f59213c6937a437db7bcb061cb7bf80d3612209decdfeb1784633f763795d2ef84c9e938b1b7c97bce000f6be12b6a1e17324f5b91dc4957b4b38cdfa54c507b5395451350644c6f6e28fcde0df234eabf4678d1a298ad662f095292b46c73b8275055a243200a5aae7b757a84d2c13ef4822f9ae78a14576a020b97f10c22409e195fafef2cf9af7d1133bbbdea9917c990841933aebac93e6185b2c9247d968cfdb3298d5aa4b8b6f6cabde0f5208a1ce9c0ee0aa0875a39a22e42ea2a7ed1b12de4e25ed1ed0de0301321617f38f71dfb69b19d8c5803c2a826788439fe9aec2f7a8c1b9473c25f0c7f27ce892c4721b495992efba906824bdbb6424d394dfc5e6e872df86ba2c924a58323ce2f8759bff0247c054b8528b5c1e349562936c12de50a001b6b8491913af10fb3f6c10137defe53b8f4d01c92c7c7db20da682686e32fcdae8cf762951c047bf8596246c306e9ce726d9077526826577b5c9dd917c5fd53c9a41b9961d827d52072711700fcf568a52e116a04da682fd164ee693bb2f26c4616950654caa1f4727c72fd507ae4f243dc507c88a3b1507179c106f0bdd989633a125d761c0d414d432bd45fc17fc0e9171ab7c900ce1b25fac3e3cc9885644420a33fbdb62bcda7b4337c6bf21870528b8fadfdad4fca8f1d9b0275d5a5ffc7167047340dab6352870140d5ee7596a5783c6387ae15c5fad78aa9eb142685d5956ee246be4b119f876070be3d3c350d3dbae1e94bba915ca2a404847336a54ed78a0519d20159932e90d1b931d9fe858aa3bf410ec7a23eae53fa330ece2bd3b13a2a9495ca0d2c1ecab4caf43a3d05b90a5a788fd86f4cc732007df3d17eaa5c6e0b6b4fe2b2fb7e866c4f452fab72faf4efdffa7aeb529b87d9b0de82a7be3134bed66f8a45029a65875a174ea082f0461d993c2856a506ff283a77d978fcc0e3851202e5f6e57a285cc7f10c9078d4fe93371cb7e35f3e47ae6ea3fd276e5f7335a5395c09acb09402ddf7a902cb89af8d9f8ffe5099fcda054cc13dcdcd51520297ae91c417b2de89a5536e1c25fdb492282bf9e69a68668b6de1c1aa1fcac78002996d19b2bae974b94c2ca3a4c8fd31567aa9785e63860cfbebea68f11614cb6aaa038851430b98ad20db284a3577e117de1787962e65366b8b2781bb75a23e1f58e7223aee75710160c7cfbca4b1dd175a232fe5c94265684305d340329ecb94c9a3e73be24119611502dff4f4c543aa248cc5b72819be86b7a46faacbc306d3d7e9706706dc1472c9f72bedf2cd86277f1e9709fd49ac518c733af344a83b68089562c839b7eddccc26c3899d470686ccac64f970c98e9c41062387785189cfce1cfad80a6ebf17639e51f2716e1eb116de9e9a8e4330c68e23d992d83f85cb27361a17bc4a5facd7aee64a5b77f6733318515e10669b334c9f26ccb6e2380553d034c7e3ecdb70b0715ace0ee8a0b972410ae508d4b71a64388f358e9fe4f1f6eb0fa7aedc5e640611e6</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -254,13 +236,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/08/Solutions/%E5%90%8E%E7%BC%80%E6%A0%91%E8%8A%82%E7%82%B9%E6%95%B0/" rel="prev" title="后缀树节点数">
-      <i class="fa fa-chevron-left"></i> 后缀树节点数
+    <a href="/2020/07/28/Solutions/ZR-SC-DAY1/" rel="prev" title="[ZR SC] DAY1">
+      <i class="fa fa-chevron-left"></i> [ZR SC] DAY1
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/07/14/Solutions/CodePlus-7-%E7%AE%80%E8%A6%81%E9%A2%98%E8%A7%A3/" rel="next" title="[CodePlus #7] 简要题解">
-      [CodePlus #7] 简要题解 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -320,7 +299,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#element-extermination"><span class="nav-number">1.</span> <span class="nav-text">Element Extermination</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#replace-by-mex"><span class="nav-number">2.</span> <span class="nav-text">Replace by MEX</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#inversion-swapsort"><span class="nav-number">3.</span> <span class="nav-text">Inversion SwapSort</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#integer-game"><span class="nav-number">4.</span> <span class="nav-text">Integer Game</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tree-modification"><span class="nav-number">5.</span> <span class="nav-text">Tree Modification</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#set-merging"><span class="nav-number">6.</span> <span class="nav-text">Set Merging</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cubic-lattice"><span class="nav-number">7.</span> <span class="nav-text">Cubic Lattice</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
