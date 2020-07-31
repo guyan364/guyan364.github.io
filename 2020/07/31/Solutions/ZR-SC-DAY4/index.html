@@ -20,21 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="欧拉函数">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[BZOJ3884] 上帝与集合的正确用法">
-<meta property="og:url" content="http://yoursite.com/2020/03/28/Solutions/[BZOJ]%20P3884/index.html">
+<meta property="og:title" content="[ZR SC] DAY4">
+<meta property="og:url" content="http://yoursite.com/2020/07/31/Solutions/ZR-SC-DAY4/index.html">
 <meta property="og:site_name" content="Guyan&#39;s blog">
-<meta property="og:description" content="欧拉函数">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.lydsy.com/JudgeOnline/upload/201502/1.png">
-<meta property="article:published_time" content="2020-03-28T01:06:00.000Z">
-<meta property="article:modified_time" content="2020-03-30T15:11:13.534Z">
+<meta property="article:published_time" content="2020-07-31T09:29:01.000Z">
+<meta property="article:modified_time" content="2020-07-31T09:53:30.782Z">
 <meta property="article:author" content="Guyan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.lydsy.com/JudgeOnline/upload/201502/1.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/03/28/Solutions/[BZOJ]%20P3884/">
+<link rel="canonical" href="http://yoursite.com/2020/07/31/Solutions/ZR-SC-DAY4/">
 
 
 <script id="page-configurations">
@@ -47,7 +45,7 @@
   };
 </script>
 
-  <title>[BZOJ3884] 上帝与集合的正确用法 | Guyan's blog</title>
+  <title>[ZR SC] DAY4 | Guyan's blog</title>
   
 
 
@@ -168,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/Solutions/[BZOJ]%20P3884/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/31/Solutions/ZR-SC-DAY4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -181,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          [BZOJ3884] 上帝与集合的正确用法
+          [ZR SC] DAY4
         </h1>
 
         <div class="post-meta">
@@ -190,16 +188,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-03-28 09:06:00" itemprop="dateCreated datePublished" datetime="2020-03-28T09:06:00+08:00">2020-03-28</time>
+              <time title="创建时间：2020-07-31 17:29:01 / 修改时间：17:53:30" itemprop="dateCreated datePublished" datetime="2020-07-31T17:29:01+08:00">2020-07-31</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-30 23:11:13" itemprop="dateModified" datetime="2020-03-30T23:11:13+08:00">2020-03-30</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -221,23 +213,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>欧拉函数</p>
-<a id="more"></a>
-<h4 id="description">Description</h4>
-<p>给出 <span class="math inline">\(p\)</span></p>
-<p>求这个:</p>
-<figure>
-<img src="https://www.lydsy.com/JudgeOnline/upload/201502/1.png" alt="" /><figcaption>avatar</figcaption>
-</figure>
-<p>多组询问</p>
-<h4 id="solution">Solution</h4>
-<p>设 <span class="math inline">\(f(p)\)</span> 为 <span class="math inline">\(2^{2^{2^{\cdots}}} mod \, p\)</span> 的值</p>
-<p>根据欧拉定理 <span class="math display">\[a^k mod \, p = a^{k \, mod \, \phi(p) + \phi(p)}\]</span></p>
-<p>则有 <span class="math display">\[f(p)= 2^{f(\phi(p))+\phi(p)}\]</span></p>
-<p>递归处理 <span class="math inline">\(f(p)\)</span> 即可</p>
-<h4 id="code">Code</h4>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e7</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> _w;</span><br><span class="line"></span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; mp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getphi</span><span class="params">( <span class="keyword">int</span> x )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> res;</span><br><span class="line">  res = x;</span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">2</span> ; i * i &lt;= x ; ++i ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( x % i == <span class="number">0</span> ) &#123;</span><br><span class="line">      res -= res / i;</span><br><span class="line">      <span class="keyword">while</span>( x % i == <span class="number">0</span> ) x /= i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>( x &gt; <span class="number">1</span> ) res -= res / x;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fpow</span><span class="params">( <span class="keyword">int</span> b , <span class="keyword">int</span> k , <span class="keyword">int</span> mod )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> res; res = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span>( k ) &#123;</span><br><span class="line">    <span class="keyword">if</span>( k &amp; <span class="number">1</span> ) res = <span class="number">1L</span>L * res * b % mod;</span><br><span class="line">    b = <span class="number">1L</span>L * b * b % mod; k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">F</span><span class="params">( <span class="keyword">int</span> x )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( mp.count( x ) ) <span class="keyword">return</span> mp[x];</span><br><span class="line">  <span class="keyword">int</span> phi = getphi( x );</span><br><span class="line">  <span class="keyword">return</span> mp[x] = fpow( <span class="number">2</span> , F( phi ) + phi , x );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">( <span class="keyword">void</span> )</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> T , p;</span><br><span class="line">  _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">  mp[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>( T-- ) &#123;</span><br><span class="line">    _w = <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;p);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,F( p ) );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="6f712360ee3c31f6b56d8530be4b4f16a9a9c6d23f0ef0dd0306e9eb443be2fe">d6387eb38793ae9dfa859eeda520f40f9ef04c63f04ac57fedde2c1454f90d360691334d33e0de61870d33ff4b76b2342c3b34b382a802f1c8bdb616271c30f2a6ac17da241f10e6ef96605191278c9435bc7d7959ae46122f3a44aa35436e9e1965e46e1a66dddc361fbaf5c72c67992b759d92594df17377ed83576c9fd144e8e47213b204776bca51650d968dc94ab944770788269e6e20fa2bf4d388a25729dfa114f4e3b06626e4621e32f3a8dc88edb7b7541d4ba625368801ad00a697fe69cd03fb245ba67183684d7a767095111bff170d9b81fc9c4e3a3419646c7a20f3a6219e6868929955f82bc23db1bca1de7f19327677715f007ebf7a923c4067ed0934168a8c131c17f490da10ce1004efc4556fd3f6142992ff545d0c683d06c7124ac3da4ee2b6dbe6a811c5a39d6c211940182e240f09c9436fce596657e52a3e7f2892f5a5dae0f2c8e7be54e274b3b9a0d2acea10fe22b595db36260a5ad00c55e9a6c4209ff0df421528b2b872c76a864a6d2e7822599e989c318f0fe67ca204e6c635f6b3a2b9f4999266b1f95f7f046ab3f52b790d29411788b1243ec2b216da9901c262615c8bb7bb8e1772f0cf62bc234b87a53d6d0f49eb76a64224c227bf8700df8e1d5ee6dab1dfa88b6ffe7296d499ce106087eb4abd40d6af7638b790e559803b6cbf3b202d71ff567f20a20bc780ac4da9374abb533cd84af390d4f0d69b56b413a748948682b79f977f2b6c447d5e9bfd0bdc7882b2b7df4d075ec10b396eefa61156351b2ead2545e9473a7a493302e73bfa4ab129f67305197e06f8df5b01e61087ce7a74ef79c30ad36f4d27925540e8a81f80ccb687b25ccd4f1577f0c941b638b3c06e6a3e94f80efa583aa11177a2b64cb43533fba9ce5b05cbd98e1ceb0d1aa06b3377744c5029f415d881b93a29fecec2bc0a6bddd3f471cef6d2b760e1d898ef342d9154399d66bde7eaac27fbf2b9d27e7e89c6831aab6d861d77913caed951daa6ecd5e739d684331ffee80d1b7711855711607fe464e1325ec1c63f21a02c3671a5a325a7a6064bb0c686f328774db48ea12ff21900538b727b0f030cacce0ddc684a034480a44f19959e9aaabc8894cf75e52b6a12354fd8725eb9c7280fbd1069674b7acc479bfbed9c4b9a81eaa7dabf0ea58b14743b9530eeb06b8d7f3deed5b2e49ad8f6150dbb8205f29facc3eb1d17259b5e4db9a7dbd7909bf0d0ed3494965801e72093e4ba621849b10322067a4f283dab8bc2237b79ff5585e097d8bab531c39b5aa69872578bc872fc3b06477e2ec82e796ce3147bb33fbfcb1e9e29bc46f6c9429b9951af12a511a58bffa6da890f1fc1be7b320e0cf61159e1b6c9f0e83b7158abc321ba929bfbba6c4dd13c344f6a2f3397e4ccd7edebb1aca18926d704645b824874faedff7736ed53f2890fb9a96a450ed3ee1962e896d2f19efdbc544494233600080abb5eb16e9fc6bea64053cb28ca1bf823e2cd5054e9a37233d4cb55a2378b841b054e53280923bd9531fab0fb081b4b6e6e2ac7f301f352429905c0f00415b5fceba583fc8a068a0d58c9a758d5cd8bd5688931d8adafa04b27d06562240fddfcdd92e4864538fe76b7bb2f7c9db5da82ce013f82ed2e307f5e76bb4fddc65243e9640a0eddaecb92dc85da7695728dced0f4e3520229228af91026c164ecdab69d17f6c21afbeb4b8db1751475dff345e714acef88976cd9b8c55a5d06d71315320244dfb29a18f6c5fb59bdd0a3231f6e2cd9d8b6e83c55b80a662575948d35230418b4527bf34875b74dba0a4e2614f6a5e2862a45e6eea0c116dbcbdfdd3f40877dc91bac81d48c19c452bedda6a3fd0389c943d64eb81cf35ae4ca614c186bc13d3dab19fb4a0ffe65abd495efad66aec235ade9fe42876b9510f089b8cf70e44b6a446a470873081f81082c3639e82362338c575823b815d79f80b37ab0a5fe4eb0d0b08c4c231f6e074e4349c33988142ebba3a9cafb990f3bf9f5ff142ed681d53766775fa55cb732ae0c9c9c69eb3097ab20ee7999e8fa5d120d7e4be8127224206d861b5f7338d11d578c87504c48fdbffd5b81d4126c18afd8a71eaca3d6bd22ee98f9da8d1342343d0150f2a7ac3c8ea203734aa428865acb36347b85922e3dd6b8816f306dacffe66191cde045ddbafb8eae9d897917c0cef2f490c9a853c244332fc028175a0484e65418baefa01f55b9067d31b21e9150333b3b881d26d15949d5bb563f084c53086a498f9da93d9c8e3e19b0862c2fe8e61c2783763823c666dfcebab8f06d360d5378eec801302f190334b64ff60e9d4fa0c17faad673097b9683f228f9a52405a1c7bbfa0ead012b2390ab8cfc7bf09294eafbb40315fc1345884b6dc53fd2dd8c0bc746977aff97d7b0c4477463f197b272a602288213f99971a1709cf8c71db5d3dd27d3ca2a61f8e15e1749a6366f0ff0f621b3f796387695e06e5d221085b1d793dab9b9884bdf5b4e9aa955dee031e3fc37d68551ad98680a7ff13319386f3a3b69d5f2fd4b687688ca39c54a108474fbdaf8567139bcf91eb6920db4b07069fa0c0016582799fad760e6c32190f2bbe288274146050f3203df7076afa1b1683b2e01a9c7131138438d43b406b98bbb8ff68473fc0799b17fc8dad85d78a3f48d03ca221a6486202dbee46a83edb52a83fe2c33f0d80dc25d65fa037cd5cf78b7930d6cdba084a323d5577f0930a2a20327a7682713441c30e82289b1495b1a1629e261689230ea082cd88a8a4e8fb0ca7a18b95fdd05e766f8fb7c7659a785c34e3b1363c1ddb021bcde2be53d65ad53763118eb5603b25f5f75ba1a5e89e6cd2ab5a3532e3058865530eb2ece73a60aa27fb55cfcb2d5660174bf7e0572d6c7de948570716153401d03791f1507cab61b6a976f4bf8d82ae7ec3aa0f378adcaeceac3a671746e1d04acd89f59dba9bc58df9f6847cba052698555754ca2ef3cd682f7776593491940ca88f047436088b567eb7d7a9b344f81780c287df861983607b10f871242d75eed0057a819c4d7f7e077ebc68b894205f5f30b1ed63f02322fb2c9e40035eb90c6e99fcc47f819458ff8c4f199c6bb28c67539a4969981725f5ee6b23144b8d9267afba983fe7ce29e779729c925a94ac9f6326b0fc331761ebbb4b665e2f37d60015e7d810aec5111d205c9b6b912ee86017447dd7676e3675f075483a6eb997891bb63453225e94f084bca30272ae7a2dea885c15834e89d715c6291d6d1bc15073f1615428d5e6734033f30354351e8d1d26f113fa9bacb222d02804b1be475a9668ccf5954e106023271b3b60bd2b88ddc3925c35c947a63ead7ac95cc26bfb40d1b7b5f9ad469b7f6f9c10b1be29433169899a9a5cc79b1d7178975acf48115af6dc012408610931455e41f2694aeb353f6ced474fc3320356bb21bf8c1b1008d65025c85b26321a51f310db5f273e23e9ed8cf2c8352421763f61e1f0509a7932aa9bb9215fa1e315d74f179c1f529d5638407e0c95cadd3189500988fc01a5b10fc4be7d4696cb45fec6d9dec9877e883c31440aa6a8db34d30ed0ff4d502ececfd0b314b5ccf936cd888d45975656bc05160871ae504d986dd6132867cfdbc48aa5c32aaee7e2f620d438ea45b838af7e8864f1ad9ac10e90a7e7ce1505dbcd7ad1b7021e09d805342210d253ace600a36faee5c057913bd4b2bd5d25ce1d588884ae26f9e44a0f07d9bdfb7f3c6f85e4e76632ec011feced398d296b99c3d52d769916b06a41c091c9c0a55b8399896ad7028e606efc8c2729aa24c673021cc16b05d70d9b337ed1e4e33b6f2415a85362ad859e026675d6755190eb4ebac271d9a3f151b5325795f17426f982840c438ab6e93391e688f7d771211d3c08f538aa9ea1edcb014e690194ef5b642aa727df2ac664106e4e932a58d28580335770055fa46e858ba05c46b45996175a759367c7f7e42201b72a411e897aba28ebd937ad0ba72399f655956f133560cdb11f18f038c8a03</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -252,13 +236,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/03/28/Solutions/%5BBZOJ%5D%20P3684/" rel="prev" title="[BZOJ3684] 大朋友与多叉树">
-      <i class="fa fa-chevron-left"></i> [BZOJ3684] 大朋友与多叉树
+    <a href="/2020/07/30/Solutions/ZR-SC-DAY3/" rel="prev" title="[ZR SC] DAY3">
+      <i class="fa fa-chevron-left"></i> [ZR SC] DAY3
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/03/28/Solutions/%5BBZOJ%5D%20P3992/" rel="next" title="[SDOI2015]序列统计">
-      [SDOI2015]序列统计 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -318,7 +299,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#solution"><span class="nav-number">2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
