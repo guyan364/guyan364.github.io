@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="开新坑是因为上个坑生草了.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杂题3">
+<meta property="og:url" content="http://yoursite.com/2020/08/16/Solutions/%E6%9D%82%E9%A2%983/index.html">
+<meta property="og:site_name" content="Guyan&#39;s blog">
+<meta property="og:description" content="开新坑是因为上个坑生草了.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-16T14:20:49.000Z">
+<meta property="article:modified_time" content="2020-08-17T05:50:25.125Z">
+<meta property="article:author" content="Guyan">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/16/Solutions/%E6%9D%82%E9%A2%983/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>杂题3 | Guyan's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Guyan's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/16/Solutions/%E6%9D%82%E9%A2%983/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Guyan">
+      <meta itemprop="description" content="水平低啊">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Guyan's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          杂题3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-16 22:20:49" itemprop="dateCreated datePublished" datetime="2020-08-16T22:20:49+08:00">2020-08-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-17 13:50:25" itemprop="dateModified" datetime="2020-08-17T13:50:25+08:00">2020-08-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>开新坑是因为上个坑生草了.</p>
+<a id="more"></a>
+<h5 id="loj-6363-地底蔷薇"><a href="https://loj.ac/problem/6363" target="_blank" rel="noopener">[LOJ 6363] 地底蔷薇</a></h5>
+<p>限定了每个点双联通分量的大小. 如果没有限定就是 <a href="/2020/04/08/Tutorial/%E5%9B%BE%E7%9A%84%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98/" title="有关图的计数问题">有关图的计数问题</a> 中的点双连通计数.</p>
+<p>令满足题目要求的点双连通图 , <span class="math inline">\(f_n\)</span> 为 <span class="math inline">\(n\)</span> 个点的有根特殊点双图个数 <span class="math inline">\(g_n\)</span> 为 <span class="math inline">\(n+1\)</span> 个点形成一个合法点双的方案数. 那么只有 <span class="math inline">\(n \in S\)</span> 才有 <span class="math inline">\(g_{n-1}\)</span> 不为 <span class="math inline">\(0\)</span> . 令 <span class="math inline">\(F(x),G(x)\)</span> 为 <span class="math inline">\(f_n,g_n\)</span> 的 <span class="math inline">\(\rm EGF\)</span> . 则有 <span class="math display">\[
+\begin{aligned}
+F(x)&amp;=x\exp(G(F(x)) \\
+x&amp;=\frac{F(x)}{\exp(G(F(x))} \\
+F^{-1}(x) &amp;= \frac{x}{\exp(G(x))} \\
+ [x^n]F(x) &amp;=\frac{1}{n}[x^{n-1}](\frac{x}{F^{-1}(x)})^n
+\end{aligned}
+\]</span> 直接拉格朗日反演即可.</p>
+<p><a href="https://loj.ac/submission/875300" target="_blank" rel="noopener">code</a></p>
+<h5 id="集训队互测-day-4-绝目编诗"><a href="https://loj.ac/problem/3077" target="_blank" rel="noopener">[2019 集训队互测 Day 4] 绝目编诗</a></h5>
+<p>首先对于一个连通块有 , <span class="math inline">\(m &lt; 2n\)</span> , 否则一定可以通过建出一个生成树 , 找出 <span class="math inline">\(\geq n\)</span> 个非树边 , 出现 <span class="math inline">\(\geq n\)</span> 个环.</p>
+<p>现在给出一个更强的约束 , 当 <span class="math inline">\(m \geq n + 2\sqrt n\)</span> 时一定有两个环长度相同. 考虑对于每条边 , 以 <span class="math inline">\(\frac{1}{\sqrt n}\)</span> 的概率将其删除. 那么对于原图中一个长度为 <span class="math inline">\(L\)</span> 的环 , 其不被删去的概率为 <span class="math inline">\(\left(\frac{\sqrt n - 1}{\sqrt n}\right)^L\)</span>, 那么出现环个数的期望为. <span class="math display">\[
+\begin{aligned}
+\sum_{i=1}^n\left(\frac{\sqrt n - 1}{\sqrt n}\right)^i &amp;\leq  \frac{1}{1-\frac{\sqrt n - 1}{\sqrt n}} =\sqrt n
+\end{aligned}
+\]</span> 于是对于每个环再删去 <span class="math inline">\(1\)</span> 条边. 也就是再删去 <span class="math inline">\(\sqrt n\)</span> 条边. 此时图中没有环. 那么就得出 , 对于一个 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\(m\)</span> 条边的连通图. 期望删去 <span class="math inline">\(\sqrt n + \frac{m}{\sqrt n}\)</span> 条边后没有环. 于是 <span class="math inline">\(m - \sqrt n - \frac{m}{\sqrt n} &lt; n\)</span> , 得出 <span class="math inline">\(m \leq n + 2\sqrt n\)</span> . 此时边数就是 <span class="math inline">\(n + \sqrt n\)</span> 级别. 那么找出一颗生成树 , 此时对于有非树边的点 , 其个数为 <span class="math inline">\(O(\sqrt n)\)</span> . 于是就可以类似建出一颗虚树 , 每条边有长度 , 可以发现 , 原图中的环仍然存在. 此时直接暴力找就好了 , 每次从一个点出发 , 找环上的下一个点 , 每到一个新的点 , 要判断一下是否和出发点连通 , 找完包含一个点所有的环后删去这个点. 判断连通的复杂度是 <span class="math inline">\(O(\sqrt n)\)</span> . 图中最多有 <span class="math inline">\(O(n)\)</span> 个环 , 每个环只会被找到 <span class="math inline">\(2\)</span> 次 , 复杂度就是 <span class="math inline">\(O(n^2)\)</span> .</p>
+<p><a href="https://loj.ac/submission/876848" target="_blank" rel="noopener">code</a></p>
+<h5 id="pa2014-druzyny"><a href="https://darkbzoj.tk/problem/3711" target="_blank" rel="noopener">[PA2014] Druzyny</a></h5>
+<p>令 <span class="math inline">\(f_i\)</span> 表示 <span class="math inline">\([1,i]\)</span> 的最大分组个数. <span class="math inline">\(g_i\)</span> 表示方案数. 有转移 <span class="math display">\[
+\begin{aligned}
+f_i &amp;= \min_{j&lt;i}(f_j+1)(\max_{k=j+1}^ic_k \leq i-j \leq \min_{k=j+1}^id_k) \\
+g_i &amp;= \sum_{j&lt;i}g_{j}(\max_{k=j+1}^ic_k \leq i-j \leq \min_{k=j+1}^id_k ,f_j+1=f_i)
+\end{aligned}
+\]</span> 令 <span class="math inline">\(h_i = \min\{j|i-j\leq \min_{k=j+1}^id_k\}\)</span> , 这个可以在 <span class="math inline">\(O(n\log n)\)</span> 的时间内预处理出. 对于 <span class="math inline">\(c_k\)</span> 的限制 , 考虑在笛卡尔树上进行 <span class="math inline">\(\rm DP\)</span> . 对于区间 <span class="math inline">\((l,r)\)</span> , 每次找出其中最大的 <span class="math inline">\(c_p\)</span> . 分治处理后 , 用 <span class="math inline">\((l,p-1)\)</span> 更新 <span class="math inline">\((p+1,r)\)</span>. 由于 <span class="math inline">\(c_p\)</span> 是区间最大值 , 那么 <span class="math inline">\(i-j\)</span> 的限制其实就固定为一个值了. 每次 <span class="math inline">\(i\)</span> 右移 , 合法的 <span class="math inline">\(j\)</span> 区间上线也会右移. 如果 <span class="math inline">\(j\)</span> 的取值下线达到 <span class="math inline">\(g_i\)</span> . 此时取值下线会增加. 也就是区间内元素会减少. 但是当前维护的信息无法维护减操作. 此时暴力在线段树上查询.</p>
+<p>分析一下复杂度. 看起来暴力查询的复杂度不太对. 考虑每次左端点增加 , 也就是 <span class="math inline">\(l \leq g_i &lt; p\)</span> 对于一个 <span class="math inline">\(i\)</span> , 只有一个区间 <span class="math inline">\((l,p)\)</span> 满足 <span class="math inline">\(l \leq g_i &lt; p\)</span> . 所以对于每个 <span class="math inline">\(i\)</span> , 只会进行一次询问. 对于 <span class="math inline">\(g_i &lt; l,i&lt;p+c_p\)</span> , 用上面的方法更新. 对于 <span class="math inline">\(g_i &lt; l , i \geq p+c_p\)</span> . 此时对于连续的 <span class="math inline">\(i\)</span> , 其转移区间一样. 二分出右端点后线段树上区间修改. 总复杂度就是 <span class="math inline">\(O(n\log n)\)</span> .</p>
+<p><del>十分抱歉 , 代码咕了</del></p>
+<h5 id="uoj269-如何优雅地求和"><a href="http://uoj.ac/problem/269" target="_blank" rel="noopener">[UOJ269] 如何优雅地求和</a></h5>
+<p>观察原式中有组合数 , 考虑将 <span class="math inline">\(f(x)\)</span> 表示为下降幂的形式. <span class="math display">\[
+\begin{aligned}
+&amp; \quad f(x) = \sum_{i= 0}^m f_ix^{\underline i} \\
+&amp; \quad \sum_{k=0}^nf(k)\binom{n}{k}x^k(1-x)^{n-k} \\
+&amp;=\sum_{k=0}^n\sum_{i=0}^mf_ik^{\underline i}\binom{n}{k}x^k(1-x)^{n-k} \\
+&amp;=\sum_{i=0}^mf_i\sum_{k=0}^n\frac{k!}{(k-i)!}\frac{n!}{k!(n-k)!}x^k(1-x)^{n-k} \\
+&amp;=\sum_{i=0}^mf_in^{\underline i}x^i\sum_{k=0}^{n-i}\binom{n-i}{k}x^k(1-x)^{n-k-i} \\
+&amp;=\sum_{i=0}^mf_in^{\underline i}x^i
+\end{aligned}
+\]</span> 已知点值求下降幂多项式系数. <span class="math display">\[
+\begin{aligned}
+&amp; \quad \sum_n f(n) \frac{x^n}{n!} \\
+&amp;= \sum_{i=0}^mf_i\sum_{n=i}^{\infty}\frac{x^n}{(n-i)!} \\
+&amp;=\sum_{i=0}^mf_ix^ie^x \\
+\end{aligned}
+\]</span> 乘 <span class="math inline">\(e^{-x}\)</span>即可.</p>
+<p><a href="http://uoj.ac/submission/415783" target="_blank" rel="noopener">code</a></p>
+<h5 id="山东一轮集训-day7-逆序对"><a href="https://loj.ac/problem/6077" target="_blank" rel="noopener">[2017 山东一轮集训 Day7] 逆序对</a></h5>
+<p>从小到大加入每个数. 对于 <span class="math inline">\(k\)</span> , 其对与答案的生成函数是 <span class="math inline">\(\sum_{i=0}^{k-1} x^k\)</span> , 因为加入时可以产生最多 <span class="math inline">\(k-1\)</span> 个逆序对. 于是可以得到答案为 <span class="math inline">\([x^k]\prod_{i=1}^n\frac{1-x^{i}}{1-x}\)</span> . 对于 <span class="math inline">\(\frac{1}{(1-x)^n}\)</span> 就是 <span class="math inline">\(\binom{n+k-1}{n-1}\)</span> . 对于 <span class="math inline">\(\prod_{i=1}^n(1-x^i)\)</span> . 就是一个背包. 同时注意到 , 最多只会选 <span class="math inline">\(\sqrt n\)</span> 个数. 于是考虑类似分拆数的方法. 每次可以让前面所有数加 <span class="math inline">\(1\)</span> . 或加入一个 <span class="math inline">\(1\)</span> . 同时注意不能加入超过 <span class="math inline">\(n\)</span> 元素 , 需要减去这部分的贡献 , 令 <span class="math inline">\(f_{i,j}\)</span> 表示选了 <span class="math inline">\(i\)</span> 个数 , 总和 <span class="math inline">\(j\)</span> 的贡献和. 可以得到 <span class="math display">\[
+\begin{aligned}
+f_{i,j} &amp;=f_{i,j-i}+f_{i-1,j-i}-f_{i-1,j-n-1}
+\end{aligned}
+\]</span> 复杂度就是愉快的 <span class="math inline">\(O(n\sqrt n)\)</span> . 当然也可以对直接对 <span class="math inline">\(\prod_{i=1}^n(1-x^i)\)</span> 下手. 具体来说就是先 <span class="math inline">\(\ln\)</span> 转成加 , 然后将 <span class="math inline">\(\ln\)</span> 泰勒展开 , 发现最后一遍 <span class="math inline">\(\exp\)</span> 就好了. 只不过这一题模数不是 <span class="math inline">\(\rm NTT\)</span> 模数.</p>
+<p><a href="https://loj.ac/submission/877551" target="_blank" rel="noopener">code</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/13/Solutions/LOJ3080-%E5%9B%BD%E9%99%85%E8%B1%A1%E6%A3%8B/" rel="prev" title="[LOJ3080] 国际象棋">
+      <i class="fa fa-chevron-left"></i> [LOJ3080] 国际象棋
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#loj-6363-地底蔷薇"><span class="nav-number">1.</span> <span class="nav-text">[LOJ 6363] 地底蔷薇</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集训队互测-day-4-绝目编诗"><span class="nav-number">2.</span> <span class="nav-text">[2019 集训队互测 Day 4] 绝目编诗</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pa2014-druzyny"><span class="nav-number">3.</span> <span class="nav-text">[PA2014] Druzyny</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#uoj269-如何优雅地求和"><span class="nav-number">4.</span> <span class="nav-text">[UOJ269] 如何优雅地求和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#山东一轮集训-day7-逆序对"><span class="nav-number">5.</span> <span class="nav-text">[2017 山东一轮集训 Day7] 逆序对</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Guyan</p>
+  <div class="site-description" itemprop="description">水平低啊</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Guyan</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
